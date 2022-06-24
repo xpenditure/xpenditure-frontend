@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
+import React, { useContext, useState } from "react";
+import styled from "styled-components";
 import {
   FormWrap,
   Heading,
@@ -8,16 +8,16 @@ import {
   DarkButton,
   Button,
   ButtonWrap,
-} from '../styles/DefaultStyles';
-import Modal from './Modal';
-import { SocketContext } from '../context/socket';
+} from "../styles/DefaultStyles";
+import Modal from "./Modal";
+import { SocketContext } from "../context/socket";
 
 const CreateBudget = ({ visible, close }) => {
   const socket = useContext(SocketContext);
 
-  const [name, setName] = useState('');
-  const [total, setTotal] = useState('');
-  const [summary, setSummary] = useState('');
+  const [name, setName] = useState("");
+  const [total, setTotal] = useState("");
+  const [summary, setSummary] = useState("");
 
   const handleCreateBudget = (e) => {
     e.preventDefault();
@@ -28,16 +28,16 @@ const CreateBudget = ({ visible, close }) => {
     };
 
     console.log(payload);
-    socket.emit('createBudget', payload);
-    setName('');
-    setTotal('');
-    setSummary('');
+    socket.emit("createBudget", payload);
+    setName("");
+    setTotal("");
+    setSummary("");
   };
 
   return (
     <Modal visible={visible} close={close}>
       <Heading>
-        <h1>Create Budget</h1>
+        <h1>Create a Budget</h1>
         <p>Provide info for your budget below.</p>
       </Heading>
       <FormWrap>
