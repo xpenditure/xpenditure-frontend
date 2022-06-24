@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
@@ -18,6 +18,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.4
+}
+
 `;
 
 export default GlobalStyles;
