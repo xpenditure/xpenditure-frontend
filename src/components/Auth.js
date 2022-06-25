@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import {
+  getTokenFromStorage,
+  loginUserAsync,
+  registerUserAsync,
+} from '../features/userSlice';
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState('register');
+  const { isAuth } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTokenFromStorage());
+  }, []);
 
   return (
-    <AuthWrap>
+    <AuthWrap auth={isAuth}>
       <AuthInner>
         <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
         <AuthMain>
@@ -21,6 +33,21 @@ const LoginForm = ({ visible }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (email != '' && password != '') {
+      const payload = {
+        email,
+        password,
+      };
+
+      dispatch(loginUserAsync(payload));
+    }
+  };
+
   return (
     <FormWrap visible={visible}>
       <Title>
@@ -28,7 +55,7 @@ const LoginForm = ({ visible }) => {
         <p>Welcome back, Bud!</p>
       </Title>
 
-      <form>
+      <form onSubmit={handleLogin}>
         <InputGroup>
           <InputWrap>
             <label>Email</label>
@@ -54,13 +81,30 @@ const RegisterForm = ({ visible }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    if (firstName != '' && lastName != '' && email != '' && password != '') {
+      const payload = {
+        firstName,
+        lastName,
+        email,
+        password,
+      };
+
+      dispatch(registerUserAsync(payload));
+    }
+  };
+
   return (
     <FormWrap visible={visible}>
       <Title>
         <h1>Register</h1>
         <p>Create an account for free!</p>
       </Title>
-      <form>
+      <form onSubmit={handleRegister}>
         <InputGroup>
           <InputWrap>
             <label>First name</label>
@@ -152,12 +196,14 @@ const Tab = styled.div`
 `;
 
 const AuthWrap = styled.div`
-  display: flex;
+  display: ${(props) => (props.auth ? 'none' : 'flex')};
   position: fixed;
   width: 100%;
   height: 100vh;
   justify-content: center;
   padding: 0 20px;
+  z-index: 99998;
+  background-color: #fff;
 `;
 
 const AuthInner = styled.div`
@@ -181,6 +227,11 @@ const FormWrap = styled.div`
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.visible ? '1' : '0')};
   height: ${(props) => (props.visible ? 'auto' : '0px')};
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 
   button {
     width: 100%;
@@ -215,6 +266,8 @@ const InputWrap = styled.div`
     outline: none;
     padding: 0 15px;
     height: 40px;
+    font-weight: 600;
+    color: #333;
   }
 `;
 
