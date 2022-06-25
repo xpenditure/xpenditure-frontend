@@ -164,6 +164,7 @@ const Tabs = ({ activeTab, setActiveTab }) => {
 const TabWrap = styled.div`
   display: flex;
   margin-bottom: 30px;
+  background-color: ${(props) => props.theme.colors.primary};
 `;
 
 const Tab = styled.div`
