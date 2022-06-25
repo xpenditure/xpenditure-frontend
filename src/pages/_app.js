@@ -1,11 +1,9 @@
-import GlobalStyles from '../styles/GlobalStyles';
-import { socket, SocketContext } from '../context/socket';
+import { socket, SocketContext } from '../context/socketContext';
 
 function MyApp({ Component, pageProps }) {
   return (
     <div>
       <SocketContext.Provider value={socket}>
-        <GlobalStyles />
         <Component {...pageProps} />
       </SocketContext.Provider>
     </div>
