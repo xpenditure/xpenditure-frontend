@@ -7,7 +7,9 @@ import WithTheme from './theme/WithTheme';
 import GlobalStyles from './styles/GlobalStyles';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import { getTokenFromStorage } from './features/userSlice';
 
+store.dispatch(getTokenFromStorage());
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

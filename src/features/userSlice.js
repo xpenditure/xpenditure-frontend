@@ -52,8 +52,6 @@ export const loginUserAsync = createAsyncThunk(
         config
       );
 
-      console.log(data);
-
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -70,23 +68,19 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     getTokenFromStorage(state) {
-      if (typeof window !== 'undefined') {
-        const token = localStorage.getItem('token')
-          ? JSON.parse(localStorage.getItem('token'))
-          : null;
-        if (token) {
-          state.isAuth = true;
-        } else {
-          state.isAuth = false;
-        }
+      const token = localStorage.getItem('token')
+        ? JSON.parse(localStorage.getItem('token'))
+        : null;
+      if (token) {
+        state.isAuth = true;
+      } else {
+        state.isAuth = false;
       }
     },
 
     clearTokenFromStorage(state) {
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('token');
-        state.isAuth = false;
-      }
+      localStorage.removeItem('token');
+      state.isAuth = false;
     },
   },
   extraReducers: {

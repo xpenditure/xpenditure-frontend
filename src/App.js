@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth';
 import { ProtectedRoute, PublicRoute } from './helper/authRoute';
 import Dashboard from './pages/Dashboard';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const isAuth = false;
+  const { isAuth } = useSelector((state) => state.user);
 
   return (
     <Router>
