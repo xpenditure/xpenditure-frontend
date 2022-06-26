@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { socket, SocketContext } from './context/socket';
+import WithTheme from './theme/WithTheme';
+import GlobalStyles from './styles/GlobalStyles';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <SocketContext.Provider value={socket}>
+        <WithTheme>
+          <GlobalStyles />
+          <App />
+        </WithTheme>
+      </SocketContext.Provider>
+    </Provider>
   </React.StrictMode>
 );
 
