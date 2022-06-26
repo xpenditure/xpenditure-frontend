@@ -78,9 +78,9 @@ const userSlice = createSlice({
       }
     },
 
-    clearTokenFromStorage(state) {
+    clearTokenFromStorage() {
       localStorage.removeItem('token');
-      state.isAuth = false;
+      window.location.href = '/auth';
     },
   },
   extraReducers: {
@@ -91,7 +91,7 @@ const userSlice = createSlice({
     [loginUserAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       localStorage.setItem('token', JSON.stringify(action.payload.token));
-      state.isAuth = true;
+      window.location.href = '/';
       state.error = null;
     },
     [loginUserAsync.rejected]: (state, action) => {
@@ -106,7 +106,7 @@ const userSlice = createSlice({
     [registerUserAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       localStorage.setItem('token', JSON.stringify(action.payload.token));
-      state.isAuth = true;
+      window.location.href = '/';
       state.error = null;
     },
     [registerUserAsync.rejected]: (state, action) => {
