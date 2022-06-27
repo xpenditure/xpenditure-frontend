@@ -63,8 +63,7 @@ const AuthMain = styled.div`
   background-color: ${(props) => props.theme.colors.secondary};
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  box-shadow: ${(props) => props.theme.colors.shadow1};
   width: 400px;
 `;
 

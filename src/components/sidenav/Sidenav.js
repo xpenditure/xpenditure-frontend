@@ -45,6 +45,7 @@ const SidenavWrap = styled.div`
   height: 100vh;
   width: 250px;
   background-color: ${(props) => props.theme.colors.secondary};
+  border-right: 1px solid ${(props) => props.theme.colors.border_color1};
 `;
 
 const SidenavInner = styled.div`

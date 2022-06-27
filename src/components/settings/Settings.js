@@ -1,20 +1,20 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setThemeMode } from '../../features/actionSlice';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AccountIcon, BellIcon, CancelIcon, PaintbrushIcon } from '../icons';
 
 const Settings = () => {
-  const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState('account');
+  const [title, setTtitle] = useState('Account');
 
   const tabList = [
     { name: 'Account', alias: 'account', element: <AccountIcon /> },
     { name: 'Appearance', alias: 'appearance', element: <PaintbrushIcon /> },
-    { name: 'Notification', alias: 'notification', element: <BellIcon /> },
+    { name: 'Notifications', alias: 'notifications', element: <BellIcon /> },
   ];
 
-  const handleTheme = (mode) => {
-    dispatch(setThemeMode(mode));
+  const handleItem = (tab) => {
+    setActiveTab(tab.alias);
+    setTtitle(tab.name);
   };
 
   return (
@@ -24,7 +24,11 @@ const Settings = () => {
         <SettingsSide>
           <div className="tabList">
             {tabList.map((tab) => (
-              <div className="tabItem" key={tab.alias}>
+              <div
+                className="tabItem"
+                key={tab.alias}
+                onClick={() => handleItem(tab)}
+              >
                 <div className="tabIcon">{tab.element}</div>
                 <div className="tabName">{tab.name}</div>
               </div>
@@ -33,16 +37,16 @@ const Settings = () => {
         </SettingsSide>
         <SettingsMain>
           <SettingsNav>
-            <div className="title">Tab Title</div>
+            <div className="title">{title}</div>
             <div className="close">
               <CancelIcon />
             </div>
           </SettingsNav>
-          <div>This is settings</div>
-          <div>
-            <button onClick={() => handleTheme('dark')}>Dark</button>
-            <button onClick={() => handleTheme('light')}>Light</button>
-          </div>
+          <SettingsView>
+            {activeTab === 'account' && 'Account'}
+            {activeTab === 'appearance' && 'Appearance'}
+            {activeTab === 'notifications' && 'Notifications'}
+          </SettingsView>
         </SettingsMain>
       </SettingsInner>
     </SettingsWrap>
@@ -65,15 +69,18 @@ const SettingsInner = styled.div`
   height: 600px;
   max-width: 100%;
   max-height: 100%;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   display: flex;
+  box-shadow: ${(props) => props.theme.colors.shadow1};
+  position: relative;
 `;
 const SettingsSide = styled.div`
   width: 200px;
   height: 100%;
-  background-color: ${(props) => props.theme.colors.tertiary};
+  background-color: ${(props) => props.theme.colors.secondary};
+  border-right: 1px solid ${(props) => props.theme.colors.border_color1};
   padding: 10px 0;
 
   .tabList {
@@ -112,6 +119,11 @@ const SettingsMain = styled.div`
   flex: 1;
 `;
 
+const SettingsView = styled.div`
+  padding: 20px;
+  overflow-y: auto;
+`;
+
 const SettingsNav = styled.div`
   height: 50px;
   width: 100%;
@@ -132,6 +144,11 @@ const SettingsNav = styled.div`
   }
 `;
 
-const Overlay = styled.div``;
+const Overlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+`;
 
 export default Settings;
