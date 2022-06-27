@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleSettingsModal } from '../../features/actionSlice';
+import Close from '../excerpt/Close';
 import { AccountIcon, BellIcon, CancelIcon, PaintbrushIcon } from '../icons';
 import Modal from '../modal/Modal';
 
@@ -48,9 +49,7 @@ const Settings = () => {
         <SettingsMain>
           <SettingsNav>
             <div className="title">{title}</div>
-            <div className="close" onClick={handleCloseSettingsModal}>
-              <CancelIcon />
-            </div>
+            <Close close={handleCloseSettingsModal} />
           </SettingsNav>
           <SettingsView>
             {activeTab === 'account' && 'Account'}
@@ -68,12 +67,7 @@ const SettingsInner = styled.div`
   height: 600px;
   max-width: 100%;
   max-height: 100%;
-  background-color: ${(props) => props.theme.colors.primary};
-  border: 1px solid ${(props) => props.theme.colors.border_color1};
-  border-radius: ${(props) => props.theme.reset.border_radius};
   display: flex;
-  box-shadow: ${(props) => props.theme.colors.shadow1};
-  position: relative;
 `;
 const SettingsSide = styled.div`
   width: 200px;
@@ -131,24 +125,6 @@ const SettingsNav = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-
-  .close {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${(props) => props.theme.colors.hover_color1};
-    }
-    svg {
-      fill: ${(props) => props.theme.colors.text_color_default};
-      width: 20px;
-    }
-  }
 `;
 
 export default Settings;

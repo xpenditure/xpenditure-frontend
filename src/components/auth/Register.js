@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FormWrap, InputGroup, InputWrap, Title } from './styled';
+import {
+  FormWrap,
+  InputGroup,
+  InputWrap,
+  Title,
+} from '../../styles/DefaultStyles';
 import { registerUserAsync } from '../../features/userSlice';
 
 const Register = () => {

@@ -16,7 +16,7 @@ export const light = {
 export const dark = {
   name: 'Dark',
   colors: {
-    input_color: '010409',
+    input_color1: '#010409',
     primary: '#0d1117',
     secondary: '#161b22',
     card_color1: '#21262d',

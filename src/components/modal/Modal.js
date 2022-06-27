@@ -23,6 +23,10 @@ const ModalWrap = styled.div`
 `;
 const ModalInner = styled.div`
   position: relative;
+  background-color: ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.border_color1};
+  border-radius: ${(props) => props.theme.reset.border_radius};
+  box-shadow: ${(props) => props.theme.colors.shadow1};
 `;
 const Overlay = styled.div`
   width: 100%;

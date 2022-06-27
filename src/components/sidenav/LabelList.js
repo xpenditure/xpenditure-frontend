@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { TagIcon } from '../icons';
 import { TabIcon, TabItem, TabName } from './styled';
+import { SocketContext } from '../../context/socket';
 
 const LabelList = ({ active }) => {
-  const labels = [
-    { name: 'Label 1' },
-    { name: 'Label 2' },
-    { name: 'Label 3' },
-    { name: 'Label 4' },
-    { name: 'Label 5' },
-    { name: 'Label 6' },
-    { name: 'Label 7' },
-    { name: 'Label 8' },
-    { name: 'Label 9' },
-  ];
+  const socket = useContext(SocketContext);
+  const [labels, setLabels] = useState([]);
+
+  useEffect(() => {
+    return () => {
+      socket.emit('fetchLabels');
+      socket.on('fetchLabels', (data) => setLabels(data));
+    };
+  });
 
   return (
     <LabelWrap visible={active}>
       {labels.map((label) => (
-        <TabItem key={label.name}>
+        <TabItem key={label._id}>
           <TabIcon>
             <TagIcon />
           </TabIcon>
