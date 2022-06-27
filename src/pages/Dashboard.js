@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Sidenav from '../components/sidenav/Sidenav';
 import Settings from '../components/settings/Settings';
 import { Outlet } from 'react-router-dom';
+import AddLabel from '../components/widgets/AddLabel';
 
 const Dashboard = () => {
   return (
@@ -18,6 +19,7 @@ const Dashboard = () => {
         </MainViews>
       </DashWrap>
       <Settings />
+      <AddLabel />
     </>
   );
 };

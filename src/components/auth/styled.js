@@ -42,7 +42,7 @@ export const InputWrap = styled.div`
     height: 40px;
     font-weight: 600;
     color: ${(props) => props.theme.colors.text_color_default};
-    background-color: ${(props) => props.theme.colors.input_color};
+    background-color: ${(props) => props.theme.colors.primary};
   }
 `;
 

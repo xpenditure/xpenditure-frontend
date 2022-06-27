@@ -6,6 +6,7 @@ export const TabList = styled.div`
 `;
 export const TabItem = styled.div`
   padding: 10px 20px;
+  height: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -23,7 +24,7 @@ export const TabIcon = styled.div`
 
   svg {
     fill: ${(props) => props.theme.colors.text_color1};
-    width: 20px;
+    width: 18px;
   }
 `;
 export const TabName = styled.div`

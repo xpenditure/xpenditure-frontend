@@ -9,6 +9,7 @@ import BellIcon from './BellIcon';
 import PaintbrushIcon from './PaintbrushIcon';
 import AccountIcon from './AccountIcon';
 import TagIcon from './TagIcon';
+import PlusIcon from './PlusIcon';
 
 export {
   TrashIcon,
@@ -22,4 +23,5 @@ export {
   PaintbrushIcon,
   BellIcon,
   TagIcon,
+  PlusIcon,
 };

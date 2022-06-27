@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleSettingsModal } from '../../features/actionSlice';
 import { AccountIcon, BellIcon, CancelIcon, PaintbrushIcon } from '../icons';
+import Modal from '../modal/Modal';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
@@ -28,8 +29,7 @@ const Settings = () => {
   };
 
   return (
-    <SettingsWrap visible={settingsModal}>
-      <Overlay onClick={handleCloseSettingsModal} />
+    <Modal visible={settingsModal} close={handleCloseSettingsModal}>
       <SettingsInner>
         <SettingsSide>
           <div className="tabList">
@@ -59,21 +59,10 @@ const Settings = () => {
           </SettingsView>
         </SettingsMain>
       </SettingsInner>
-    </SettingsWrap>
+    </Modal>
   );
 };
 
-const SettingsWrap = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  z-index: 999998;
-  display: ${(props) => (props.visible ? 'flex' : 'none')};
-  justify-content: center;
-  align-items: center;
-  left: 0;
-  top: 0;
-`;
 const SettingsInner = styled.div`
   width: 900px;
   height: 600px;
@@ -160,13 +149,6 @@ const SettingsNav = styled.div`
       width: 20px;
     }
   }
-`;
-
-const Overlay = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export default Settings;
