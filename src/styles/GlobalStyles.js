@@ -14,6 +14,7 @@ body {
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.text_color_default};
 }
 
 `;

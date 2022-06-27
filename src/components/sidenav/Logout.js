@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { clearTokenFromStorage } from '../../features/userSlice';
+import { LogoutIcon } from '../icons';
+import { TabIcon, TabItem, TabName } from './styled';
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -9,9 +11,14 @@ const Logout = () => {
     dispatch(clearTokenFromStorage());
   };
   return (
-    <div>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <>
+      <TabItem onClick={handleLogout}>
+        <TabIcon>
+          <LogoutIcon />
+        </TabIcon>
+        <TabName>Logout</TabName>
+      </TabItem>
+    </>
   );
 };
 

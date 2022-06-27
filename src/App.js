@@ -3,6 +3,7 @@ import Auth from './pages/Auth';
 import { ProtectedRoute, PublicRoute } from './helper/authRoute';
 import Dashboard from './pages/Dashboard';
 import { useSelector } from 'react-redux';
+import Home from './pages/Home';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -10,6 +11,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route
           path="/auth"
           element={
@@ -19,13 +21,13 @@ function App() {
           }
         />
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <ProtectedRoute auth={isAuth}>
               <Dashboard />
             </ProtectedRoute>
           }
-        />
+        ></Route>
       </Routes>
     </Router>
   );

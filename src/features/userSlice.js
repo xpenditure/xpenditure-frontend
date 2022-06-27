@@ -91,7 +91,7 @@ const userSlice = createSlice({
     [loginUserAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       localStorage.setItem('token', JSON.stringify(action.payload.token));
-      window.location.href = '/';
+      window.location.href = '/dashboard';
       state.error = null;
     },
     [loginUserAsync.rejected]: (state, action) => {
@@ -106,7 +106,7 @@ const userSlice = createSlice({
     [registerUserAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       localStorage.setItem('token', JSON.stringify(action.payload.token));
-      window.location.href = '/';
+      window.location.href = '/dashboard';
       state.error = null;
     },
     [registerUserAsync.rejected]: (state, action) => {

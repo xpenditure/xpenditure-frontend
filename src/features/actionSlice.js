@@ -3,6 +3,7 @@ import { getFromLS, setToLS } from '../utils/storage';
 
 const initialState = {
   mode: 'light',
+  activeView: 'budgets',
 };
 
 const actionSlice = createSlice({
@@ -19,8 +20,12 @@ const actionSlice = createSlice({
       setToLS('mode', action.payload);
       state.mode = action.payload;
     },
+    setDashboardView(state, action) {
+      state.activeView = action.payload;
+    },
   },
 });
 
-export const { getThemeMode, setThemeMode } = actionSlice.actions;
+export const { getThemeMode, setThemeMode, setDashboardView } =
+  actionSlice.actions;
 export default actionSlice.reducer;

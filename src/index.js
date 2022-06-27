@@ -8,8 +8,10 @@ import GlobalStyles from './styles/GlobalStyles';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { getTokenFromStorage } from './features/userSlice';
+import { getThemeMode } from './features/actionSlice';
 
 store.dispatch(getTokenFromStorage());
+store.dispatch(getThemeMode());
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -10,8 +10,8 @@ export const FormWrap = styled.div`
     width: 100%;
     border: none;
     outline: none;
-    background-color: #222;
-    color: #fff;
+    background-color: ${(props) => props.theme.colors.btn_color1};
+    color: ${(props) => props.theme.colors.text_color_default};
     height: 45px;
     border-radius: 8px;
     font-weight: 600;
@@ -31,16 +31,18 @@ export const InputWrap = styled.div`
   label {
     font-size: 12px;
     font-weight: 600;
+    margin-bottom: 3px;
   }
 
   input {
-    border: 1px solid #999;
-    border-radius: 4px;
+    border: 1px solid ${(props) => props.theme.colors.border_color1};
+    border-radius: ${(props) => props.theme.reset.border_radius};
     outline: none;
     padding: 0 15px;
     height: 40px;
     font-weight: 600;
-    color: #333;
+    color: ${(props) => props.theme.colors.text_color_default};
+    background-color: ${(props) => props.theme.colors.primary};
   }
 `;
 
@@ -87,6 +89,6 @@ export const Tab = styled.div`
   }
 
   :hover {
-    background-color: #eee;
+    background-color: ${(props) => props.theme.colors.hover_color1};
   }
 `;

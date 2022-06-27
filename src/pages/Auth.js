@@ -19,9 +19,7 @@ const Auth = () => {
     if (tab) {
       tabList.map((item) => {
         if (item.alias === tab.toLowerCase()) {
-          setActiveTab(tab);
-        } else {
-          setActiveTab('login');
+          setActiveTab(item.alias);
         }
       });
     }
@@ -51,7 +49,7 @@ const AuthWrap = styled.div`
   justify-content: center;
   padding: 0 20px;
   z-index: 99998;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.primary};
 `;
 
 const AuthInner = styled.div`
@@ -61,11 +59,10 @@ const AuthInner = styled.div`
 `;
 
 const AuthMain = styled.div`
-  border: 1px solid red;
   padding: 30px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 4px;
+  background-color: ${(props) => props.theme.colors.secondary};
+  border: 1px solid ${(props) => props.theme.colors.border_color1};
+  border-radius: ${(props) => props.theme.reset.border_radius};
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
   width: 400px;
