@@ -1,30 +1,65 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { TabList, TabIcon, TabItem, TabName } from './styled';
 import { GearIcon } from '../icons';
+import { toggleSettingsModal } from '../../features/actionSlice';
+import { ArchiveIcon, ControlIcon, LabelIcon, TrashIcon } from '../icons';
+import LabelList from './LabelList';
 
-const NavTab = ({ views }) => {
+const NavTab = () => {
   const navigate = useNavigate();
-  const { activeView } = useSelector((state) => state.action);
+  const dispatch = useDispatch();
+
+  const handleSettings = () => {
+    dispatch(toggleSettingsModal(true));
+  };
 
   return (
     <TabList>
-      {views.map((view) => {
-        return (
-          <TabItem
-            key={view.alias}
-            active={activeView === view.alias}
-            onClick={() => {
-              navigate(`/dashboard?view=${view.alias}`);
-            }}
-          >
-            <TabIcon>{view.element}</TabIcon>
-            <TabName>{view.name}</TabName>
-          </TabItem>
-        );
-      })}
+      {/* dashboard */}
+      <TabItem
+        onClick={() => {
+          navigate('/dashboard');
+        }}
+      >
+        <TabIcon>
+          <ControlIcon />
+        </TabIcon>
+        <TabName>Dashboard</TabName>
+      </TabItem>
+      {/* labels */}
       <TabItem>
+        <TabIcon>
+          <LabelIcon />
+        </TabIcon>
+        <TabName>Labels</TabName>
+      </TabItem>
+      <LabelList />
+      {/* archive */}
+      <TabItem
+        onClick={() => {
+          navigate('archive');
+        }}
+      >
+        <TabIcon>
+          <ArchiveIcon />
+        </TabIcon>
+        <TabName>Archive</TabName>
+      </TabItem>
+      {/* trash */}
+      <TabItem
+        onClick={() => {
+          navigate('trash');
+        }}
+      >
+        <TabIcon>
+          <TrashIcon />
+        </TabIcon>
+        <TabName>Trash</TabName>
+      </TabItem>
+      {/* settings */}
+      <TabItem onClick={handleSettings}>
         <TabIcon>
           <GearIcon />
         </TabIcon>

@@ -4,6 +4,7 @@ import { getFromLS, setToLS } from '../utils/storage';
 const initialState = {
   mode: 'light',
   activeView: 'budgets',
+  settingsModal: false,
 };
 
 const actionSlice = createSlice({
@@ -23,9 +24,16 @@ const actionSlice = createSlice({
     setDashboardView(state, action) {
       state.activeView = action.payload;
     },
+    toggleSettingsModal(state, action) {
+      state.settingsModal = action.payload;
+    },
   },
 });
 
-export const { getThemeMode, setThemeMode, setDashboardView } =
-  actionSlice.actions;
+export const {
+  getThemeMode,
+  setThemeMode,
+  setDashboardView,
+  toggleSettingsModal,
+} = actionSlice.actions;
 export default actionSlice.reducer;

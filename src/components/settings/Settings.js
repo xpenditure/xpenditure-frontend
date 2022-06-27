@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { toggleSettingsModal } from '../../features/actionSlice';
 import { AccountIcon, BellIcon, CancelIcon, PaintbrushIcon } from '../icons';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
   const [title, setTtitle] = useState('Account');
+
+  const dispatch = useDispatch();
+
+  const { settingsModal } = useSelector((state) => state.action);
 
   const tabList = [
     { name: 'Account', alias: 'account', element: <AccountIcon /> },
@@ -17,9 +23,13 @@ const Settings = () => {
     setTtitle(tab.name);
   };
 
+  const handleCloseSettingsModal = () => {
+    dispatch(toggleSettingsModal(false));
+  };
+
   return (
-    <SettingsWrap>
-      <Overlay />
+    <SettingsWrap visible={settingsModal}>
+      <Overlay onClick={handleCloseSettingsModal} />
       <SettingsInner>
         <SettingsSide>
           <div className="tabList">
@@ -38,7 +48,7 @@ const Settings = () => {
         <SettingsMain>
           <SettingsNav>
             <div className="title">{title}</div>
-            <div className="close">
+            <div className="close" onClick={handleCloseSettingsModal}>
               <CancelIcon />
             </div>
           </SettingsNav>
@@ -58,7 +68,7 @@ const SettingsWrap = styled.div`
   width: 100%;
   height: 100vh;
   z-index: 999998;
-  display: flex;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   left: 0;
@@ -137,6 +147,14 @@ const SettingsNav = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
+    }
     svg {
       fill: ${(props) => props.theme.colors.text_color_default};
       width: 20px;

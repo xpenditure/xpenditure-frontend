@@ -4,6 +4,9 @@ import { ProtectedRoute, PublicRoute } from './helper/authRoute';
 import Dashboard from './pages/Dashboard';
 import { useSelector } from 'react-redux';
 import Home from './pages/Home';
+import Budgets from './pages/Budgets';
+import Trash from './pages/Trash';
+import Archive from './pages/Archive';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -27,7 +30,11 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           }
-        ></Route>
+        >
+          <Route index element={<Budgets />} />
+          <Route path="trash" element={<Trash />} />
+          <Route path="archive" element={<Archive />} />
+        </Route>
       </Routes>
     </Router>
   );

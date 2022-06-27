@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Budgets from '../components/views/Budgets';
-import Labels from '../components/views/Labels';
+
 import Sidenav from '../components/sidenav/Sidenav';
-import { useSelector } from 'react-redux';
 import Settings from '../components/settings/Settings';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
-  const { activeView } = useSelector((state) => state.action);
-
   return (
     <>
       <DashWrap>
@@ -16,8 +13,7 @@ const Dashboard = () => {
 
         <MainViews>
           <Container>
-            {activeView === 'budgets' && <Budgets />}
-            {activeView === 'labels' && <Labels />}
+            <Outlet />
           </Container>
         </MainViews>
       </DashWrap>
