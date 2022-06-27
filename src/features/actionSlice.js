@@ -1,19 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getFromLS, setToLS } from '../utils/storage';
 
 const initialState = {
-  createModal: false,
+  mode: 'light',
+  activeView: 'budgets',
 };
 
-export const actionSlice = createSlice({
+const actionSlice = createSlice({
   name: 'action',
   initialState,
   reducers: {
-    showCreateModal(state, action) {
-      console.log(action);
-      state.createModal = !state.createModal;
+    getThemeMode(state) {
+      const mode = getFromLS('mode');
+      if (mode) {
+        state.mode = mode;
+      }
+    },
+    setThemeMode(state, action) {
+      setToLS('mode', action.payload);
+      state.mode = action.payload;
+    },
+    setDashboardView(state, action) {
+      state.activeView = action.payload;
     },
   },
 });
 
-export const { showCreateModal } = actionSlice.actions;
+export const { getThemeMode, setThemeMode, setDashboardView } =
+  actionSlice.actions;
 export default actionSlice.reducer;

@@ -1,8 +1,5 @@
-const BASE_URL = `http://localhost:8000/api`;
+import { getFromLS } from './storage';
 
-const TOKEN =
-  global.window && global.window.localStorage.getItem('token')
-    ? JSON.parse(localStorage.getItem('token'))
-    : null;
+export const BASE_URL = `http://localhost:8000/api`;
 
-export { BASE_URL, TOKEN };
+export const TOKEN = getFromLS('token');
