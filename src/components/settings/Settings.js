@@ -6,6 +6,8 @@ import Close from '../excerpt/Close';
 import { AccountIcon, BellIcon, PaintbrushIcon } from '../icons';
 import Modal from '../modal/Modal';
 import Account from './Account';
+import Appearance from './Appearance';
+import Notifications from './Notifications';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
@@ -54,8 +56,8 @@ const Settings = () => {
           </SettingsNav>
           <SettingsView>
             {activeTab === 'account' && <Account />}
-            {activeTab === 'appearance' && 'Appearance'}
-            {activeTab === 'notifications' && 'Notifications'}
+            {activeTab === 'appearance' && <Appearance />}
+            {activeTab === 'notifications' && <Notifications />}
           </SettingsView>
         </SettingsMain>
       </SettingsInner>

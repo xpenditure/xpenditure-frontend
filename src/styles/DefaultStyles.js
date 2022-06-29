@@ -5,18 +5,6 @@ export const FormWrap = styled.div`
     display: flex;
     flex-direction: column;
   }
-
-  button {
-    width: 100%;
-    border: none;
-    outline: none;
-    background-color: ${(props) => props.theme.colors.btn_color1};
-    color: ${(props) => props.theme.colors.text_color_default};
-    height: 45px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-  }
 `;
 export const InputGroup = styled.div`
   display: flex;
@@ -48,6 +36,11 @@ export const InputWrap = styled.div`
       border-color: #58a6ff;
       outline: #58a6ff;
     }
+  }
+
+  p {
+    font-size: 12px;
+    color: ${(props) => props.theme.colors.text_color2};
   }
 `;
 
