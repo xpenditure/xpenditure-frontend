@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logout from './Logout';
 import NavTab from './NavTab';
 
 const Sidenav = () => {
@@ -8,7 +7,6 @@ const Sidenav = () => {
     <SidenavWrap>
       <SidenavInner>
         <NavTab />
-        <Logout />
       </SidenavInner>
     </SidenavWrap>
   );

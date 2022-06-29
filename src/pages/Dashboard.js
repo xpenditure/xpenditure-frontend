@@ -5,6 +5,7 @@ import Sidenav from '../components/sidenav/Sidenav';
 import Settings from '../components/settings/Settings';
 import { Outlet } from 'react-router-dom';
 import AddLabel from '../components/widgets/AddLabel';
+import Header from '../components/header/Header';
 
 const Dashboard = () => {
   return (
@@ -13,9 +14,12 @@ const Dashboard = () => {
         <Sidenav />
 
         <MainViews>
-          <Container>
-            <Outlet />
-          </Container>
+          <Header />
+          <OutletWrap>
+            <Container>
+              <Outlet />
+            </Container>
+          </OutletWrap>
         </MainViews>
       </DashWrap>
       <Settings />
@@ -39,6 +43,10 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+`;
+
+const OutletWrap = styled.div`
+  margin-top: 100px;
 `;
 
 export default Dashboard;

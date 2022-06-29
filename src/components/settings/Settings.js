@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleSettingsModal } from '../../features/actionSlice';
 import Close from '../excerpt/Close';
-import { AccountIcon, BellIcon, CancelIcon, PaintbrushIcon } from '../icons';
+import { AccountIcon, BellIcon, PaintbrushIcon } from '../icons';
 import Modal from '../modal/Modal';
 
 const Settings = () => {

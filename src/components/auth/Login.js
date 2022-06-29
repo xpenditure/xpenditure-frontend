@@ -17,7 +17,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email != '' && password != '') {
+    if (email !== '' && password !== '') {
       const payload = {
         email,
         password,

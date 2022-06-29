@@ -19,7 +19,12 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    if (firstName != '' && lastName != '' && email != '' && password != '') {
+    if (
+      firstName !== '' &&
+      lastName !== '' &&
+      email !== '' &&
+      password !== ''
+    ) {
       const payload = {
         firstName,
         lastName,

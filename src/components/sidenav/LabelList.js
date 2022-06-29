@@ -36,7 +36,7 @@ const LabelWrap = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.border_color1};
   border-bottom: 1px solid ${(props) => props.theme.colors.border_color1};
   max-height: ${(props) => (props.visible ? '250px' : '0')};
-  overflow: auto;
+  overflow: ${(props) => (props.visible ? 'auto' : 'hidden')};
   border-width: ${(props) => (props.visible ? '1px' : '0')};
   transition: all 300ms ease-in-out;
 `;

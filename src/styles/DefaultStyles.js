@@ -39,7 +39,7 @@ export const InputWrap = styled.div`
     border-radius: ${(props) => props.theme.reset.border_radius};
     outline: none;
     padding: 0 15px;
-    height: 40px;
+    height: 35px;
     font-weight: 600;
     color: ${(props) => props.theme.colors.text_color_default};
     background-color: ${(props) => props.theme.colors.input_color1};
@@ -59,14 +59,21 @@ export const Title = styled.div`
 `;
 
 export const Button = styled.button`
-  border: none;
-  outline: none;
-  background-color: ${(props) => props.theme.colors.btn_color1};
-  color: ${(props) => props.theme.colors.text_color_default};
   height: 40px;
   padding: 0 20px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  border: none;
+  outline: none;
+`;
+
+export const ButtonPrimary = styled(Button)`
+  background-color: ${(props) => props.theme.colors.btn_color_primary};
+  color: ${(props) => props.theme.colors.text_color_default};
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.btn_color_primary_hover};
+  }
 `;
 export const ButtonDark = styled(Button)``;

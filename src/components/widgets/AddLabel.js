@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleLabelModal } from '../../features/actionSlice';
-import { Button, InputWrap } from '../../styles/DefaultStyles';
+import { ButtonPrimary, InputWrap } from '../../styles/DefaultStyles';
 import Close from '../excerpt/Close';
 import Modal from '../modal/Modal';
 import { SocketContext } from '../../context/socket';
@@ -46,7 +46,7 @@ const AddLabel = () => {
               />
             </InputWrap>
             <ButtonWrap>
-              <Button type="submit">Add Label</Button>
+              <ButtonPrimary type="submit">Add Label</ButtonPrimary>
             </ButtonWrap>
           </form>
         </LabelMain>

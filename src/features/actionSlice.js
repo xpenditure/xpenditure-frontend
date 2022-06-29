@@ -5,6 +5,7 @@ const initialState = {
   mode: 'light',
   settingsModal: false,
   labelModal: false,
+  moreSide: false,
 };
 
 const actionSlice = createSlice({
@@ -27,6 +28,9 @@ const actionSlice = createSlice({
     toggleLabelModal(state, action) {
       state.labelModal = action.payload;
     },
+    toggleMoreSide(state, action) {
+      state.moreSide = action.payload;
+    },
   },
 });
 
@@ -35,5 +39,6 @@ export const {
   setThemeMode,
   toggleSettingsModal,
   toggleLabelModal,
+  toggleMoreSide,
 } = actionSlice.actions;
 export default actionSlice.reducer;
