@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Account = () => {
-  return <div></div>;
+  return (
+    <AccountWrap>
+      <div>Account Infos</div>
+    </AccountWrap>
+  );
 };
 
 const AccountWrap = styled.div`

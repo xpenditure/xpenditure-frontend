@@ -5,6 +5,7 @@ import {
   InputGroup,
   InputWrap,
   Title,
+  ButtonPrimary,
 } from '../../styles/DefaultStyles';
 import { loginUserAsync } from '../../features/userSlice';
 
@@ -47,7 +48,7 @@ const Login = () => {
             />
           </InputWrap>
         </InputGroup>
-        <button>Login</button>
+        <ButtonPrimary>Login</ButtonPrimary>
       </form>
     </FormWrap>
   );

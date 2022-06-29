@@ -43,6 +43,11 @@ export const InputWrap = styled.div`
     font-weight: 600;
     color: ${(props) => props.theme.colors.text_color_default};
     background-color: ${(props) => props.theme.colors.input_color1};
+
+    :focus {
+      border-color: #58a6ff;
+      outline: #58a6ff;
+    }
   }
 `;
 

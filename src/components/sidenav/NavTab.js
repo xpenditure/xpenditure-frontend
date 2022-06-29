@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router-dom';
 import { TabList, TabIcon, TabItem, TabName } from './styled';
 import { GearIcon, PlusIcon } from '../icons';
 import {
@@ -32,18 +32,15 @@ const NavTab = () => {
 
   return (
     <TabList>
-      {/* dashboard */}
-      <TabItem
-        onClick={() => {
-          navigate('/dashboard');
-        }}
-      >
-        <TabIcon>
-          <ControlIcon />
-        </TabIcon>
-        <TabName>Budgets</TabName>
-      </TabItem>
-      {/* labels */}
+      <Link to="/dashboard">
+        <TabItem>
+          <TabIcon>
+            <ControlIcon />
+          </TabIcon>
+          <TabName>Budgets</TabName>
+        </TabItem>
+      </Link>
+
       <TabItem onClick={handleToggleLabel}>
         <OLS>
           <div className="tabitem">
@@ -58,29 +55,25 @@ const NavTab = () => {
         </OLS>
       </TabItem>
       <LabelList active={label} />
-      {/* archive */}
-      <TabItem
-        onClick={() => {
-          navigate('archive');
-        }}
-      >
-        <TabIcon>
-          <ArchiveIcon />
-        </TabIcon>
-        <TabName>Archive</TabName>
-      </TabItem>
-      {/* trash */}
-      <TabItem
-        onClick={() => {
-          navigate('trash');
-        }}
-      >
-        <TabIcon>
-          <TrashIcon />
-        </TabIcon>
-        <TabName>Trash</TabName>
-      </TabItem>
-      {/* settings */}
+
+      <Link to="archive">
+        <TabItem>
+          <TabIcon>
+            <ArchiveIcon />
+          </TabIcon>
+          <TabName>Archive</TabName>
+        </TabItem>
+      </Link>
+
+      <Link to="trash">
+        <TabItem>
+          <TabIcon>
+            <TrashIcon />
+          </TabIcon>
+          <TabName>Trash</TabName>
+        </TabItem>
+      </Link>
+
       <TabItem onClick={handleSettings}>
         <TabIcon>
           <GearIcon />

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMoreSide } from '../../features/actionSlice';
+import { clearTokenFromStorage } from '../../features/userSlice';
 
 const MoreSide = () => {
   const { moreSide } = useSelector((state) => state.action);
@@ -12,19 +13,34 @@ const MoreSide = () => {
     dispatch(toggleMoreSide(false));
   };
 
+  const handleLogout = () => {
+    close();
+    dispatch(clearTokenFromStorage());
+  };
+
   return (
     <MoreSideWrap visible={moreSide}>
       <Overlay onClick={close} />
       <MoreSideInner>
         <div className="info-link">
-          <Link to="#">I will be back</Link>
-          <Link to="#">Help</Link>
-          <Link to="#">Support</Link>
-          <Link to="#">FAQs</Link>
+          <Link onClick={close} to="#">
+            I will be back
+          </Link>
+          <Link onClick={close} to="#">
+            Help
+          </Link>
+          <Link onClick={close} to="#">
+            Support
+          </Link>
+          <Link onClick={close} to="#">
+            FAQs
+          </Link>
         </div>
         <Line />
         <div className="logout-link">
-          <div className="logout">Logout</div>
+          <div className="logout" onClick={handleLogout}>
+            Logout
+          </div>
         </div>
       </MoreSideInner>
     </MoreSideWrap>
@@ -58,6 +74,7 @@ const MoreSideInner = styled.div`
       text-decoration: none;
       color: ${(props) => props.theme.colors.text_color2};
       font-size: 14px;
+      cursor: pointer;
 
       :hover {
         color: ${(props) => props.theme.colors.text_color1};

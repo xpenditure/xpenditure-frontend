@@ -45,7 +45,6 @@ const Auth = () => {
 const AuthWrap = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
   justify-content: center;
   padding: 0 20px;
   z-index: 99998;
@@ -55,7 +54,7 @@ const AuthWrap = styled.div`
 const AuthInner = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin: 100px 0;
 `;
 
 const AuthMain = styled.div`

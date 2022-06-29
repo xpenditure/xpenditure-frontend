@@ -5,6 +5,7 @@ import { toggleSettingsModal } from '../../features/actionSlice';
 import Close from '../excerpt/Close';
 import { AccountIcon, BellIcon, PaintbrushIcon } from '../icons';
 import Modal from '../modal/Modal';
+import Account from './Account';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
@@ -52,7 +53,7 @@ const Settings = () => {
             <Close close={handleCloseSettingsModal} />
           </SettingsNav>
           <SettingsView>
-            {activeTab === 'account' && 'Account'}
+            {activeTab === 'account' && <Account />}
             {activeTab === 'appearance' && 'Appearance'}
             {activeTab === 'notifications' && 'Notifications'}
           </SettingsView>
@@ -97,7 +98,7 @@ const SettingsSide = styled.div`
     justify-content: center;
     align-items: center;
     svg {
-      width: 20px;
+      width: 18px;
       fill: ${(props) => props.theme.colors.text_color2};
     }
   }

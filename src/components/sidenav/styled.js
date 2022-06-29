@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const TabList = styled.div`
   display: flex;
   flex-direction: column;
+
+  a {
+    text-decoration: none;
+  }
 `;
 export const TabItem = styled.div`
   padding: 10px 20px;

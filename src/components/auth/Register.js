@@ -5,6 +5,7 @@ import {
   InputGroup,
   InputWrap,
   Title,
+  ButtonPrimary,
 } from '../../styles/DefaultStyles';
 import { registerUserAsync } from '../../features/userSlice';
 
@@ -70,7 +71,7 @@ const Register = () => {
             />
           </InputWrap>
         </InputGroup>
-        <button>Register</button>
+        <ButtonPrimary>Register</ButtonPrimary>
       </form>
     </FormWrap>
   );
