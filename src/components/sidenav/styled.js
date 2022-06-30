@@ -10,8 +10,8 @@ export const TabList = styled.div`
     ::after {
       content: '';
       position: absolute;
-      width: 3px;
-      height: 70%;
+      width: 4px;
+      height: 60%;
       background-color: ${(props) => props.theme.colors.btn_color_primary};
       border-radius: 40px;
       margin-left: 5px;
@@ -88,7 +88,7 @@ export const OLS = styled.div`
     }
 
     svg {
-      width: 13px;
+      width: 18px;
       fill: ${(props) => props.theme.colors.text_color2};
     }
   }

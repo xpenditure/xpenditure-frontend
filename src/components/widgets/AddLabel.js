@@ -44,7 +44,7 @@ const AddLabel = () => {
               />
             </InputWrap>
             <ButtonWrap>
-              <ButtonPrimary type="submit">Add Label</ButtonPrimary>
+              <ButtonPrimary type="submit">Add label</ButtonPrimary>
             </ButtonWrap>
           </form>
         </LabelMain>

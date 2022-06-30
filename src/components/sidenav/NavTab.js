@@ -4,6 +4,7 @@ import { TabList, TabIcon, TabItem, TabName, OLS } from './styled';
 import { GearIcon, PlusIcon } from '../icons';
 import { ArchiveIcon, ControlIcon, LabelIcon, TrashIcon } from '../icons';
 import LabelList from './LabelList';
+import { ButtonPrimary } from '../../styles/DefaultStyles';
 
 const NavTab = () => {
   const location = useLocation();
@@ -42,11 +43,10 @@ const NavTab = () => {
             </div>
             <Link
               to="/dashboard/new/label"
-              className="more-icon"
               state={{ background: location }}
               onClick={(e) => e.stopPropagation()}
             >
-              <PlusIcon />
+              <ButtonPrimary>New</ButtonPrimary>
             </Link>
           </OLS>
         </TabItem>

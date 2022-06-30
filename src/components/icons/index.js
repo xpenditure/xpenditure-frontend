@@ -11,6 +11,7 @@ import AccountIcon from './AccountIcon';
 import TagIcon from './TagIcon';
 import PlusIcon from './PlusIcon';
 import EllipsisVerticalIcon from './EllipsisVerticalIcon';
+import EllipsisHorizontalIcon from './EllipsisHorizontalIcon';
 
 export {
   TrashIcon,
@@ -26,4 +27,5 @@ export {
   TagIcon,
   PlusIcon,
   EllipsisVerticalIcon,
+  EllipsisHorizontalIcon,
 };

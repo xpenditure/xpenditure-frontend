@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const SearchField = ({ visible }) => {
+  const handleEvent = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <SearchFieldWrap visible={visible}>
+    <SearchFieldWrap visible={visible} onClick={handleEvent}>
       <div>search results will show here</div>
     </SearchFieldWrap>
   );
@@ -22,6 +26,7 @@ const SearchFieldWrap = styled.div`
   background-color: ${(props) => props.theme.colors.primary};
   visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.visible ? '1' : '0')};
+  color: ${(props) => props.theme.colors.text_color2};
 
   div {
     padding: 30px;

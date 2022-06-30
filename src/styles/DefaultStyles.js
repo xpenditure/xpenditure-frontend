@@ -27,8 +27,9 @@ export const InputWrap = styled.div`
     border: 1px solid ${(props) => props.theme.colors.border_color1};
     border-radius: ${(props) => props.theme.reset.border_radius};
     outline: none;
-    padding: 0 15px;
-    height: 35px;
+    padding: 5px 12px;
+    line-height: 20px;
+    vertical-align: middle;
     font-weight: 600;
     color: ${(props) => props.theme.colors.text_color1};
     background-color: ${(props) => props.theme.colors.input_color1};
@@ -59,18 +60,24 @@ export const Title = styled.div`
 `;
 
 export const Button = styled.button`
-  height: 35px;
-  padding: 0 20px;
+  padding: 5px 16px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   border: none;
   outline: none;
+  font-size: 14px;
+  vertical-align: middle;
+  white-space: nowrap;
+  user-select: none;
+  border: 1px solid;
+  color: ${(props) => props.theme.colors.text_color_default};
+  line-height: 20px;
 `;
 
 export const ButtonPrimary = styled(Button)`
   background-color: ${(props) => props.theme.colors.btn_color_primary};
-  color: ${(props) => props.theme.colors.text_color_default};
+  border-color: ${(props) => props.theme.colors.btn_primary_border};
 
   :hover {
     background-color: ${(props) => props.theme.colors.btn_color_primary_hover};

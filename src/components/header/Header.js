@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
-import { BellIcon, EllipsisVerticalIcon } from '../icons';
+import { BellIcon, EllipsisHorizontalIcon } from '../icons';
 import { Link } from 'react-router-dom';
 import MoreSide from '../widgets/MoreSide';
 import { useDispatch } from 'react-redux';
 import { toggleMoreSide } from '../../features/actionSlice';
-import { ButtonPrimary } from '../../styles/DefaultStyles';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -26,12 +25,9 @@ const Header = () => {
             <BellIcon />
           </Link>
         </div>
-        <Link to="new/budget">
-          <ButtonPrimary>New</ButtonPrimary>
-        </Link>
         <MoreItem>
           <div className="ellipsis" onClick={handleShowMoreSide}>
-            <EllipsisVerticalIcon />
+            <EllipsisHorizontalIcon />
           </div>
           <MoreSide />
         </MoreItem>
@@ -72,6 +68,7 @@ const HeaderRight = styled.div`
 
 const MoreItem = styled.div`
   position: relative;
+  margin-left: 20px;
   .ellipsis {
     width: 30px;
     height: 30px;

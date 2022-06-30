@@ -29,6 +29,7 @@ export const dark = {
     hover_color1: '#b1bac41f',
     btn_color_primary: '#238636',
     btn_color_primary_hover: '#2ea043',
+    btn_primary_border: '#f0f6fc1a',
     shadow1: '0 8px 24px #010409',
   },
   reset: {
