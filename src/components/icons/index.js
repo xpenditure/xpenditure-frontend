@@ -12,6 +12,8 @@ import TagIcon from './TagIcon';
 import PlusIcon from './PlusIcon';
 import EllipsisVerticalIcon from './EllipsisVerticalIcon';
 import EllipsisHorizontalIcon from './EllipsisHorizontalIcon';
+import CaretDownIcon from './CaretDownIcon';
+import CheckedIcon from './CheckedIcon';
 
 export {
   TrashIcon,
@@ -28,4 +30,6 @@ export {
   PlusIcon,
   EllipsisVerticalIcon,
   EllipsisHorizontalIcon,
+  CaretDownIcon,
+  CheckedIcon,
 };

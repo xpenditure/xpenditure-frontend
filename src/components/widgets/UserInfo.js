@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { EllipsisHorizontalIcon } from '../icons';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import More from './More';
+import { clearTokenFromStorage } from '../../features/userSlice';
 
 const UserInfo = () => {
   const { user } = useSelector((state) => state.user);
+  const [menu, setMenu] = useState(false);
+  const dispatch = useDispatch();
+
+  const open = () => {
+    setMenu(true);
+  };
+
+  const close = () => {
+    setMenu(false);
+  };
+
+  const handleLogout = () => {
+    close();
+    dispatch(clearTokenFromStorage());
+  };
 
   return (
     <UserInfoWrap>
@@ -12,28 +29,30 @@ const UserInfo = () => {
         <div className="avatar"></div>
         <div className="details">
           <div className="name">
-            {user?.firstName}
-            {user?.lastName}
+            {user?.firstName} {user?.lastName}
           </div>
           <div className="email">{user?.email}</div>
         </div>
       </div>
-      <div className="icon-more">
-        <EllipsisHorizontalIcon />
-      </div>
+      <ShowMenu>
+        <div className="icon-more" onClick={open}>
+          <EllipsisHorizontalIcon />
+        </div>
+        <More visible={menu} close={close} pos="top">
+          <div className="link">
+            <p onClick={handleLogout}>Sign out</p>
+          </div>
+        </More>
+      </ShowMenu>
     </UserInfoWrap>
   );
 };
 
 const UserInfoWrap = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding: 20px 20px;
-  cursor: pointer;
-
-  :hover {
-    background-color: ${(props) => props.theme.colors.hover_color1};
-  }
 
   .avatar {
     width: 40px !important;
@@ -67,6 +86,10 @@ const UserInfoWrap = styled.div`
   .email {
     font-size: 12px;
   }
+`;
+
+const ShowMenu = styled.div`
+  position: relative;
 
   .icon-more {
     display: flex;
@@ -75,6 +98,11 @@ const UserInfoWrap = styled.div`
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    cursor: pointer;
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
+    }
 
     svg {
       width: 18px;

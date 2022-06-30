@@ -1,6 +1,12 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
-import { ButtonPrimary, InputWrap } from '../../styles/DefaultStyles';
+import {
+  ButtonPrimary,
+  InputWrap,
+  AddWrap,
+  AddMain,
+  AddNav,
+  ButtonWrap,
+} from '../../styles/DefaultStyles';
 import Close from '../excerpt/Close';
 import Modal from '../modal/Modal';
 import { SocketContext } from '../../context/socket';
@@ -29,12 +35,12 @@ const AddLabel = () => {
 
   return (
     <Modal visible={true} close={close}>
-      <AddLabelWrap>
-        <LabelNav>
+      <AddWrap>
+        <AddNav>
           <div>Create Label</div>
           <Close close={close} />
-        </LabelNav>
-        <LabelMain>
+        </AddNav>
+        <AddMain>
           <form onSubmit={handleCreateLabel}>
             <InputWrap>
               <label>Label name</label>
@@ -47,33 +53,10 @@ const AddLabel = () => {
               <ButtonPrimary type="submit">Add label</ButtonPrimary>
             </ButtonWrap>
           </form>
-        </LabelMain>
-      </AddLabelWrap>
+        </AddMain>
+      </AddWrap>
     </Modal>
   );
 };
-
-const AddLabelWrap = styled.div`
-  width: 500px;
-  background-color: ${(props) => props.theme.colors.primary};
-`;
-
-const LabelNav = styled.div`
-  height: 50px;
-  border-bottom: 1px solid ${(props) => props.theme.colors.border_color1};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-`;
-
-const LabelMain = styled.div`
-  padding: 20px;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
 
 export default AddLabel;

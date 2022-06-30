@@ -9,6 +9,7 @@ import Trash from './pages/Trash';
 import Archive from './pages/Archive';
 import Settings from './components/settings/Settings';
 import AddLabel from './components/widgets/AddLabel';
+import NewBudget from './components/widgets/NewBudget';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Routes>
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="/dashboard/new/label" element={<AddLabel />} />
+          <Route path="/dashboard/new/budget" element={<NewBudget />} />
         </Routes>
       )}
     </>

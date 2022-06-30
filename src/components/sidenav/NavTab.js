@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
 import { TabList, TabIcon, TabItem, TabName, OLS } from './styled';
-import { GearIcon, PlusIcon } from '../icons';
+import { CaretDownIcon, GearIcon, PlusIcon } from '../icons';
 import { ArchiveIcon, ControlIcon, LabelIcon, TrashIcon } from '../icons';
 import LabelList from './LabelList';
 import { ButtonPrimary } from '../../styles/DefaultStyles';
@@ -31,28 +31,6 @@ const NavTab = () => {
           <TabName>Budgets</TabName>
         </TabItem>
       </NavLink>
-
-      <div className="custom" to="#">
-        <TabItem onClick={handleToggleLabel}>
-          <OLS>
-            <div className="tabitem">
-              <TabIcon>
-                <LabelIcon />
-              </TabIcon>
-              <TabName>Labels</TabName>
-            </div>
-            <Link
-              to="/dashboard/new/label"
-              state={{ background: location }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ButtonPrimary>New</ButtonPrimary>
-            </Link>
-          </OLS>
-        </TabItem>
-      </div>
-      <LabelList active={label} />
-
       <NavLink
         to="archive"
         end
@@ -82,7 +60,29 @@ const NavTab = () => {
           <TabName>Trash</TabName>
         </TabItem>
       </NavLink>
-
+      <div className="custom" to="#">
+        <TabItem onClick={handleToggleLabel}>
+          <OLS>
+            <div className="tabitem">
+              <TabIcon>
+                <LabelIcon />
+              </TabIcon>
+              <TabName>Labels</TabName>
+              <div className="icon">
+                <CaretDownIcon />
+              </div>
+            </div>
+            <Link
+              to="/dashboard/new/label"
+              state={{ background: location }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ButtonPrimary>New</ButtonPrimary>
+            </Link>
+          </OLS>
+        </TabItem>
+      </div>
+      <LabelList active={label} />
       <NavLink
         end
         className={({ isActive }) =>

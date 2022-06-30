@@ -19,9 +19,10 @@ const ModalWrap = styled.div`
   z-index: 999998;
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 `;
 const ModalInner = styled.div`
+  margin-top: 60px;
   position: relative;
   background-color: ${(props) => props.theme.colors.primary};
   border: 1px solid ${(props) => props.theme.colors.border_color1};

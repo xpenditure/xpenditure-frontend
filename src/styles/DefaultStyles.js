@@ -23,7 +23,8 @@ export const InputWrap = styled.div`
     color: ${(props) => props.theme.colors.text_color2};
   }
 
-  input {
+  input,
+  textarea {
     border: 1px solid ${(props) => props.theme.colors.border_color1};
     border-radius: ${(props) => props.theme.reset.border_radius};
     outline: none;
@@ -38,6 +39,12 @@ export const InputWrap = styled.div`
       border-color: #58a6ff;
       outline: #58a6ff;
     }
+  }
+
+  textarea {
+    min-height: 100px;
+    max-height: 200px;
+    resize: vertical;
   }
 
   p {
@@ -57,6 +64,35 @@ export const Title = styled.div`
   p {
     font-size: 14px;
   }
+`;
+
+export const Line = styled.div`
+  width: 100%;
+  background-color: ${(props) => props.theme.colors.border_color1};
+  height: 1px;
+`;
+
+export const AddWrap = styled.div`
+  width: 500px;
+  background-color: ${(props) => props.theme.colors.primary};
+`;
+
+export const AddNav = styled.div`
+  height: 50px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.border_color1};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+`;
+
+export const AddMain = styled.div`
+  padding: 20px;
+`;
+
+export const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export const Button = styled.button`

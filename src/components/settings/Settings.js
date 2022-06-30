@@ -66,7 +66,7 @@ const SettingsInner = styled.div`
   width: 900px;
   height: 600px;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 600px;
   display: flex;
 `;
 const SettingsSide = styled.div`

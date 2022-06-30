@@ -74,6 +74,12 @@ export const OLS = styled.div`
     align-items: center;
   }
 
+  .icon {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
   .more-icon {
     display: flex;
     justify-content: center;
