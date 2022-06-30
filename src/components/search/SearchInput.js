@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { InputWrap } from '../../styles/DefaultStyles';
 import SearchField from './SearchField';
+import { CancelIcon } from '../icons';
 
 const SearchInput = () => {
   const [search, setSearch] = useState('');
   const [focused, setFocused] = useState(false);
+  const inputRef = useRef();
 
   return (
     <SearchInputWrap>
       <form>
         <Input focused={focused}>
           <input
+            ref={inputRef}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             value={search}

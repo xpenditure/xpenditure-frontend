@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import Sidenav from '../components/sidenav/Sidenav';
-import Settings from '../components/settings/Settings';
 import { Outlet } from 'react-router-dom';
-import AddLabel from '../components/widgets/AddLabel';
 import Header from '../components/header/Header';
+import { useDispatch } from 'react-redux';
+import { getUserProfileAsync } from '../features/userSlice';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(getUserProfileAsync());
+    };
+  }, []);
+
   return (
     <>
       <DashWrap>
@@ -22,8 +30,6 @@ const Dashboard = () => {
           </OutletWrap>
         </MainViews>
       </DashWrap>
-      <Settings />
-      <AddLabel />
     </>
   );
 };

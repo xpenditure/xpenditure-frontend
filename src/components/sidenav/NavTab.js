@@ -1,115 +1,105 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import { TabList, TabIcon, TabItem, TabName } from './styled';
+import { NavLink, useLocation, Link } from 'react-router-dom';
+import { TabList, TabIcon, TabItem, TabName, OLS } from './styled';
 import { GearIcon, PlusIcon } from '../icons';
-import {
-  toggleLabelModal,
-  toggleSettingsModal,
-} from '../../features/actionSlice';
 import { ArchiveIcon, ControlIcon, LabelIcon, TrashIcon } from '../icons';
 import LabelList from './LabelList';
-import styled from 'styled-components';
 
 const NavTab = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const location = useLocation();
 
   const [label, setLabel] = useState(false);
-
-  const handleSettings = () => {
-    dispatch(toggleSettingsModal(true));
-  };
 
   const handleToggleLabel = () => {
     setLabel(!label);
   };
 
-  const handleAddLabel = (e) => {
-    e.stopPropagation();
-    dispatch(toggleLabelModal(true));
-  };
-
   return (
     <TabList>
-      <Link to="/dashboard">
+      <NavLink
+        to="/dashboard"
+        end
+        className={({ isActive }) =>
+          'nav-link' + (isActive ? ' activated' : '')
+        }
+      >
         <TabItem>
           <TabIcon>
             <ControlIcon />
           </TabIcon>
           <TabName>Budgets</TabName>
         </TabItem>
-      </Link>
+      </NavLink>
 
-      <TabItem onClick={handleToggleLabel}>
-        <OLS>
-          <div className="tabitem">
-            <TabIcon>
-              <LabelIcon />
-            </TabIcon>
-            <TabName>Labels</TabName>
-          </div>
-          <div className="add-label" onClick={handleAddLabel}>
-            <PlusIcon />
-          </div>
-        </OLS>
-      </TabItem>
+      <div className="custom" to="#">
+        <TabItem onClick={handleToggleLabel}>
+          <OLS>
+            <div className="tabitem">
+              <TabIcon>
+                <LabelIcon />
+              </TabIcon>
+              <TabName>Labels</TabName>
+            </div>
+            <Link
+              to="/dashboard/new/label"
+              className="more-icon"
+              state={{ background: location }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <PlusIcon />
+            </Link>
+          </OLS>
+        </TabItem>
+      </div>
       <LabelList active={label} />
 
-      <Link to="archive">
+      <NavLink
+        to="archive"
+        end
+        className={({ isActive }) =>
+          'nav-link' + (isActive ? ' activated' : '')
+        }
+      >
         <TabItem>
           <TabIcon>
             <ArchiveIcon />
           </TabIcon>
           <TabName>Archive</TabName>
         </TabItem>
-      </Link>
+      </NavLink>
 
-      <Link to="trash">
+      <NavLink
+        to="trash"
+        end
+        className={({ isActive }) =>
+          'nav-link' + (isActive ? ' activated' : '')
+        }
+      >
         <TabItem>
           <TabIcon>
             <TrashIcon />
           </TabIcon>
           <TabName>Trash</TabName>
         </TabItem>
-      </Link>
+      </NavLink>
 
-      <TabItem onClick={handleSettings}>
-        <TabIcon>
-          <GearIcon />
-        </TabIcon>
-        <TabName>Settings</TabName>
-      </TabItem>
+      <NavLink
+        end
+        className={({ isActive }) =>
+          'nav-link' + (isActive ? ' activated' : '')
+        }
+        to="/dashboard/settings"
+        state={{ background: location }}
+      >
+        <TabItem>
+          <TabIcon>
+            <GearIcon />
+          </TabIcon>
+          <TabName>Settings</TabName>
+        </TabItem>
+      </NavLink>
     </TabList>
   );
 };
-
-const OLS = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-
-  .tabitem {
-    display: flex;
-  }
-
-  .add-label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-
-    :hover {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    svg {
-      width: 13px;
-      fill: ${(props) => props.theme.colors.text_color2};
-    }
-  }
-`;
 
 export default NavTab;

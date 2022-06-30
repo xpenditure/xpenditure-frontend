@@ -1,21 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toggleLabelModal } from '../../features/actionSlice';
 import { ButtonPrimary, InputWrap } from '../../styles/DefaultStyles';
 import Close from '../excerpt/Close';
 import Modal from '../modal/Modal';
 import { SocketContext } from '../../context/socket';
+import { useNavigate } from 'react-router-dom';
 
 const AddLabel = () => {
-  const { labelModal } = useSelector((state) => state.action);
   const [labelName, setLabelName] = useState('');
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const socket = useContext(SocketContext);
 
   const close = () => {
-    dispatch(toggleLabelModal(false));
     setLabelName('');
+    navigate(-1);
   };
 
   const handleCreateLabel = (e) => {
@@ -30,7 +28,7 @@ const AddLabel = () => {
   };
 
   return (
-    <Modal visible={labelModal} close={close}>
+    <Modal visible={true} close={close}>
       <AddLabelWrap>
         <LabelNav>
           <div>Create Label</div>

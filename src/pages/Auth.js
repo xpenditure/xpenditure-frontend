@@ -4,11 +4,15 @@ import Tabs from '../components/auth/Tabs';
 import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
 import { useSearchParams } from 'react-router-dom';
+import Message from '../components/message/Message';
+import { useSelector } from 'react-redux';
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState('login');
   const [searchParams] = useSearchParams();
   const tab = searchParams.get('tab');
+
+  const { errorMsg } = useSelector((state) => state.user);
 
   const tabList = [
     { name: 'Login', alias: 'login' },
@@ -38,6 +42,7 @@ const Auth = () => {
           {activeTab === 'register' && <Register />}
         </AuthMain>
       </AuthInner>
+      <Message msg={errorMsg} />
     </AuthWrap>
   );
 };

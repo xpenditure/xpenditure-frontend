@@ -4,17 +4,50 @@ export const TabList = styled.div`
   display: flex;
   flex-direction: column;
 
-  a {
+  .activated {
+    position: relative;
+
+    ::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 70%;
+      background-color: ${(props) => props.theme.colors.btn_color_primary};
+      border-radius: 40px;
+      margin-left: 5px;
+    }
+  }
+
+  a,
+  .custom {
     text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
+
+      .more-icon {
+        visibility: visible;
+      }
+    }
+  }
+
+  svg {
+    fill: ${(props) => props.theme.colors.text_color2};
+    width: 18px;
   }
 `;
 export const TabItem = styled.div`
-  padding: 10px 20px;
+  padding: 0 20px;
   height: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.colors.text_color1};
+  color: ${(props) => props.theme.colors.text_color2};
+  flex: 1;
+  position: relative;
 
   :hover {
     background-color: ${(props) => props.theme.colors.hover_color1};
@@ -25,13 +58,38 @@ export const TabIcon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  svg {
-    fill: ${(props) => props.theme.colors.text_color1};
-    width: 18px;
-  }
 `;
 export const TabName = styled.div`
   margin-left: 10px;
   font-size: 14px;
+`;
+
+export const OLS = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+
+  .tabitem {
+    display: flex;
+    align-items: center;
+  }
+
+  .more-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    visibility: hidden;
+
+    :hover {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    svg {
+      width: 13px;
+      fill: ${(props) => props.theme.colors.text_color2};
+    }
+  }
 `;

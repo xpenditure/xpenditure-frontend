@@ -3,8 +3,6 @@ import { getFromLS, setToLS } from '../utils/storage';
 
 const initialState = {
   mode: 'light',
-  settingsModal: false,
-  labelModal: false,
   moreSide: false,
 };
 
@@ -22,23 +20,12 @@ const actionSlice = createSlice({
       setToLS('mode', action.payload);
       state.mode = action.payload;
     },
-    toggleSettingsModal(state, action) {
-      state.settingsModal = action.payload;
-    },
-    toggleLabelModal(state, action) {
-      state.labelModal = action.payload;
-    },
     toggleMoreSide(state, action) {
       state.moreSide = action.payload;
     },
   },
 });
 
-export const {
-  getThemeMode,
-  setThemeMode,
-  toggleSettingsModal,
-  toggleLabelModal,
-  toggleMoreSide,
-} = actionSlice.actions;
+export const { getThemeMode, setThemeMode, toggleMoreSide } =
+  actionSlice.actions;
 export default actionSlice.reducer;

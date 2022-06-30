@@ -20,6 +20,7 @@ export const InputWrap = styled.div`
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 3px;
+    color: ${(props) => props.theme.colors.text_color2};
   }
 
   input {
@@ -29,7 +30,7 @@ export const InputWrap = styled.div`
     padding: 0 15px;
     height: 35px;
     font-weight: 600;
-    color: ${(props) => props.theme.colors.text_color_default};
+    color: ${(props) => props.theme.colors.text_color1};
     background-color: ${(props) => props.theme.colors.input_color1};
 
     :focus {
@@ -40,6 +41,7 @@ export const InputWrap = styled.div`
 
   p {
     font-size: 12px;
+    margin-top: 5px;
     color: ${(props) => props.theme.colors.text_color2};
   }
 `;
@@ -57,9 +59,9 @@ export const Title = styled.div`
 `;
 
 export const Button = styled.button`
-  height: 40px;
+  height: 35px;
   padding: 0 20px;
-  border-radius: 8px;
+  border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   border: none;

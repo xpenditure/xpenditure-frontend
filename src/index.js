@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { getTokenFromStorage } from './features/userSlice';
 import { getThemeMode } from './features/actionSlice';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 store.dispatch(getTokenFromStorage());
 store.dispatch(getThemeMode());
@@ -19,7 +20,9 @@ root.render(
       <SocketContext.Provider value={socket}>
         <WithTheme>
           <GlobalStyles />
-          <App />
+          <Router>
+            <App />
+          </Router>
         </WithTheme>
       </SocketContext.Provider>
     </Provider>

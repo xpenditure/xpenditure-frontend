@@ -16,7 +16,10 @@ const Budgets = () => {
   return (
     <BudgetsWrap>
       {budgets.map((budget) => (
-        <BudgetCard key={budget._id}>{budget.name}</BudgetCard>
+        <BudgetCard key={budget._id}>
+          <div>{budget.total}</div>
+          <div>{budget.name}</div>
+        </BudgetCard>
       ))}
     </BudgetsWrap>
   );

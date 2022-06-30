@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BASE_URL } from '../utils/constants';
+import { BASE_URL, TOKEN } from '../utils/constants';
 
 const initialState = {
   user: {},
   status: 'idle',
-  error: null,
+  errorMsg: null,
+  errorFields: null,
   isAuth: false,
 };
 
@@ -29,7 +30,7 @@ export const registerUserAsync = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response && error.response.data.message
-          ? error.response.data.message
+          ? error.response.data
           : error.message
       );
     }
@@ -51,6 +52,32 @@ export const loginUserAsync = createAsyncThunk(
         payload,
         config
       );
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
+export const getUserProfileAsync = createAsyncThunk(
+  'user/getUserProfileAsync',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      };
+
+      const { data } = await axios.get(`${BASE_URL}/user/profile`, config);
+
+      console.log(data);
 
       return data;
     } catch (error) {
@@ -86,32 +113,44 @@ const userSlice = createSlice({
   extraReducers: {
     [loginUserAsync.pending]: (state) => {
       state.status = 'loading';
-      state.error = null;
+      state.errorMsg = null;
+      state.errorFields = null;
     },
     [loginUserAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       localStorage.setItem('token', JSON.stringify(action.payload.token));
       window.location.href = '/dashboard';
-      state.error = null;
+      state.errorMsg = null;
+      state.errorFields = null;
     },
     [loginUserAsync.rejected]: (state, action) => {
       state.status = 'idle';
-      state.error = action.payload;
+      state.errorMsg = action.payload;
     },
 
     [registerUserAsync.pending]: (state) => {
       state.status = 'loading';
-      state.error = null;
+      state.errorMsg = null;
+      state.errorFields = null;
     },
     [registerUserAsync.fulfilled]: (state, action) => {
       state.status = 'idle';
       localStorage.setItem('token', JSON.stringify(action.payload.token));
       window.location.href = '/dashboard';
-      state.error = null;
+      state.errorMsg = null;
+      state.errorFields = null;
     },
     [registerUserAsync.rejected]: (state, action) => {
       state.status = 'idle';
-      state.error = action.payload;
+      state.errorMsg = action.payload.message;
+      state.errorField = action.payload.errors;
+    },
+
+    [getUserProfileAsync.pending]: (state) => {
+      state.status = 'loading';
+    },
+    [getUserProfileAsync.fulfilled]: (state, action) => {
+      state.user = action.payload.payload;
     },
   },
 });

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
   FormWrap,
@@ -11,6 +12,16 @@ const Account = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    return () => {
+      setFirstName(user?.firstName);
+      setLastName(user?.lastName);
+      setEmail(user?.email);
+    };
+  }, []);
 
   return (
     <AccountWrap>

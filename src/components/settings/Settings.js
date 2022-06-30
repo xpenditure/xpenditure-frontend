@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { toggleSettingsModal } from '../../features/actionSlice';
 import Close from '../excerpt/Close';
 import { AccountIcon, BellIcon, PaintbrushIcon } from '../icons';
 import Modal from '../modal/Modal';
@@ -13,9 +12,7 @@ const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
   const [title, setTtitle] = useState('Account');
 
-  const dispatch = useDispatch();
-
-  const { settingsModal } = useSelector((state) => state.action);
+  const navigate = useNavigate();
 
   const tabList = [
     { name: 'Account', alias: 'account', element: <AccountIcon /> },
@@ -29,11 +26,11 @@ const Settings = () => {
   };
 
   const handleCloseSettingsModal = () => {
-    dispatch(toggleSettingsModal(false));
+    navigate(-1);
   };
 
   return (
-    <Modal visible={settingsModal} close={handleCloseSettingsModal}>
+    <Modal visible={true} close={handleCloseSettingsModal}>
       <SettingsInner>
         <SettingsSide>
           <div className="tabList">

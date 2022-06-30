@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
-import { BellIcon, ArrowDownIcon, EllipsisVerticalIcon } from '../icons';
+import { BellIcon, EllipsisVerticalIcon } from '../icons';
 import { Link } from 'react-router-dom';
 import MoreSide from '../widgets/MoreSide';
 import { useDispatch } from 'react-redux';
 import { toggleMoreSide } from '../../features/actionSlice';
+import { ButtonPrimary } from '../../styles/DefaultStyles';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,13 +26,9 @@ const Header = () => {
             <BellIcon />
           </Link>
         </div>
-        <UserInfo>
-          <div className="avatar"></div>
-          <div className="details">
-            <div className="name">Jerry Nwosu</div>
-            <div className="email">jerrynwosu@gmail.com</div>
-          </div>
-        </UserInfo>
+        <Link to="new/budget">
+          <ButtonPrimary>New</ButtonPrimary>
+        </Link>
         <MoreItem>
           <div className="ellipsis" onClick={handleShowMoreSide}>
             <EllipsisVerticalIcon />
@@ -47,7 +44,6 @@ const HeaderWrap = styled.div`
   display: flex;
   width: 100%;
   height: 60px;
-  /* border-bottom: 1px solid ${(props) => props.theme.colors.border_color1}; */
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
@@ -58,7 +54,11 @@ const HeaderWrap = styled.div`
   }
 `;
 
-const HeaderLeft = styled.div``;
+const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
@@ -67,30 +67,6 @@ const HeaderRight = styled.div`
     a {
       display: flex;
     }
-  }
-`;
-
-const UserInfo = styled.div`
-  font-size: 14px;
-  margin: 0 30px;
-  color: ${(props) => props.theme.colors.text_color2};
-  display: flex;
-  line-height: 1.2;
-
-  .name {
-    font-weight: 600;
-  }
-
-  .email {
-    font-size: 12px;
-  }
-
-  .avatar {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.input_color1};
-    margin-right: 10px;
   }
 `;
 
