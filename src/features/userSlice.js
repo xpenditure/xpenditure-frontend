@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BASE_URL, TOKEN } from '../utils/constants';
+import { getFromLS, setToLS } from '../utils/storage';
 
 const initialState = {
   user: {},
@@ -8,6 +9,7 @@ const initialState = {
   errorMsg: null,
   errorFields: null,
   isAuth: false,
+  accentColor: '',
 };
 
 export const registerUserAsync = createAsyncThunk(
@@ -95,9 +97,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     getTokenFromStorage(state) {
-      const token = localStorage.getItem('token')
-        ? JSON.parse(localStorage.getItem('token'))
-        : null;
+      const token = getFromLS('token');
       if (token) {
         state.isAuth = true;
       } else {
@@ -108,6 +108,10 @@ const userSlice = createSlice({
     clearTokenFromStorage() {
       localStorage.removeItem('token');
       window.location.href = '/auth';
+    },
+
+    setUserData(state, action) {
+      state.user = action.payload;
     },
   },
   extraReducers: {
@@ -155,5 +159,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { getTokenFromStorage, clearTokenFromStorage } = userSlice.actions;
+export const { getTokenFromStorage, clearTokenFromStorage, setUserData } =
+  userSlice.actions;
 export default userSlice.reducer;

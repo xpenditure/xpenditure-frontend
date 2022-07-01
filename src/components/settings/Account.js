@@ -16,12 +16,10 @@ const Account = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    return () => {
-      setFirstName(user?.firstName);
-      setLastName(user?.lastName);
-      setEmail(user?.email);
-    };
-  }, []);
+    setFirstName(user?.firstName);
+    setLastName(user?.lastName);
+    setEmail(user?.email);
+  }, [user]);
 
   return (
     <AccountWrap>
