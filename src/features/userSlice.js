@@ -155,6 +155,10 @@ const userSlice = createSlice({
     },
     [getUserProfileAsync.fulfilled]: (state, action) => {
       state.user = action.payload.payload;
+      setToLS('accent-color', action.payload.payload.color);
+      setToLS('accent-bg', action.payload.payload.background);
+      console.log(action.payload.payload.color);
+      state.status = 'idle';
     },
   },
 });

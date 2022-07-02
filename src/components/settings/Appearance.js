@@ -4,6 +4,7 @@ import { CheckedIcon } from '../icons';
 import { SocketContext } from '../../context/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserData } from '../../features/userSlice';
+import { setToLS } from '../../utils/storage';
 
 const Appearance = () => {
   const socket = useContext(SocketContext);
@@ -22,6 +23,12 @@ const Appearance = () => {
     '#468737',
   ];
 
+  const backgrounds = [
+    { mode: 'light', name: 'Default', color: '#fff' },
+    { mode: 'dim', name: 'Dim', color: '#0d1117' },
+    { mode: 'amoled', name: 'Amoled', color: '#000' },
+  ];
+
   useEffect(() => {
     return () => {
       socket.on('fetchUserProfile', (user) => {
@@ -32,6 +39,12 @@ const Appearance = () => {
 
   const handleColor = (color) => {
     socket.emit('userColor', color);
+    setToLS('accent-color', color);
+  };
+
+  const handleBackground = (background) => {
+    socket.emit('userBackground', background);
+    setToLS('accent-bg', background);
   };
 
   return (
@@ -51,6 +64,20 @@ const Appearance = () => {
           ))}
         </ColorsWrap>
       </Item>
+      <Item>
+        <div className="title">Background</div>
+        <BackgroundWrap>
+          {backgrounds.map((background) => (
+            <Background
+              key={background.color}
+              color={background.color}
+              onClick={() => handleBackground(background.mode)}
+            >
+              <div className="name">{background.name}</div>
+            </Background>
+          ))}
+        </BackgroundWrap>
+      </Item>
     </AppearanceWrap>
   );
 };
@@ -62,6 +89,7 @@ const AppearanceWrap = styled.div`
 const Item = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 
   .title {
     margin-bottom: 10px;
@@ -85,8 +113,26 @@ const Color = styled.div`
 
   svg {
     width: 14px;
-    fill: ${(props) => props.theme.colors.text_color2};
+    fill: #fff;
   }
+`;
+
+const BackgroundWrap = styled.div`
+  display: flex;
+`;
+const Background = styled.div`
+  width: 150px;
+  background-color: ${(props) => props.color};
+  height: 70px;
+  margin-right: 20px;
+  border-radius: ${(props) => props.theme.reset.border_radius};
+  border: 2px solid ${(props) => props.theme.colors.border_color1};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => (props.color === '#fff' ? '#444' : '#c9d1d9')};
+  font-weight: 600;
+  cursor: pointer;
 `;
 
 export default Appearance;

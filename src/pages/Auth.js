@@ -64,7 +64,7 @@ const AuthInner = styled.div`
 
 const AuthMain = styled.div`
   padding: 30px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.auth_bg_color};
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   box-shadow: ${(props) => props.theme.colors.shadow1};

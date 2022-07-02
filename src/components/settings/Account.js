@@ -16,9 +16,11 @@ const Account = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    setFirstName(user?.firstName);
-    setLastName(user?.lastName);
-    setEmail(user?.email);
+    if (user) {
+      setFirstName(user?.firstName);
+      setLastName(user?.lastName);
+      setEmail(user?.email);
+    }
   }, [user]);
 
   return (

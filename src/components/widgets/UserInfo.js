@@ -85,6 +85,7 @@ const UserInfoWrap = styled.div`
 
   .email {
     font-size: 12px;
+    font-weight: 600;
   }
 `;
 

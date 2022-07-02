@@ -24,7 +24,7 @@ const MoreInner = styled.div`
   top: 40px;
   right: 0;
   width: 200px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: ${(props) => props.theme.reset.border_radius};
   box-shadow: ${(props) => props.theme.colors.shadow1};
   border: 1px solid ${(props) => props.theme.colors.border_color1};

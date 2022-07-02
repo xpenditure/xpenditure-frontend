@@ -107,7 +107,7 @@ export const Button = styled.button`
   white-space: nowrap;
   user-select: none;
   border: 1px solid;
-  color: ${(props) => props.theme.colors.text_color_default};
+  color: ${(props) => props.theme.colors.btn_text_color};
   line-height: 20px;
 `;
 
