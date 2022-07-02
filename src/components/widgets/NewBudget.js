@@ -17,12 +17,15 @@ const NewBudget = () => {
   const [budgetName, setBudgetName] = useState('');
   const [budgetTotal, setBudgetTotal] = useState('');
   const [budgetSummary, setBudgetSummary] = useState('');
+  const [selectLabel, setSelectLabel] = useState('');
   const [labels, setLabels] = useState([]);
 
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
 
-  const handleCreateBudget = () => {
+  const handleCreateBudget = (e) => {
+    e.preventDefault();
+
     console.log('created');
   };
 
@@ -37,14 +40,13 @@ const NewBudget = () => {
       socket.emit('fetchLabels');
       socket.on('fetchLabels', (data) => {
         setLabels(data);
-        console.log(data);
       });
     };
   }, []);
 
   return (
     <Modal visible={true} close={close}>
-      <AddWrap>
+      <AddWrap width="600">
         <AddNav>
           <div>Create Budget</div>
           <Close close={close} />
@@ -76,9 +78,15 @@ const NewBudget = () => {
               </InputWrap>
               <InputWrap>
                 <label>Select label</label>
-                <select>
+                <select
+                  value={selectLabel}
+                  onChange={(e) => setSelectLabel(e.target.value)}
+                >
+                  <option value="">--Select a label--</option>
                   {labels.map((label) => (
-                    <option key={label._id}>{label.name}</option>
+                    <option key={label._id} value={label._id}>
+                      {label.name}
+                    </option>
                   ))}
                 </select>
               </InputWrap>

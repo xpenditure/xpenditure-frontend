@@ -18,7 +18,7 @@ const LabelList = ({ active }) => {
 
   return (
     <LabelWrap visible={active}>
-      {!!labels && <NoLabel>No Label</NoLabel>}
+      {labels === [] && <NoLabel>No Label</NoLabel>}
       {labels.map((label) => (
         <Link to="#" key={label._id}>
           <TabItem>
@@ -45,6 +45,14 @@ const LabelWrap = styled.div`
   transition: all 300ms ease-in-out;
 `;
 
-const NoLabel = styled.div``;
+const NoLabel = styled.div`
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme.colors.text_color2};
+  overflow: hidden;
+`;
 
 export default LabelList;

@@ -24,6 +24,7 @@ export const InputWrap = styled.div`
   }
 
   input,
+  select,
   textarea {
     border: 1px solid ${(props) => props.theme.colors.border_color1};
     border-radius: ${(props) => props.theme.reset.border_radius};
@@ -39,6 +40,15 @@ export const InputWrap = styled.div`
       border-color: #58a6ff;
       outline: #58a6ff;
     }
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iIzZlNzY4MSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNC40MjcgOS40MjdsMy4zOTYgMy4zOTZhLjI1MS4yNTEgMCAwMC4zNTQgMGwzLjM5Ni0zLjM5NkEuMjUuMjUgMCAwMDExLjM5NiA5SDQuNjA0YS4yNS4yNSAwIDAwLS4xNzcuNDI3ek00LjQyMyA2LjQ3TDcuODIgMy4wNzJhLjI1LjI1IDAgMDEuMzU0IDBMMTEuNTcgNi40N2EuMjUuMjUgMCAwMS0uMTc3LjQyN0g0LjZhLjI1LjI1IDAgMDEtLjE3Ny0uNDI3eiIgLz48L3N2Zz4=')
+      98% / 4% no-repeat ${(props) => props.theme.colors.input_color1};
+    color: ${(props) => props.theme.colors.text_color2};
   }
 
   textarea {
@@ -73,7 +83,7 @@ export const Line = styled.div`
 `;
 
 export const AddWrap = styled.div`
-  width: 500px;
+  width: ${(props) => props.width + 'px' || '500px'};
   background-color: ${(props) => props.theme.colors.primary};
 `;
 
