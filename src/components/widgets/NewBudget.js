@@ -26,12 +26,22 @@ const NewBudget = () => {
   const handleCreateBudget = (e) => {
     e.preventDefault();
 
-    console.log('created');
+    const payload = {
+      budgetName,
+      budgetTotal,
+      budgetSummary,
+      label: selectLabel,
+    };
+
+    socket.emit('createBudget', payload);
+    close();
   };
 
   const close = () => {
     setBudgetName('');
     setBudgetTotal('');
+    setBudgetSummary('');
+    setSelectLabel('');
     navigate(-1);
   };
 
