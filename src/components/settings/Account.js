@@ -1,38 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { updateUserProfileAsync } from '../../features/userSlice';
 import {
   FormWrap,
   InputWrap,
   InputGroup,
   ButtonPrimary,
 } from '../../styles/DefaultStyles';
+import PageLoading from '../loading/PageLoading';
 
 const Account = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
+  const [loading, setLoading] = useState(true);
+
   const { user, status } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
       setFirstName(user?.firstName);
       setLastName(user?.lastName);
       setEmail(user?.email);
+      setLoading(false);
     }
   }, [user]);
 
   const handleUpdateUserProfile = (e) => {
     e.preventDefault();
-    const data = {
+    const payload = {
       firstName,
       lastName,
       email,
     };
 
-    console.log(data);
+    dispatch(updateUserProfileAsync(payload));
   };
+
+  if (loading) {
+    return <PageLoading />;
+  }
 
   return (
     <AccountWrap>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Modal from '../modal/Modal';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -11,12 +11,15 @@ import {
   ButtonWrap,
 } from '../../styles/DefaultStyles';
 import Close from '../excerpt/Close';
+import { SocketContext } from '../../context/socket';
 
 const NewBudget = () => {
   const [budgetName, setBudgetName] = useState('');
   const [budgetTotal, setBudgetTotal] = useState('');
   const [budgetSummary, setBudgetSummary] = useState('');
+  const [labels, setLabels] = useState([]);
 
+  const socket = useContext(SocketContext);
   const navigate = useNavigate();
 
   const handleCreateBudget = () => {
@@ -28,6 +31,16 @@ const NewBudget = () => {
     setBudgetTotal('');
     navigate(-1);
   };
+
+  useEffect(() => {
+    return () => {
+      socket.emit('fetchLabels');
+      socket.on('fetchLabels', (data) => {
+        setLabels(data);
+        console.log(data);
+      });
+    };
+  }, []);
 
   return (
     <Modal visible={true} close={close}>
@@ -60,6 +73,14 @@ const NewBudget = () => {
                   onChange={(e) => setBudgetSummary(e.target.value)}
                 />
                 <p>A summary of this budget</p>
+              </InputWrap>
+              <InputWrap>
+                <label>Select label</label>
+                <select>
+                  {labels.map((label) => (
+                    <option key={label._id}>{label.name}</option>
+                  ))}
+                </select>
               </InputWrap>
             </InputGroup>
             <ButtonWrap>

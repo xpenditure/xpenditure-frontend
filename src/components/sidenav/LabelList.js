@@ -14,10 +14,11 @@ const LabelList = ({ active }) => {
       socket.emit('fetchLabels');
       socket.on('fetchLabels', (data) => setLabels(data));
     };
-  });
+  }, []);
 
   return (
     <LabelWrap visible={active}>
+      {!!labels && <NoLabel>No Label</NoLabel>}
       {labels.map((label) => (
         <Link to="#" key={label._id}>
           <TabItem>
@@ -43,5 +44,7 @@ const LabelWrap = styled.div`
   border-width: ${(props) => (props.visible ? '1px' : '0')};
   transition: all 300ms ease-in-out;
 `;
+
+const NoLabel = styled.div``;
 
 export default LabelList;

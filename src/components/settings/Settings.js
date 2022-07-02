@@ -110,11 +110,15 @@ const SettingsSide = styled.div`
 `;
 const SettingsMain = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const SettingsView = styled.div`
   padding: 20px;
   overflow-y: auto;
+  position: relative;
+  flex: 1;
 `;
 
 const SettingsNav = styled.div`

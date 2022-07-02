@@ -190,11 +190,12 @@ const userSlice = createSlice({
       state.errorMsg = action.payload.message;
     },
 
-    [updateUserProfileAsync.pending]: (state, action) => {
+    [updateUserProfileAsync.pending]: (state) => {
       state.status = 'loading';
     },
     [updateUserProfileAsync.fulfilled]: (state, action) => {
       state.user = action.payload.payload;
+      state.errorMsg = action.payload.message;
       state.status = 'idle';
     },
     [updateUserProfileAsync.rejected]: (state, action) => {
