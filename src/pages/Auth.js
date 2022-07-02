@@ -12,7 +12,7 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
   const tab = searchParams.get('tab');
 
-  const { errorMsg } = useSelector((state) => state.user);
+  const { errorMsg, status } = useSelector((state) => state.user);
 
   const tabList = [
     { name: 'Login', alias: 'login' },
@@ -38,8 +38,8 @@ const Auth = () => {
           setActiveTab={setActiveTab}
         />
         <AuthMain>
-          {activeTab === 'login' && <Login />}
-          {activeTab === 'register' && <Register />}
+          {activeTab === 'login' && <Login status={status} />}
+          {activeTab === 'register' && <Register status={status} />}
         </AuthMain>
       </AuthInner>
       <Message msg={errorMsg} />

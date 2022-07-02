@@ -32,7 +32,7 @@ export const InputWrap = styled.div`
     line-height: 20px;
     vertical-align: middle;
     font-weight: 600;
-    color: ${(props) => props.theme.colors.text_color1};
+    color: ${(props) => props.theme.colors.text_color2};
     background-color: ${(props) => props.theme.colors.input_color1};
 
     :focus {

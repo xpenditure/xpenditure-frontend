@@ -13,7 +13,7 @@ const Account = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
 
-  const { user } = useSelector((state) => state.user);
+  const { user, status } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (user) {
@@ -23,11 +23,22 @@ const Account = () => {
     }
   }, [user]);
 
+  const handleUpdateUserProfile = (e) => {
+    e.preventDefault();
+    const data = {
+      firstName,
+      lastName,
+      email,
+    };
+
+    console.log(data);
+  };
+
   return (
     <AccountWrap>
       <AccountLeft>
         <FormWrap>
-          <form>
+          <form onSubmit={handleUpdateUserProfile}>
             <InputGroup>
               <InputWrap>
                 <label>First name</label>
@@ -59,7 +70,11 @@ const Account = () => {
               </InputWrap>
             </InputGroup>
             <div style={{ display: 'block' }}>
-              <ButtonPrimary>Update profile</ButtonPrimary>
+              <ButtonPrimary
+                className={status === 'loading' ? 'btn-disabled' : ''}
+              >
+                {status === 'loading' ? 'Updating...' : 'Update profile'}
+              </ButtonPrimary>
             </div>
           </form>
         </FormWrap>

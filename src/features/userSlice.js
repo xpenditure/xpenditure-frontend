@@ -31,7 +31,7 @@ export const registerUserAsync = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
-        error.response && error.response.data.message
+        error.response && error.response.data
           ? error.response.data
           : error.message
       );
@@ -79,7 +79,33 @@ export const getUserProfileAsync = createAsyncThunk(
 
       const { data } = await axios.get(`${BASE_URL}/user/profile`, config);
 
-      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
+export const updateUserProfileAsync = createAsyncThunk(
+  'user/updateUserProfileAsync',
+  async (payload, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `${BASE_URL}/user/profile`,
+        payload,
+        config
+      );
 
       return data;
     } catch (error) {
@@ -157,7 +183,22 @@ const userSlice = createSlice({
       state.user = action.payload.payload;
       setToLS('accent-color', action.payload.payload.color);
       setToLS('accent-bg', action.payload.payload.background);
-      console.log(action.payload.payload.color);
+      state.status = 'idle';
+    },
+    [getUserProfileAsync.rejected]: (state, action) => {
+      state.status = 'idle';
+      state.errorMsg = action.payload.message;
+    },
+
+    [updateUserProfileAsync.pending]: (state, action) => {
+      state.status = 'loading';
+    },
+    [updateUserProfileAsync.fulfilled]: (state, action) => {
+      state.user = action.payload.payload;
+      state.status = 'idle';
+    },
+    [updateUserProfileAsync.rejected]: (state, action) => {
+      state.errorMsg = action.payload.message;
       state.status = 'idle';
     },
   },

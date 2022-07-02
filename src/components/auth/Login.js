@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   FormWrap,
   InputGroup,
@@ -9,7 +9,7 @@ import {
 } from '../../styles/DefaultStyles';
 import { loginUserAsync } from '../../features/userSlice';
 
-const Login = () => {
+const Login = ({ status }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -48,7 +48,9 @@ const Login = () => {
             />
           </InputWrap>
         </InputGroup>
-        <ButtonPrimary>Login</ButtonPrimary>
+        <ButtonPrimary className={status === 'loading' ? 'btn-disabled' : ''}>
+          {status === 'loading' ? 'Loading...' : 'Login'}
+        </ButtonPrimary>
       </form>
     </FormWrap>
   );

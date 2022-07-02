@@ -51,4 +51,9 @@ body {
   border-width: 0 0 0 4px;
 }
 
+.btn-disabled {
+  opacity: .5;
+  cursor: progress;
+}
+
 `;

@@ -9,7 +9,7 @@ import {
 } from '../../styles/DefaultStyles';
 import { registerUserAsync } from '../../features/userSlice';
 
-const Register = () => {
+const Register = ({ status }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -71,7 +71,9 @@ const Register = () => {
             />
           </InputWrap>
         </InputGroup>
-        <ButtonPrimary>Register</ButtonPrimary>
+        <ButtonPrimary className={status === 'loading' ? 'btn-disabled' : ''}>
+          {status === 'loading' ? 'Loading...' : 'Register'}
+        </ButtonPrimary>
       </form>
     </FormWrap>
   );
