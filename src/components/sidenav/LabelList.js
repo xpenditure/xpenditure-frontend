@@ -12,7 +12,10 @@ const LabelList = ({ active }) => {
   useEffect(() => {
     return () => {
       socket.emit('fetchLabels');
-      socket.on('fetchLabels', (data) => setLabels(data));
+      socket.on('fetchLabels', (data) => {
+        console.log(data);
+        setLabels(data);
+      });
     };
   }, []);
 

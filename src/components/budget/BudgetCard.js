@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BudgetCard = ({ budget }) => {
   return (
-    <BudgetCardWrap>
-      <div>{budget.name}</div>
-    </BudgetCardWrap>
+    <Link to={`/dashboard/budgets/${budget.name}`}>
+      <BudgetCardWrap>
+        <div>{budget.name}</div>
+      </BudgetCardWrap>
+    </Link>
   );
 };
 

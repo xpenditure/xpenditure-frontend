@@ -1,34 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { SocketContext } from '../../context/socket';
 import BudgetCard from './BudgetCard';
 
-const BudgetList = () => {
-  const socket = useContext(SocketContext);
-  const [budgets, setBudgets] = useState([]);
-
-  useEffect(() => {
-    return () => {
-      socket.emit('fetchBudgets');
-      socket.on('fetchBudgets', (data) => {
-        setBudgets(data);
-      });
-    };
-  }, [socket]);
-
+const BudgetList = ({ budgets }) => {
   return (
-    <BudgetListWrap>
+    <BudgetsWrap>
       {budgets.map((budget) => (
         <BudgetCard key={budget._id} budget={budget} />
       ))}
-    </BudgetListWrap>
+    </BudgetsWrap>
   );
 };
 
-const BudgetListWrap = styled.div`
+const BudgetsWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 15px;
+
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.text_color2};
+  }
 `;
 
 export default BudgetList;

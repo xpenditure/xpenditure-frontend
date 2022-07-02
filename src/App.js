@@ -10,6 +10,7 @@ import Archive from './pages/Archive';
 import Settings from './components/settings/Settings';
 import AddLabel from './components/widgets/AddLabel';
 import NewBudget from './components/widgets/NewBudget';
+import Labels from './pages/Labels';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route index element={<Budgets />} />
           <Route path="trash" element={<Trash />} />
           <Route path="archive" element={<Archive />} />
+          <Route path="labels/:alias" element={<Labels />} />
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Route>
       </Routes>

@@ -83,7 +83,7 @@ export const Line = styled.div`
 `;
 
 export const AddWrap = styled.div`
-  width: ${(props) => props.width + 'px' || '500px'};
+  width: ${(props) => (props.width ? +props.width + 'px' : '500px')};
   background-color: ${(props) => props.theme.colors.primary};
 `;
 
