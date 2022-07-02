@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TagIcon } from '../icons';
 import { TabIcon, TabItem, TabName } from './styled';
 import { SocketContext } from '../../context/socket';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const LabelList = ({ active }) => {
   const socket = useContext(SocketContext);
@@ -13,7 +13,6 @@ const LabelList = ({ active }) => {
     return () => {
       socket.emit('fetchLabels');
       socket.on('fetchLabels', (data) => {
-        console.log(data);
         setLabels(data);
       });
     };
@@ -23,14 +22,21 @@ const LabelList = ({ active }) => {
     <LabelWrap visible={active}>
       {labels === [] && <NoLabel>No Label</NoLabel>}
       {labels.map((label) => (
-        <Link to="#" key={label._id}>
+        <NavLink
+          end
+          className={({ isActive }) =>
+            'nav-link' + (isActive ? ' activated' : '')
+          }
+          to={`/dashboard/labels/${label.alias}`}
+          key={label._id}
+        >
           <TabItem>
             <TabIcon>
               <TagIcon />
             </TabIcon>
             <TabName>{label.name}</TabName>
           </TabItem>
-        </Link>
+        </NavLink>
       ))}
     </LabelWrap>
   );

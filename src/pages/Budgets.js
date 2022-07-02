@@ -12,7 +12,7 @@ const Budgets = () => {
       socket.emit('fetchBudgets');
       socket.on('fetchBudgets', (data) => setBudgets(data));
     };
-  });
+  }, []);
 
   return <BudgetList budgets={budgets} />;
 };

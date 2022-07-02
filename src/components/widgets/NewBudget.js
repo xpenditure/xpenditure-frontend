@@ -94,7 +94,7 @@ const NewBudget = () => {
                 >
                   <option value="">--Select a label--</option>
                   {labels.map((label) => (
-                    <option key={label._id} value={label._id}>
+                    <option key={label._id} value={label.alias}>
                       {label.name}
                     </option>
                   ))}
