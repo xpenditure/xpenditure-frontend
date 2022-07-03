@@ -3,6 +3,7 @@ import BudgetList from '../components/budget/BudgetList';
 import { SocketContext } from '../context/socket';
 import { Link, useLocation } from 'react-router-dom';
 import { ButtonPrimary } from '../styles/DefaultStyles';
+import styled from 'styled-components';
 
 const Budgets = () => {
   const socket = useContext(SocketContext);
@@ -17,15 +18,23 @@ const Budgets = () => {
   }, []);
 
   return (
-    <div>
-      <div>
+    <BudgetsWrap>
+      <div className="header">
         <Link to="new/budget" state={{ background: location }}>
           <ButtonPrimary>New budget</ButtonPrimary>
         </Link>
       </div>
       <BudgetList budgets={budgets} />
-    </div>
+    </BudgetsWrap>
   );
 };
+
+const BudgetsWrap = styled.div`
+  .header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
 
 export default Budgets;
