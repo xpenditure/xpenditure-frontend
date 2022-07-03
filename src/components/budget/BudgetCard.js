@@ -19,6 +19,13 @@ const BudgetCard = ({ budget }) => {
             {budget.total.toLocaleString()}
           </div>
         </CardInfo>
+        <CardLabels>
+          {budget.labels.map((label) => (
+            <div className="label" key={label._id}>
+              {label.name}
+            </div>
+          ))}
+        </CardLabels>
       </BudgetCardWrap>
     </Link>
   );
@@ -71,6 +78,21 @@ const CardHead = styled.div`
       width: 15px;
       fill: ${(props) => props.theme.colors.text_color2};
     }
+  }
+`;
+
+const CardLabels = styled.div`
+  display: flex;
+  padding: 10px 20px;
+
+  .label {
+    font-size: 12px;
+    color: ${(props) => props.theme.colors.text_color2};
+    margin-right: 3px;
+    border: 1px solid ${(props) => props.theme.colors.border_color1};
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: ${(props) => props.theme.colors.secondary};
   }
 `;
 

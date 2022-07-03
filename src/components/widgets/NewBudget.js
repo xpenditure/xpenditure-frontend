@@ -102,17 +102,6 @@ const NewBudget = () => {
               </InputWrap>
               <InputWrap>
                 <label>Select label</label>
-                {/* <select
-                  value={selectLabel}
-                  onChange={(e) => setSelectLabel(e.target.value)}
-                >
-                  <option value="">--Select a label--</option>
-                  {labels.map((label) => (
-                    <option key={label._id} value={label.alias}>
-                      {label.name}
-                    </option>
-                  ))}
-                </select> */}
                 <LabelList>
                   {labels.map((label) => (
                     <Label
@@ -141,6 +130,7 @@ const NewBudget = () => {
 
 const LabelList = styled.div`
   display: flex;
+  margin-top: 10px;
 
   .active {
     border-color: ${(props) => props.theme.colors.btn_color_primary};
@@ -149,11 +139,12 @@ const LabelList = styled.div`
 const Label = styled.div`
   border-radius: 25px;
   border: 2px solid ${(props) => props.theme.colors.border_color1};
-  padding: 10px;
+  padding: 5px 10px;
   margin-right: 10px;
   font-size: 14px;
   color: ${(props) => props.theme.colors.text_color2};
   cursor: pointer;
+  background-color: ${(props) => props.theme.colors.input_color1};
 
   :hover {
     border-color: ${(props) => props.theme.colors.btn_color_primary};
