@@ -15,7 +15,6 @@ const Budgets = () => {
       socket.emit('fetchBudgets');
       socket.on('fetchBudgets', (data) => {
         setBudgets(data);
-        console.log(data);
       });
     };
   }, []);

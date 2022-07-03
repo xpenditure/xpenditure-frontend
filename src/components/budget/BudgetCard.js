@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { EllipsisHorizontalIcon } from '../icons';
 
+const handleMoreClick = (e, id) => {
+  e.stopPropagation();
+  e.preventDefault();
+  console.log(id);
+};
+
 const BudgetCard = ({ budget }) => {
   return (
     <Link to={`/dashboard/budgets/${budget._id}`}>
       <BudgetCardWrap>
         <CardHead>
-          <div className="icon">
+          <div className="icon" onClick={(e) => handleMoreClick(e, budget._id)}>
             <EllipsisHorizontalIcon />
           </div>
         </CardHead>
@@ -21,9 +27,9 @@ const BudgetCard = ({ budget }) => {
         </CardInfo>
         <CardLabels>
           {budget.labels.map((label) => (
-            <div className="label" key={label._id}>
+            <Link to={`/dashboard/labels/${label._id}`} key={label._id}>
               {label.name}
-            </div>
+            </Link>
           ))}
         </CardLabels>
       </BudgetCardWrap>
@@ -85,7 +91,7 @@ const CardLabels = styled.div`
   display: flex;
   padding: 10px 20px;
 
-  .label {
+  a {
     font-size: 12px;
     color: ${(props) => props.theme.colors.text_color2};
     margin-right: 3px;

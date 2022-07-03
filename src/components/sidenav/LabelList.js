@@ -27,7 +27,7 @@ const LabelList = ({ active }) => {
           className={({ isActive }) =>
             'nav-link' + (isActive ? ' activated' : '')
           }
-          to={`/dashboard/labels/${label.alias}`}
+          to={`/dashboard/labels/${label._id}`}
           key={label._id}
         >
           <TabItem>
