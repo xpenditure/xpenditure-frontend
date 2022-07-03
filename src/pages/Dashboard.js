@@ -42,6 +42,8 @@ const DashWrap = styled.div`
 const MainViews = styled.div`
   flex: 1;
   background-color: ${(props) => props.theme.colors.primary};
+  overflow-y: auto;
+  height: 100vh;
 `;
 
 const Container = styled.div`
@@ -52,7 +54,7 @@ const Container = styled.div`
 `;
 
 const OutletWrap = styled.div`
-  margin-top: 100px;
+  margin: 70px 0;
 `;
 
 export default Dashboard;

@@ -2,15 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
 import { BellIcon, EllipsisHorizontalIcon } from '../icons';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MoreSide from '../widgets/MoreSide';
 import { useDispatch } from 'react-redux';
 import { toggleMoreSide } from '../../features/actionSlice';
-import { ButtonPrimary } from '../../styles/DefaultStyles';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const handleShowMoreSide = () => {
     dispatch(toggleMoreSide(true));
@@ -22,9 +20,6 @@ const Header = () => {
         <SearchInput />
       </HeaderLeft>
       <HeaderRight>
-        <Link to="new/budget" state={{ background: location }}>
-          <ButtonPrimary>New budget</ButtonPrimary>
-        </Link>
         <div className="noti">
           <Link to="notifications">
             <BellIcon />

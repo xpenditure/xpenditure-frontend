@@ -12,6 +12,7 @@ import AddLabel from './components/widgets/AddLabel';
 import NewBudget from './components/widgets/NewBudget';
 import Labels from './pages/Labels';
 import NotFound from './pages/NotFound';
+import OneBudget from './pages/OneBudget';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -44,6 +45,7 @@ function App() {
           <Route path="trash" element={<Trash />} />
           <Route path="archive" element={<Archive />} />
           <Route path="labels/:alias" element={<Labels />} />
+          <Route path="budgets/:budgetId" element={<OneBudget />} />
           <Route path="*" element={<Navigate to="/dashboard" />} />
         </Route>
       </Routes>
