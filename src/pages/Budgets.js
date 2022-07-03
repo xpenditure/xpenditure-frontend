@@ -13,7 +13,10 @@ const Budgets = () => {
   useEffect(() => {
     return () => {
       socket.emit('fetchBudgets');
-      socket.on('fetchBudgets', (data) => setBudgets(data));
+      socket.on('fetchBudgets', (data) => {
+        setBudgets(data);
+        console.log(data);
+      });
     };
   }, []);
 

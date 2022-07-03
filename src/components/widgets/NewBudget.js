@@ -12,12 +12,13 @@ import {
 } from '../../styles/DefaultStyles';
 import Close from '../excerpt/Close';
 import { SocketContext } from '../../context/socket';
+import styled from 'styled-components';
 
 const NewBudget = () => {
   const [budgetName, setBudgetName] = useState('');
   const [budgetTotal, setBudgetTotal] = useState('');
   const [budgetSummary, setBudgetSummary] = useState('');
-  const [selectLabel, setSelectLabel] = useState('');
+  const [budgetLabels, setBudgetLabels] = useState([]);
   const [labels, setLabels] = useState([]);
 
   const socket = useContext(SocketContext);
@@ -30,7 +31,7 @@ const NewBudget = () => {
       budgetName,
       budgetTotal,
       budgetSummary,
-      label: selectLabel,
+      budgetLabels,
     };
 
     socket.emit('createBudget', payload);
@@ -41,7 +42,7 @@ const NewBudget = () => {
     setBudgetName('');
     setBudgetTotal('');
     setBudgetSummary('');
-    setSelectLabel('');
+    setBudgetLabels([]);
     navigate(-1);
   };
 
@@ -53,6 +54,19 @@ const NewBudget = () => {
       });
     };
   }, []);
+
+  const handleSelectLabel = (labelId) => {
+    const items = budgetLabels.slice();
+    if (items.includes(labelId)) {
+      const item = items.find((id) => id === labelId);
+      const index = items.indexOf(item);
+      items.splice(index, 1);
+      setBudgetLabels(items);
+    } else {
+      items.push(labelId);
+      setBudgetLabels(items);
+    }
+  };
 
   return (
     <Modal visible={true} close={close}>
@@ -88,7 +102,7 @@ const NewBudget = () => {
               </InputWrap>
               <InputWrap>
                 <label>Select label</label>
-                <select
+                {/* <select
                   value={selectLabel}
                   onChange={(e) => setSelectLabel(e.target.value)}
                 >
@@ -98,7 +112,21 @@ const NewBudget = () => {
                       {label.name}
                     </option>
                   ))}
-                </select>
+                </select> */}
+                <LabelList>
+                  {labels.map((label) => (
+                    <Label
+                      key={label._id}
+                      value={label.alias}
+                      onClick={() => handleSelectLabel(label._id)}
+                      className={
+                        budgetLabels.includes(label._id) ? 'active' : ''
+                      }
+                    >
+                      {label.name}
+                    </Label>
+                  ))}
+                </LabelList>
               </InputWrap>
             </InputGroup>
             <ButtonWrap>
@@ -110,5 +138,26 @@ const NewBudget = () => {
     </Modal>
   );
 };
+
+const LabelList = styled.div`
+  display: flex;
+
+  .active {
+    border-color: ${(props) => props.theme.colors.btn_color_primary};
+  }
+`;
+const Label = styled.div`
+  border-radius: 25px;
+  border: 2px solid ${(props) => props.theme.colors.border_color1};
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.text_color2};
+  cursor: pointer;
+
+  :hover {
+    border-color: ${(props) => props.theme.colors.btn_color_primary};
+  }
+`;
 
 export default NewBudget;
