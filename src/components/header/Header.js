@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
-import { BellIcon, EllipsisHorizontalIcon } from '../icons';
+import { BellIcon, EllipsisHorizontalIcon, GridIcon, ListIcon } from '../icons';
 import { Link } from 'react-router-dom';
 import MoreSide from '../widgets/MoreSide';
-import { useDispatch } from 'react-redux';
-import { toggleMoreSide } from '../../features/actionSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleMoreSide, toggleLayout } from '../../features/actionSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { layout } = useSelector((state) => state.action);
 
   const handleShowMoreSide = () => {
     dispatch(toggleMoreSide(true));
+  };
+
+  const handleChangeLayout = () => {
+    dispatch(toggleLayout());
   };
 
   return (
@@ -20,6 +25,9 @@ const Header = () => {
         <SearchInput />
       </HeaderLeft>
       <HeaderRight>
+        <div className="layout-icon" onClick={handleChangeLayout}>
+          {layout === 'grid' ? <ListIcon /> : <GridIcon />}
+        </div>
         <div className="noti">
           <Link to="notifications">
             <BellIcon />
@@ -63,6 +71,26 @@ const HeaderRight = styled.div`
     margin-left: 20px;
     a {
       display: flex;
+    }
+  }
+
+  .layout-icon {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
+    }
+
+    svg {
+      width: 25px;
+      fill: ${(props) => props.theme.colors.text_color2};
     }
   }
 `;

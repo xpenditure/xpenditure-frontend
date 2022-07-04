@@ -48,10 +48,6 @@ export const TabItem = styled.div`
   color: ${(props) => props.theme.colors.text_color2};
   flex: 1;
   position: relative;
-
-  :hover {
-    background-color: ${(props) => props.theme.colors.hover_color1};
-  }
 `;
 
 export const TabIcon = styled.div`

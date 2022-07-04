@@ -14,6 +14,8 @@ import EllipsisVerticalIcon from './EllipsisVerticalIcon';
 import EllipsisHorizontalIcon from './EllipsisHorizontalIcon';
 import CaretDownIcon from './CaretDownIcon';
 import CheckedIcon from './CheckedIcon';
+import { ReactComponent as GridIcon } from '../../assets/icons/grid.svg';
+import { ReactComponent as ListIcon } from '../../assets/icons/list.svg';
 
 export {
   TrashIcon,
@@ -32,4 +34,6 @@ export {
   EllipsisHorizontalIcon,
   CaretDownIcon,
   CheckedIcon,
+  GridIcon,
+  ListIcon,
 };

@@ -1,25 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { TagIcon } from '../icons';
+import { EllipsisHorizontalIcon, TagIcon } from '../icons';
 import { TabIcon, TabItem, TabName } from './styled';
 import { SocketContext } from '../../context/socket';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const LabelList = ({ active }) => {
   const socket = useContext(SocketContext);
-  const [labels, setLabels] = useState([]);
-
-  useEffect(() => {
-    return () => {
-      socket.emit('fetchLabels');
-      socket.on('fetchLabels', (data) => {
-        setLabels(data);
-      });
-    };
-  }, []);
+  const { labels } = useSelector((state) => state.budget);
 
   return (
-    <LabelWrap visible={active}>
+    <LabelWrap active={active}>
       {labels === [] && <NoLabel>No Label</NoLabel>}
       {labels.map((label) => (
         <NavLink
@@ -36,6 +28,9 @@ const LabelList = ({ active }) => {
             </TabIcon>
             <TabName>{label.name}</TabName>
           </TabItem>
+          <div className="more">
+            <EllipsisHorizontalIcon />
+          </div>
         </NavLink>
       ))}
     </LabelWrap>
@@ -48,10 +43,29 @@ const LabelWrap = styled.div`
   background-color: ${(props) => props.theme.colors.primary};
   border-top: 1px solid ${(props) => props.theme.colors.border_color1};
   border-bottom: 1px solid ${(props) => props.theme.colors.border_color1};
-  max-height: ${(props) => (props.visible ? '250px' : '0')};
-  overflow-y: ${(props) => (props.visible ? 'auto' : 'hidden')};
-  border-width: ${(props) => (props.visible ? '1px' : '0')};
+  max-height: ${(props) => (props.active ? '250px' : '0')};
+  overflow-y: ${(props) => (props.active ? 'auto' : 'hidden')};
+  border-width: ${(props) => (props.active ? '1px' : '0')};
   transition: all 300ms ease-in-out;
+
+  a {
+    text-decoration: none;
+    position: relative;
+
+    .more {
+      margin-right: 20px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: none; // flex to show ellipsis
+      justify-content: center;
+      align-items: center;
+
+      :hover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
 `;
 
 const NoLabel = styled.div`

@@ -4,6 +4,7 @@ import { getFromLS, setToLS } from '../utils/storage';
 const initialState = {
   mode: 'light',
   moreSide: false,
+  layout: 'grid',
 };
 
 const actionSlice = createSlice({
@@ -23,9 +24,12 @@ const actionSlice = createSlice({
     toggleMoreSide(state, action) {
       state.moreSide = action.payload;
     },
+    toggleLayout(state) {
+      state.layout = state.layout === 'grid' ? 'list' : 'grid';
+    },
   },
 });
 
-export const { getThemeMode, setThemeMode, toggleMoreSide } =
+export const { getThemeMode, setThemeMode, toggleMoreSide, toggleLayout } =
   actionSlice.actions;
 export default actionSlice.reducer;

@@ -4,7 +4,13 @@ import styled from 'styled-components';
 const More = ({ children, close, visible, pos }) => {
   return (
     <MoreWrap visible={visible}>
-      <Overlay onClick={close} />
+      <Overlay
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          close();
+        }}
+      />
       <MoreInner className={pos}>{children}</MoreInner>
     </MoreWrap>
   );
@@ -58,6 +64,8 @@ const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0);
   left: 0;
   top: 0;
+  cursor: default;
+  z-index: 99999;
 `;
 
 export default More;
