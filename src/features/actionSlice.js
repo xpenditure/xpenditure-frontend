@@ -5,6 +5,7 @@ const initialState = {
   mode: 'light',
   moreSide: false,
   layout: 'grid',
+  addLabelModal: false,
 };
 
 const actionSlice = createSlice({
@@ -27,9 +28,17 @@ const actionSlice = createSlice({
     toggleLayout(state) {
       state.layout = state.layout === 'grid' ? 'list' : 'grid';
     },
+    toggleAddLabelModal(state, action) {
+      state.addLabelModal = action.payload;
+    },
   },
 });
 
-export const { getThemeMode, setThemeMode, toggleMoreSide, toggleLayout } =
-  actionSlice.actions;
+export const {
+  getThemeMode,
+  setThemeMode,
+  toggleMoreSide,
+  toggleLayout,
+  toggleAddLabelModal,
+} = actionSlice.actions;
 export default actionSlice.reducer;

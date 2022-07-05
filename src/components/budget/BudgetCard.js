@@ -14,7 +14,6 @@ const BudgetCard = ({ budget }) => {
     e.stopPropagation();
     e.preventDefault();
     setId(id);
-    console.log(id);
   };
 
   const handleCloseMore = () => {
@@ -29,7 +28,11 @@ const BudgetCard = ({ budget }) => {
             <EllipsisHorizontalIcon />
           </div>
           {id === budget._id && (
-            <BudgetCardOption close={handleCloseMore} labels={budget.labels} />
+            <BudgetCardOption
+              close={handleCloseMore}
+              labels={budget.labels}
+              budgetId={budget._id}
+            />
           )}
         </CardHead>
         <CardInfo>

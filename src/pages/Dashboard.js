@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import Header from '../components/header/Header';
 import { useDispatch } from 'react-redux';
 import { getUserProfileAsync } from '../features/userSlice';
+import AddLabel from '../components/widgets/AddLabel';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Dashboard = () => {
           </OutletWrap>
         </MainViews>
       </DashWrap>
+      <AddLabel />
     </>
   );
 };

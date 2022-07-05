@@ -130,3 +130,27 @@ export const ButtonPrimary = styled(Button)`
   }
 `;
 export const ButtonDark = styled(Button)``;
+
+export const LabelList = styled.div`
+  display: flex;
+  margin-top: 10px;
+
+  .active {
+    border-color: ${(props) => props.theme.colors.btn_color_primary};
+    background-color: ${(props) => props.theme.colors.btn_color_primary};
+  }
+`;
+export const Label = styled.div`
+  border-radius: 25px;
+  border: 2px solid ${(props) => props.theme.colors.border_color1};
+  padding: 5px 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  color: ${(props) => props.theme.colors.text_color2};
+  cursor: pointer;
+  background-color: ${(props) => props.theme.colors.input_color1};
+
+  :hover {
+    border-color: ${(props) => props.theme.colors.btn_color_primary};
+  }
+`;
