@@ -17,6 +17,7 @@ import { useEffect, useContext } from 'react';
 import { addBudgets, addLabels } from './features/budgetSlice';
 import { SocketContext } from './context/socket';
 import EditBudget from './components/widgets/EditBudget';
+import EditLabel from './components/widgets/EditLabel';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -79,6 +80,10 @@ function App() {
           <Route
             path="/dashboard/edit/budgets/:budgetId"
             element={<EditBudget />}
+          />
+          <Route
+            path="/dashboard/edit/labels/:labelId"
+            element={<EditLabel />}
           />
         </Routes>
       )}

@@ -50,7 +50,7 @@ const NewLabel = () => {
     <Modal visible={true} close={close}>
       <AddWrap>
         <AddNav>
-          <div>Create Label</div>
+          <div>Create label</div>
           <Close close={close} />
         </AddNav>
         <AddMain>

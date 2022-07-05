@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import BudgetList from '../components/budget/BudgetList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconLg } from '../styles/DefaultStyles';
 import { EditIcon, TrashIcon } from '../components/icons';
 import styled from 'styled-components';
+import { setLabel } from '../features/budgetSlice';
 
 const Labels = () => {
   const { labelId } = useParams();
   const [filteredBudgets, setFilteredBudgets] = useState([]);
   const [labelName, setLabelName] = useState('');
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   const { budgets } = useSelector((state) => state.budget);
 
@@ -19,6 +22,7 @@ const Labels = () => {
       budget.labels.map((label) => {
         if (label._id === labelId) {
           setLabelName(label.name);
+          dispatch(setLabel(label));
           newBudget.push(budget);
         }
       });
@@ -37,9 +41,14 @@ const Labels = () => {
           <h2>{labelName}</h2>
         </div>
         <div className="right">
-          <IconLg>
-            <EditIcon />
-          </IconLg>
+          <Link
+            to={`/dashboard/edit/labels/${labelId}`}
+            state={{ background: location }}
+          >
+            <IconLg>
+              <EditIcon />
+            </IconLg>
+          </Link>
           <IconLg>
             <TrashIcon />
           </IconLg>
@@ -61,12 +70,6 @@ const LabelsWrap = styled.div`
   .left,
   .right {
     display: flex;
-  }
-
-  .left {
-  }
-
-  .right {
   }
 `;
 

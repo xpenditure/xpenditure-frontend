@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   budgets: [],
   labels: [],
+  label: {},
   budgetLabels: [],
   budget: {},
   budgetId: '',
@@ -27,6 +28,9 @@ const budgetSlice = createSlice({
     setBudget(state, action) {
       state.budget = action.payload;
     },
+    setLabel(state, action) {
+      state.label = action.payload;
+    },
     clearActiveBudgetData(state) {
       state.budgetId = '';
       state.budgetLabels = [];
@@ -41,6 +45,7 @@ export const {
   setBudgetLabels,
   setBudgetId,
   setBudget,
+  setLabel,
   clearActiveBudgetData,
 } = budgetSlice.actions;
 export default budgetSlice.reducer;
