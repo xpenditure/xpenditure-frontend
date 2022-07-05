@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   ButtonPrimary,
@@ -14,11 +14,15 @@ import styled from 'styled-components';
 import { toggleAddLabelModal } from '../../features/actionSlice';
 import Close from '../excerpt/Close';
 import { setBudgetLabels } from '../../features/budgetSlice';
+import { SocketContext } from '../../context/socket';
 
 const AddLabel = () => {
-  const { labels, budgetLabels } = useSelector((state) => state.budget);
+  const { labels, budgetLabels, budgetId } = useSelector(
+    (state) => state.budget
+  );
   const { addLabelModal } = useSelector((state) => state.action);
   const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
 
   const close = () => {
     dispatch(toggleAddLabelModal(false));
@@ -26,7 +30,7 @@ const AddLabel = () => {
 
   const handleSelectLabel = (label) => {
     const items = budgetLabels.slice();
-    if (items.includes(label._id)) {
+    if (items.includes(label)) {
       const item = items.find((it) => it._id === label._id);
       const index = items.indexOf(item);
       items.splice(index, 1);
@@ -38,7 +42,14 @@ const AddLabel = () => {
   };
 
   const handleAddLabel = () => {
-    console.log(budgetLabels);
+    const data = {
+      budgetId,
+      labels: budgetLabels,
+    };
+
+    console.log(data);
+
+    socket.emit('updateBudgetLabel', data);
   };
 
   return (

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { setBudgetId } from '../../features/budgetSlice';
 import { EllipsisHorizontalIcon } from '../icons';
 import BudgetCardOption from './BudgetCardOption';
 
 const BudgetCard = ({ budget }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { layout } = useSelector((state) => state.action);
   const [id, setId] = useState('');
 
@@ -14,6 +16,7 @@ const BudgetCard = ({ budget }) => {
     e.stopPropagation();
     e.preventDefault();
     setId(id);
+    dispatch(setBudgetId(id));
   };
 
   const handleCloseMore = () => {
