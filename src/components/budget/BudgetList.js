@@ -21,11 +21,6 @@ const BudgetsWrap = styled.div`
   gap: 15px;
   width: ${(props) => (props.layout === 'list' ? '700px' : 'auto')};
   margin: ${(props) => (props.layout === 'list' ? 'auto' : '0')};
-
-  a {
-    text-decoration: none;
-    color: ${(props) => props.theme.colors.text_color2};
-  }
 `;
 
 export default BudgetList;

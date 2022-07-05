@@ -4,6 +4,7 @@ const initialState = {
   budgets: [],
   labels: [],
   budgetLabels: [],
+  budget: {},
   budgetId: '',
 };
 
@@ -23,9 +24,13 @@ const budgetSlice = createSlice({
     setBudgetLabels(state, action) {
       state.budgetLabels = action.payload;
     },
+    setBudget(state, action) {
+      state.budget = action.payload;
+    },
     clearActiveBudgetData(state) {
       state.budgetId = '';
       state.budgetLabels = [];
+      state.budget = {};
     },
   },
 });
@@ -35,6 +40,7 @@ export const {
   addLabels,
   setBudgetLabels,
   setBudgetId,
+  setBudget,
   clearActiveBudgetData,
 } = budgetSlice.actions;
 export default budgetSlice.reducer;

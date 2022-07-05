@@ -77,7 +77,7 @@ function App() {
           <Route path="/dashboard/new/label" element={<NewLabel />} />
           <Route path="/dashboard/new/budget" element={<NewBudget />} />
           <Route
-            path="/dashboard/edit/budget/:budgetId"
+            path="/dashboard/edit/budgets/:budgetId"
             element={<EditBudget />}
           />
         </Routes>

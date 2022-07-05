@@ -3,16 +3,23 @@ import More from '../widgets/More';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { toggleAddLabelModal } from '../../features/actionSlice';
-import { setBudgetLabels } from '../../features/budgetSlice';
+import { setBudget, setBudgetLabels } from '../../features/budgetSlice';
 import { EditIcon, LabelIcon, TrashIcon } from '../icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const BudgetCardOption = ({ close, labels }) => {
+const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleLabelAction = () => {
     dispatch(toggleAddLabelModal(true));
     dispatch(setBudgetLabels(labels));
+    close();
+  };
+
+  const handleEditAction = () => {
+    dispatch(setBudgetLabels(labels));
+    dispatch(setBudget(budget));
     close();
   };
 
@@ -32,7 +39,11 @@ const BudgetCardOption = ({ close, labels }) => {
             </i>
             {labels.length > 0 ? 'Change labels' : 'Add label'}
           </p>
-          <Link to="#">
+          <Link
+            to={`/dashboard/edit/budgets/${budgetId}`}
+            state={{ background: location }}
+            onClick={() => handleEditAction()}
+          >
             <i>
               <EditIcon />
             </i>

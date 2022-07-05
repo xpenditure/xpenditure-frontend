@@ -24,49 +24,51 @@ const BudgetCard = ({ budget }) => {
   };
 
   return (
-    <Link to={`/dashboard/budgets/${budget._id}`}>
-      <BudgetCardWrap layout={layout}>
-        <CardHead>
-          <div className="icon" onClick={(e) => handleMoreClick(e, budget._id)}>
-            <EllipsisHorizontalIcon />
-          </div>
-          {id === budget._id && (
-            <BudgetCardOption
-              close={handleCloseMore}
-              labels={budget.labels}
-              budgetId={budget._id}
-            />
-          )}
-        </CardHead>
-        <CardInfo>
+    <BudgetCardWrap layout={layout}>
+      <CardHead>
+        <div className="icon" onClick={(e) => handleMoreClick(e, budget._id)}>
+          <EllipsisHorizontalIcon />
+        </div>
+        {id === budget._id && (
+          <BudgetCardOption
+            close={handleCloseMore}
+            budget={budget}
+            labels={budget.labels}
+            budgetId={budget._id}
+          />
+        )}
+      </CardHead>
+      <CardInfo>
+        <Link to={`/dashboard/budgets/${budget._id}`}>
           <div className="budget-name">{budget.name}</div>
-          <div className="budget-total">
-            <span className="cur">&#x20A6;</span>
-            {budget.total.toLocaleString()}
+        </Link>
+
+        <div className="budget-total">
+          <span className="cur">&#x20A6;</span>
+          {budget.total.toLocaleString()}
+        </div>
+      </CardInfo>
+      <CardLabels>
+        {budget.labels.slice(0, 3).map((label) => (
+          <div
+            className="label"
+            key={label._id}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              navigate(`/dashboard/labels/${label._id}`);
+            }}
+          >
+            {label.name}
           </div>
-        </CardInfo>
-        <CardLabels>
-          {budget.labels.slice(0, 3).map((label) => (
-            <div
-              className="label"
-              key={label._id}
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                navigate(`/dashboard/labels/${label._id}`);
-              }}
-            >
-              {label.name}
-            </div>
-          ))}
-          {budget.labels.length > 3 ? (
-            <div className="label num">+{budget.labels.length - 3}</div>
-          ) : (
-            ''
-          )}
-        </CardLabels>
-      </BudgetCardWrap>
-    </Link>
+        ))}
+        {budget.labels.length > 3 ? (
+          <div className="label num">+{budget.labels.length - 3}</div>
+        ) : (
+          ''
+        )}
+      </CardLabels>
+    </BudgetCardWrap>
   );
 };
 
@@ -97,6 +99,16 @@ const CardInfo = styled.div`
   .cur {
     font-size: 14px;
   }
+
+  a {
+    display: inline-flex;
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.text_color2};
+
+    :hover {
+      color: deepskyblue;
+    }
+  }
 `;
 
 const CardHead = styled.div`
@@ -112,6 +124,7 @@ const CardHead = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     :hover {
       background-color: ${(props) => props.theme.colors.hover_color1};

@@ -21,11 +21,11 @@ import {
 } from '../../features/budgetSlice';
 
 const EditBudget = () => {
-  const [budgetName, setBudgetName] = useState('');
-  const [budgetTotal, setBudgetTotal] = useState('');
-  const [budgetSummary, setBudgetSummary] = useState('');
+  const { labels, budgetLabels, budget } = useSelector((state) => state.budget);
 
-  const { labels, budgetLabels } = useSelector((state) => state.budget);
+  const [budgetName, setBudgetName] = useState(budget?.name);
+  const [budgetTotal, setBudgetTotal] = useState(budget?.total);
+  const [budgetSummary, setBudgetSummary] = useState(budget?.summary);
 
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
@@ -65,12 +65,14 @@ const EditBudget = () => {
     }
   };
 
+  const populateFields = () => {};
+
   return (
-    <Modal>
-      <AddWrap>
+    <Modal visible={true} close={close}>
+      <AddWrap width="600">
         <AddNav>
           <div>Edit budget</div>
-          <Close />
+          <Close close={close} />
         </AddNav>
         <AddMain>
           <form onSubmit={handleEditBudget}>
@@ -101,7 +103,14 @@ const EditBudget = () => {
                 <label>Select label</label>
                 <LabelList>
                   {labels?.map((label) => (
-                    <Label key={label._id} value={label.alias}>
+                    <Label
+                      key={label._id}
+                      value={label.alias}
+                      className={budgetLabels.map((l) =>
+                        l._id === label._id ? 'active' : ''
+                      )}
+                      onClick={() => handleSelectLabel(label)}
+                    >
                       {label.name}
                     </Label>
                   ))}
@@ -109,7 +118,7 @@ const EditBudget = () => {
               </InputWrap>
             </InputGroup>
             <ButtonWrap>
-              <ButtonPrimary type="submit">Add Budget</ButtonPrimary>
+              <ButtonPrimary type="submit">Edit budget</ButtonPrimary>
             </ButtonWrap>
           </form>
         </AddMain>
