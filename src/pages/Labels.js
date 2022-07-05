@@ -6,23 +6,21 @@ import { IconLg } from '../styles/DefaultStyles';
 import { EditIcon, TrashIcon } from '../components/icons';
 import styled from 'styled-components';
 import { setLabel } from '../features/budgetSlice';
+import { toggleDelLabelModal } from '../features/actionSlice';
 
 const Labels = () => {
   const { labelId } = useParams();
   const [filteredBudgets, setFilteredBudgets] = useState([]);
-  const [labelName, setLabelName] = useState('');
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { budgets } = useSelector((state) => state.budget);
+  const { budgets, label, labels } = useSelector((state) => state.budget);
 
   const filterById = () => {
     let newBudget = [];
     budgets.filter((budget) => {
       budget.labels.map((label) => {
         if (label._id === labelId) {
-          setLabelName(label.name);
-          dispatch(setLabel(label));
           newBudget.push(budget);
         }
       });
@@ -34,11 +32,21 @@ const Labels = () => {
     filterById();
   }, [budgets, labelId]);
 
+  useEffect(() => {
+    labels.map((lb) => {
+      if (lb._id === labelId) dispatch(setLabel(lb));
+    });
+  }, [labels, labelId]);
+
+  const handleShowDel = () => {
+    dispatch(toggleDelLabelModal(true));
+  };
+
   return (
     <LabelsWrap>
       <div className="header">
         <div className="left">
-          <h2>{labelName}</h2>
+          <h2>{label?.name}</h2>
         </div>
         <div className="right">
           <Link
@@ -49,7 +57,7 @@ const Labels = () => {
               <EditIcon />
             </IconLg>
           </Link>
-          <IconLg>
+          <IconLg onClick={handleShowDel}>
             <TrashIcon />
           </IconLg>
         </div>

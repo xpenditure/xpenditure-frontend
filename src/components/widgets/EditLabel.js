@@ -38,7 +38,6 @@ const EditLabel = () => {
             name: labelName,
             id: label._id,
           };
-          console.log(payload);
           socket.emit('updateLabel', payload);
           close();
         } else {

@@ -6,6 +6,8 @@ const initialState = {
   moreSide: false,
   layout: 'grid',
   addLabelModal: false,
+  delLabelModal: false,
+  delBudgetModal: false,
 };
 
 const actionSlice = createSlice({
@@ -31,6 +33,12 @@ const actionSlice = createSlice({
     toggleAddLabelModal(state, action) {
       state.addLabelModal = action.payload;
     },
+    toggleDelLabelModal(state, action) {
+      state.delLabelModal = action.payload;
+    },
+    toggleDelBudgetModal(state, action) {
+      state.delBudgetModal = action.payload;
+    },
   },
 });
 
@@ -40,5 +48,7 @@ export const {
   toggleMoreSide,
   toggleLayout,
   toggleAddLabelModal,
+  toggleDelLabelModal,
+  toggleDelBudgetModal,
 } = actionSlice.actions;
 export default actionSlice.reducer;

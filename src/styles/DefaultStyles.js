@@ -108,7 +108,7 @@ export const ButtonWrap = styled.div`
 export const Button = styled.button`
   padding: 5px 16px;
   border-radius: 6px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   border: none;
   outline: none;
@@ -116,20 +116,33 @@ export const Button = styled.button`
   vertical-align: middle;
   white-space: nowrap;
   user-select: none;
-  border: 1px solid;
+  border: 1px solid ${(props) => props.theme.colors.btn_border_color_default};
   color: ${(props) => props.theme.colors.btn_text_color};
   line-height: 20px;
+  width: ${(props) => (props.fill ? '100%' : 'auto')};
+  background-color: ${(props) => props.theme.colors.btn_color_default};
+  transition: all 300ms;
 `;
 
 export const ButtonPrimary = styled(Button)`
   background-color: ${(props) => props.theme.colors.btn_color_primary};
   border-color: ${(props) => props.theme.colors.btn_primary_border};
+  color: #fff;
 
   :hover {
     background-color: ${(props) => props.theme.colors.btn_color_primary_hover};
   }
 `;
 export const ButtonDark = styled(Button)``;
+export const ButtonDanger = styled(Button)`
+  color: ${(props) => props.theme.colors.danger_color1};
+
+  :hover {
+    border-color: ${(props) => props.theme.colors.danger_border_color};
+    background-color: ${(props) => props.theme.colors.danger_color1};
+    color: #fff;
+  }
+`;
 
 export const LabelList = styled.div`
   display: flex;
@@ -177,4 +190,19 @@ export const IconLg = styled.div`
   }
 `;
 
-export const IconSm = styled(IconLg)``;
+export const IconSm = styled(IconLg)`
+  svg {
+    width: 16px;
+  }
+`;
+
+export const DelInfo = styled.div`
+  color: ${(props) => props.theme.colors.text_color2};
+  p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    span {
+      font-weight: bolder;
+    }
+  }
+`;

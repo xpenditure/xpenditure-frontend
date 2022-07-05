@@ -5,7 +5,6 @@ import Dashboard from './pages/Dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import Home from './pages/Home';
 import Budgets from './pages/Budgets';
-import Trash from './pages/Trash';
 import Archive from './pages/Archive';
 import Settings from './components/settings/Settings';
 import NewLabel from './components/widgets/NewLabel';
@@ -18,9 +17,11 @@ import { addBudgets, addLabels } from './features/budgetSlice';
 import { SocketContext } from './context/socket';
 import EditBudget from './components/widgets/EditBudget';
 import EditLabel from './components/widgets/EditLabel';
+import Notifications from './pages/Notifications';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
+  const { labels } = useSelector((state) => state.budget);
   const location = useLocation();
   const socket = useContext(SocketContext);
   const dispatch = useDispatch();
@@ -41,6 +42,15 @@ function App() {
       });
     };
   }, []);
+
+  useEffect(() => {
+    // When label is updated, we need to fetch budgets
+    // with the newly populated labels from the update
+    socket.emit('fetchBudgets');
+    socket.on('fetchBudgets', (data) => {
+      dispatch(addBudgets(data));
+    });
+  }, [labels]);
 
   return (
     <>
@@ -65,7 +75,7 @@ function App() {
           }
         >
           <Route index element={<Budgets />} />
-          <Route path="trash" element={<Trash />} />
+          <Route path="notifications" element={<Notifications />} />
           <Route path="archive" element={<Archive />} />
           <Route path="labels/:labelId" element={<Labels />} />
           <Route path="budgets/:budgetId" element={<OneBudget />} />

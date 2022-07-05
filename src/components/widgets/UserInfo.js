@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { EllipsisHorizontalIcon } from '../icons';
+import { EllipsisHorizontalIcon, LogoutIcon } from '../icons';
 import { useDispatch, useSelector } from 'react-redux';
 import More from './More';
 import { clearTokenFromStorage } from '../../features/userSlice';
@@ -40,7 +40,12 @@ const UserInfo = () => {
         </div>
         <More visible={menu} close={close} pos="top">
           <div className="link">
-            <p onClick={handleLogout}>Sign out</p>
+            <p onClick={handleLogout}>
+              <i>
+                <LogoutIcon />
+              </i>
+              Sign out
+            </p>
           </div>
         </More>
       </ShowMenu>
@@ -53,6 +58,8 @@ const UserInfoWrap = styled.div`
   display: flex;
   align-items: center;
   padding: 20px 20px;
+  width: 100%;
+  justify-content: space-between;
 
   .avatar {
     width: 40px !important;
@@ -67,6 +74,7 @@ const UserInfoWrap = styled.div`
   .user-info {
     display: flex;
     align-items: center;
+
     flex: 1;
   }
 
@@ -76,6 +84,15 @@ const UserInfoWrap = styled.div`
     line-height: 1;
     font-size: 14px;
     color: ${(props) => props.theme.colors.text_color2};
+  }
+
+  .name,
+  .email {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 80%;
   }
 
   .name {

@@ -53,7 +53,8 @@ body {
 
 .btn-disabled {
   opacity: .5;
-  cursor: progress;
+  cursor: not-allowed !important;
+  pointer-events: none;
 }
 
 .danger {

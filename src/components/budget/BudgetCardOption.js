@@ -2,9 +2,12 @@ import React from 'react';
 import More from '../widgets/More';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { toggleAddLabelModal } from '../../features/actionSlice';
+import {
+  toggleAddLabelModal,
+  toggleDelBudgetModal,
+} from '../../features/actionSlice';
 import { setBudget, setBudgetLabels } from '../../features/budgetSlice';
-import { EditIcon, LabelIcon, TrashIcon } from '../icons';
+import { ArchiveIcon, EditIcon, LabelIcon, TrashIcon } from '../icons';
 import { Link, useLocation } from 'react-router-dom';
 
 const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
@@ -23,11 +26,17 @@ const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
     close();
   };
 
+  const handleDeleteBudget = () => {
+    dispatch(setBudget(budget));
+    dispatch(toggleDelBudgetModal(true));
+    close();
+  };
+
   return (
     <More visible={true} close={close}>
       <Wrap onClick={(e) => e.preventDefault()}>
         <div className="link">
-          <p>
+          <p onClick={handleDeleteBudget}>
             <i>
               <TrashIcon />
             </i>
@@ -38,6 +47,12 @@ const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
               <LabelIcon />
             </i>
             {labels.length > 0 ? 'Change labels' : 'Add label'}
+          </p>
+          <p>
+            <i>
+              <ArchiveIcon />
+            </i>
+            Archive
           </p>
           <Link
             to={`/dashboard/edit/budgets/${budgetId}`}

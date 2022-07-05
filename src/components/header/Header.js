@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
-import { BellIcon, EllipsisHorizontalIcon, GridIcon, ListIcon } from '../icons';
-import { Link } from 'react-router-dom';
+import { EllipsisHorizontalIcon, GridIcon, ListIcon } from '../icons';
 import MoreSide from '../widgets/MoreSide';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMoreSide, toggleLayout } from '../../features/actionSlice';
@@ -27,11 +26,6 @@ const Header = () => {
       <HeaderRight>
         <div className="layout-icon" onClick={handleChangeLayout}>
           {layout === 'grid' ? <ListIcon /> : <GridIcon />}
-        </div>
-        <div className="noti">
-          <Link to="notifications">
-            <BellIcon />
-          </Link>
         </div>
         <MoreItem>
           <div className="ellipsis" onClick={handleShowMoreSide}>

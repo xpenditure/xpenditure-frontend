@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
 import { TabList, TabIcon, TabItem, TabName, OLS } from './styled';
-import { CaretDownIcon, GearIcon, PlusIcon } from '../icons';
-import { ArchiveIcon, ControlIcon, LabelIcon, TrashIcon } from '../icons';
+import { BellIcon, CaretDownIcon, GearIcon, PlusIcon } from '../icons';
+import { ArchiveIcon, ControlIcon, LabelIcon } from '../icons';
 import LabelList from './LabelList';
 import { ButtonPrimary } from '../../styles/DefaultStyles';
 
@@ -47,7 +47,7 @@ const NavTab = () => {
       </NavLink>
 
       <NavLink
-        to="trash"
+        to="notifications"
         end
         className={({ isActive }) =>
           'nav-link' + (isActive ? ' activated' : '')
@@ -55,9 +55,9 @@ const NavTab = () => {
       >
         <TabItem>
           <TabIcon>
-            <TrashIcon />
+            <BellIcon />
           </TabIcon>
-          <TabName>Trash</TabName>
+          <TabName>Notifications</TabName>
         </TabItem>
       </NavLink>
       <div className="custom" to="#">
