@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import Modal from '../modal/Modal';
-import { useNavigate } from 'react-router-dom';
 import {
   ButtonPrimary,
   InputWrap,
@@ -13,21 +11,27 @@ import {
   Label,
 } from '../../styles/DefaultStyles';
 import Close from '../excerpt/Close';
+import Modal from '../modal/Modal';
 import { SocketContext } from '../../context/socket';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import {
+  clearActiveBudgetData,
+  setBudgetLabels,
+} from '../../features/budgetSlice';
 
-const NewBudget = () => {
+const EditBudget = () => {
   const [budgetName, setBudgetName] = useState('');
   const [budgetTotal, setBudgetTotal] = useState('');
   const [budgetSummary, setBudgetSummary] = useState('');
-  const [budgetLabels, setBudgetLabels] = useState([]);
 
-  const { labels } = useSelector((state) => state.budget);
+  const { labels, budgetLabels } = useSelector((state) => state.budget);
 
   const socket = useContext(SocketContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleCreateBudget = (e) => {
+  const handleEditBudget = (e) => {
     e.preventDefault();
 
     const payload = {
@@ -37,40 +41,39 @@ const NewBudget = () => {
       budgetLabels,
     };
 
-    socket.emit('createBudget', payload);
-    close();
+    console.log(payload);
   };
 
   const close = () => {
     setBudgetName('');
     setBudgetTotal('');
     setBudgetSummary('');
-    setBudgetLabels([]);
+    dispatch(clearActiveBudgetData());
     navigate(-1);
   };
 
-  const handleSelectLabel = (labelId) => {
+  const handleSelectLabel = (label) => {
     const items = budgetLabels.slice();
-    if (items.includes(labelId)) {
-      const item = items.find((id) => id === labelId);
+    if (items.some((lb) => lb._id === label._id)) {
+      const item = items.find((it) => it._id === label._id);
       const index = items.indexOf(item);
       items.splice(index, 1);
-      setBudgetLabels(items);
+      dispatch(setBudgetLabels(items));
     } else {
-      items.push(labelId);
-      setBudgetLabels(items);
+      items.push(label);
+      dispatch(setBudgetLabels(items));
     }
   };
 
   return (
-    <Modal visible={true} close={close}>
-      <AddWrap width="600">
+    <Modal>
+      <AddWrap>
         <AddNav>
-          <div>Create Budget</div>
-          <Close close={close} />
+          <div>Edit budget</div>
+          <Close />
         </AddNav>
         <AddMain>
-          <form onSubmit={handleCreateBudget}>
+          <form onSubmit={handleEditBudget}>
             <InputGroup>
               <InputWrap>
                 <label>Budget name</label>
@@ -98,14 +101,7 @@ const NewBudget = () => {
                 <label>Select label</label>
                 <LabelList>
                   {labels?.map((label) => (
-                    <Label
-                      key={label._id}
-                      value={label.alias}
-                      onClick={() => handleSelectLabel(label._id)}
-                      className={
-                        budgetLabels.includes(label._id) ? 'active' : ''
-                      }
-                    >
+                    <Label key={label._id} value={label.alias}>
                       {label.name}
                     </Label>
                   ))}
@@ -122,4 +118,4 @@ const NewBudget = () => {
   );
 };
 
-export default NewBudget;
+export default EditBudget;

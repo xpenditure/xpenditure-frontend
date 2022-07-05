@@ -46,7 +46,7 @@ const BudgetCard = ({ budget }) => {
           </div>
         </CardInfo>
         <CardLabels>
-          {budget.labels.map((label) => (
+          {budget.labels.slice(0, 3).map((label) => (
             <div
               className="label"
               key={label._id}
@@ -59,6 +59,11 @@ const BudgetCard = ({ budget }) => {
               {label.name}
             </div>
           ))}
+          {budget.labels.length > 3 ? (
+            <div className="label num">+{budget.labels.length - 3}</div>
+          ) : (
+            ''
+          )}
         </CardLabels>
       </BudgetCardWrap>
     </Link>
@@ -70,7 +75,8 @@ const BudgetCardWrap = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: 5px;
   margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};
-  height: 190px;
+  /* max-height: 190px; */
+  overflow: hidden;
 `;
 
 const CardInfo = styled.div`
@@ -121,6 +127,10 @@ const CardHead = styled.div`
 const CardLabels = styled.div`
   display: flex;
   padding: 10px 20px;
+  flex-wrap: wrap;
+  overflow: ellipsis;
+  white-space: wrap;
+  width: 100%;
 
   .label {
     font-size: 12px;
@@ -130,6 +140,10 @@ const CardLabels = styled.div`
     padding: 5px 10px;
     border-radius: 20px;
     background-color: ${(props) => props.theme.colors.secondary};
+  }
+
+  .num {
+    font-weight: 600;
   }
 `;
 

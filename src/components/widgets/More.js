@@ -48,10 +48,21 @@ const MoreInner = styled.div`
       color: ${(props) => props.theme.colors.text_color2};
       font-size: 14px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
 
       :hover {
-        color: ${(props) => props.theme.colors.text_color1};
+        color: ${(props) => props.theme.colors.text_color2};
         background-color: ${(props) => props.theme.colors.hover_color1};
+      }
+
+      i {
+        display: flex;
+        margin-right: 8px;
+        svg {
+          width: 18px;
+          fill: ${(props) => props.theme.colors.text_color2};
+        }
       }
     }
   }

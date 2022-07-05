@@ -13,7 +13,10 @@ import Modal from '../modal/Modal';
 import styled from 'styled-components';
 import { toggleAddLabelModal } from '../../features/actionSlice';
 import Close from '../excerpt/Close';
-import { setBudgetLabels } from '../../features/budgetSlice';
+import {
+  clearActiveBudgetData,
+  setBudgetLabels,
+} from '../../features/budgetSlice';
 import { SocketContext } from '../../context/socket';
 
 const AddLabel = () => {
@@ -26,11 +29,12 @@ const AddLabel = () => {
 
   const close = () => {
     dispatch(toggleAddLabelModal(false));
+    dispatch(clearActiveBudgetData());
   };
 
   const handleSelectLabel = (label) => {
     const items = budgetLabels.slice();
-    if (items.includes(label)) {
+    if (items.some((lb) => lb._id === label._id)) {
       const item = items.find((it) => it._id === label._id);
       const index = items.indexOf(item);
       items.splice(index, 1);
@@ -47,9 +51,8 @@ const AddLabel = () => {
       labels: budgetLabels,
     };
 
-    console.log(data);
-
     socket.emit('updateBudgetLabel', data);
+    close();
   };
 
   return (

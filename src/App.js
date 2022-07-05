@@ -16,6 +16,7 @@ import OneBudget from './pages/OneBudget';
 import { useEffect, useContext } from 'react';
 import { addBudgets, addLabels } from './features/budgetSlice';
 import { SocketContext } from './context/socket';
+import EditBudget from './components/widgets/EditBudget';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -75,6 +76,10 @@ function App() {
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="/dashboard/new/label" element={<NewLabel />} />
           <Route path="/dashboard/new/budget" element={<NewBudget />} />
+          <Route
+            path="/dashboard/edit/budget/:budgetId"
+            element={<EditBudget />}
+          />
         </Routes>
       )}
     </>
