@@ -106,7 +106,7 @@ const CardInfo = styled.div`
     color: ${(props) => props.theme.colors.text_color2};
 
     :hover {
-      color: deepskyblue;
+      color: #58a6ff;
     }
   }
 `;

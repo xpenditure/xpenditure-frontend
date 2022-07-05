@@ -35,13 +35,15 @@ const EditBudget = () => {
     e.preventDefault();
 
     const payload = {
+      budgetId: budget._id,
       budgetName,
       budgetTotal,
       budgetSummary,
       budgetLabels,
     };
 
-    console.log(payload);
+    socket.emit('updateBudget', payload);
+    close();
   };
 
   const close = () => {

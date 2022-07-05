@@ -56,4 +56,8 @@ body {
   cursor: progress;
 }
 
+.danger {
+  color: #ff9191 !important;
+}
+
 `;
