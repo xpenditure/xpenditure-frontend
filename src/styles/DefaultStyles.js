@@ -134,6 +134,7 @@ export const ButtonDark = styled(Button)``;
 export const LabelList = styled.div`
   display: flex;
   margin-top: 10px;
+  flex-wrap: wrap;
 
   .active {
     border-color: ${(props) => props.theme.colors.btn_color_primary};
@@ -145,6 +146,7 @@ export const Label = styled.div`
   border: 2px solid ${(props) => props.theme.colors.border_color1};
   padding: 5px 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
   font-size: 14px;
   color: ${(props) => props.theme.colors.text_color2};
   cursor: pointer;
@@ -154,3 +156,25 @@ export const Label = styled.div`
     border-color: ${(props) => props.theme.colors.btn_color_primary};
   }
 `;
+
+export const IconLg = styled.div`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.hover_color1};
+  }
+
+  svg {
+    width: 20px;
+    fill: ${(props) => props.theme.colors.text_color2};
+  }
+`;
+
+export const IconSm = styled(IconLg)``;

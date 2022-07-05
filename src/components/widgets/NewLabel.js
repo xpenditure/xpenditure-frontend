@@ -34,11 +34,11 @@ const NewLabel = () => {
     e.preventDefault();
     if (labelName !== '') {
       if (nameAval()) {
-        // const payload = {
-        //   name: labelName,
-        // };
-        // socket.emit('createLabel', payload);
-        // close();
+        const payload = {
+          name: labelName,
+        };
+        socket.emit('createLabel', payload);
+        close();
       } else {
         setMsg('Label already exits');
         return false;

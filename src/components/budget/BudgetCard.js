@@ -50,17 +50,13 @@ const BudgetCard = ({ budget }) => {
       </CardInfo>
       <CardLabels>
         {budget.labels.slice(0, 3).map((label) => (
-          <div
+          <Link
+            to={`/dashboard/labels/${label._id}`}
             className="label"
             key={label._id}
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              navigate(`/dashboard/labels/${label._id}`);
-            }}
           >
             {label.name}
-          </div>
+          </Link>
         ))}
         {budget.labels.length > 3 ? (
           <div className="label num">+{budget.labels.length - 3}</div>
@@ -146,6 +142,7 @@ const CardLabels = styled.div`
   width: 100%;
 
   .label {
+    text-decoration: none;
     font-size: 12px;
     color: ${(props) => props.theme.colors.text_color2};
     margin-right: 3px;
@@ -157,6 +154,7 @@ const CardLabels = styled.div`
 
   .num {
     font-weight: 600;
+    cursor: pointer;
   }
 `;
 
