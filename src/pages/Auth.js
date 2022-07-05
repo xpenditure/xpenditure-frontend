@@ -6,6 +6,7 @@ import Register from '../components/auth/Register';
 import { useSearchParams } from 'react-router-dom';
 import Message from '../components/message/Message';
 import { useSelector } from 'react-redux';
+import { FormWrap } from '../styles/DefaultStyles';
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState('login');
@@ -38,8 +39,10 @@ const Auth = () => {
           setActiveTab={setActiveTab}
         />
         <AuthMain>
-          {activeTab === 'login' && <Login status={status} />}
-          {activeTab === 'register' && <Register status={status} />}
+          <FormWrap>
+            {activeTab === 'login' && <Login status={status} />}
+            {activeTab === 'register' && <Register status={status} />}
+          </FormWrap>
         </AuthMain>
       </AuthInner>
       <Message msg={errorMsg} />

@@ -12,12 +12,14 @@ import Modal from '../modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleDelLabelModal } from '../../features/actionSlice';
 import { SocketContext } from '../../context/socket';
+import { useNavigate } from 'react-router-dom';
 
 const DeleteLabel = () => {
   const { delLabelModal } = useSelector((state) => state.action);
   const { label } = useSelector((state) => state.budget);
   const [labelName, setLabelName] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const socket = useContext(SocketContext);
 
   const close = () => {
@@ -30,6 +32,7 @@ const DeleteLabel = () => {
 
     socket.emit('deleteLabel', label._id);
     close();
+    navigate('/dashboard');
   };
 
   return (

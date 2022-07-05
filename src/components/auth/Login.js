@@ -28,7 +28,7 @@ const Login = ({ status }) => {
     }
   };
   return (
-    <FormWrap>
+    <>
       <Title>
         <h1>Login</h1>
         <p>Welcome back, Bud!</p>
@@ -52,7 +52,7 @@ const Login = ({ status }) => {
           {status === 'loading' ? 'Loading...' : 'Login'}
         </ButtonPrimary>
       </form>
-    </FormWrap>
+    </>
   );
 };
 

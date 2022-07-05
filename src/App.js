@@ -95,6 +95,7 @@ function App() {
             path="/dashboard/edit/labels/:labelId"
             element={<EditLabel />}
           />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       )}
     </>

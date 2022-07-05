@@ -38,7 +38,7 @@ const Register = ({ status }) => {
   };
 
   return (
-    <FormWrap>
+    <>
       <Title>
         <h1>Register</h1>
         <p>Create an account for free!</p>
@@ -75,7 +75,7 @@ const Register = ({ status }) => {
           {status === 'loading' ? 'Loading...' : 'Register'}
         </ButtonPrimary>
       </form>
-    </FormWrap>
+    </>
   );
 };
 

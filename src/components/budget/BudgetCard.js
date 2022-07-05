@@ -72,8 +72,6 @@ const BudgetCardWrap = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: 5px;
   margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};
-  /* max-height: 190px; */
-  overflow: hidden;
 `;
 
 const CardInfo = styled.div`

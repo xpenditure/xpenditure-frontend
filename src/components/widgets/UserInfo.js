@@ -74,7 +74,6 @@ const UserInfoWrap = styled.div`
   .user-info {
     display: flex;
     align-items: center;
-
     flex: 1;
   }
 
@@ -84,6 +83,7 @@ const UserInfoWrap = styled.div`
     line-height: 1;
     font-size: 14px;
     color: ${(props) => props.theme.colors.text_color2};
+    flex: 1;
   }
 
   .name,
@@ -92,7 +92,7 @@ const UserInfoWrap = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 80%;
+    width: 95%;
   }
 
   .name {
