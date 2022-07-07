@@ -19,6 +19,7 @@ const OneBudget = () => {
 
   return (
     <OneBudgetWrap>
+      <BudgetName>{budget.name}</BudgetName>
       <OneBudgetInner>
         <BudgetData budget={budget} budgetId={budgetId} />
       </OneBudgetInner>
@@ -30,6 +31,11 @@ const OneBudgetWrap = styled.div``;
 const OneBudgetInner = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const BudgetName = styled.div`
+  font-size: 30px;
+  color: ${(props) => props.theme.colors.text_color2};
 `;
 
 export default OneBudget;

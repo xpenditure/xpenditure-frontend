@@ -24,19 +24,6 @@ const BudgetCard = ({ budget }) => {
 
   return (
     <BudgetCardWrap layout={layout}>
-      <CardHead>
-        <div className="icon" onClick={(e) => handleMoreClick(e, budget._id)}>
-          <EllipsisHorizontalIcon />
-        </div>
-        {id === budget._id && (
-          <BudgetCardOption
-            close={handleCloseMore}
-            budget={budget}
-            labels={budget.labels}
-            budgetId={budget._id}
-          />
-        )}
-      </CardHead>
       <CardInfo>
         <Link to={`/dashboard/budgets/${budget._id}`}>
           <div className="budget-name">{budget.name}</div>
@@ -68,16 +55,15 @@ const BudgetCard = ({ budget }) => {
 };
 
 const BudgetCardWrap = styled.div`
-  background-color: ${(props) => props.theme.colors.card_color1};
+  /* background-color: ${(props) => props.theme.colors.card_color1}; */
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: 5px;
   margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};
+  padding: 20px;
 `;
 
 const CardInfo = styled.div`
-  padding: 20px;
-  padding-top: 0;
-
+  margin-bottom: 20px;
   .budget-name {
     font-size: 20px;
     font-weight: 400;
@@ -104,35 +90,8 @@ const CardInfo = styled.div`
   }
 `;
 
-const CardHead = styled.div`
-  display: flex;
-  padding: 10px 10px;
-  justify-content: flex-end;
-  position: relative;
-
-  .icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${(props) => props.theme.colors.hover_color1};
-    }
-
-    svg {
-      width: 18px;
-      fill: ${(props) => props.theme.colors.text_color2};
-    }
-  }
-`;
-
 const CardLabels = styled.div`
   display: flex;
-  padding: 10px 20px;
   flex-wrap: wrap;
   overflow: ellipsis;
   white-space: wrap;
@@ -140,11 +99,11 @@ const CardLabels = styled.div`
 
   .label {
     text-decoration: none;
-    font-size: 12px;
+    font-size: 10px;
     color: ${(props) => props.theme.colors.text_color2};
     margin-right: 3px;
     border: 1px solid ${(props) => props.theme.colors.border_color1};
-    padding: 5px 10px;
+    padding: 3px 8px;
     border-radius: 20px;
     background-color: ${(props) => props.theme.colors.secondary};
   }

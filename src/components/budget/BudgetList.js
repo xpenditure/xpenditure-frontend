@@ -19,7 +19,7 @@ const BudgetsWrap = styled.div`
   display: ${(props) => props.layout};
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 15px;
-  width: ${(props) => (props.layout === 'list' ? '700px' : 'auto')};
+  width: ${(props) => (props.layout === 'list' ? '600px' : 'auto')};
   margin: ${(props) => (props.layout === 'list' ? 'auto' : '0')};
 `;
 
