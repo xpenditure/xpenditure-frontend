@@ -1,13 +1,23 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Budgets from '../components/views/Budgets';
-import Labels from '../components/views/Labels';
+
 import Sidenav from '../components/sidenav/Sidenav';
-import { useSelector } from 'react-redux';
-import Settings from '../components/settings/Settings';
+import { Outlet } from 'react-router-dom';
+import Header from '../components/header/Header';
+import { useDispatch } from 'react-redux';
+import { getUserProfileAsync } from '../features/userSlice';
+import AddLabel from '../components/widgets/AddLabel';
+import DeleteLabel from '../components/widgets/DeleteLabel';
+import DeleteBudget from '../components/widgets/DeleteBudget';
 
 const Dashboard = () => {
-  const { activeView } = useSelector((state) => state.action);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(getUserProfileAsync());
+    };
+  }, []);
 
   return (
     <>
@@ -15,13 +25,17 @@ const Dashboard = () => {
         <Sidenav />
 
         <MainViews>
-          <Container>
-            {activeView === 'budgets' && <Budgets />}
-            {activeView === 'labels' && <Labels />}
-          </Container>
+          <Header />
+          <OutletWrap>
+            <Container>
+              <Outlet />
+            </Container>
+          </OutletWrap>
         </MainViews>
       </DashWrap>
-      <Settings />
+      <AddLabel />
+      <DeleteLabel />
+      <DeleteBudget />
     </>
   );
 };
@@ -34,6 +48,8 @@ const DashWrap = styled.div`
 const MainViews = styled.div`
   flex: 1;
   background-color: ${(props) => props.theme.colors.primary};
+  overflow-y: auto;
+  height: 100vh;
 `;
 
 const Container = styled.div`
@@ -41,6 +57,10 @@ const Container = styled.div`
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
+`;
+
+const OutletWrap = styled.div`
+  margin: 70px 0;
 `;
 
 export default Dashboard;

@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { FormWrap, InputGroup, InputWrap, Title } from './styled';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  FormWrap,
+  InputGroup,
+  InputWrap,
+  Title,
+  ButtonPrimary,
+} from '../../styles/DefaultStyles';
 import { loginUserAsync } from '../../features/userSlice';
 
-const Login = () => {
+const Login = ({ status }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,7 +18,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (email != '' && password != '') {
+    if (email !== '' && password !== '') {
       const payload = {
         email,
         password,
@@ -22,7 +28,7 @@ const Login = () => {
     }
   };
   return (
-    <FormWrap>
+    <>
       <Title>
         <h1>Login</h1>
         <p>Welcome back, Bud!</p>
@@ -42,9 +48,11 @@ const Login = () => {
             />
           </InputWrap>
         </InputGroup>
-        <button>Login</button>
+        <ButtonPrimary className={status === 'loading' ? 'btn-disabled' : ''}>
+          {status === 'loading' ? 'Loading...' : 'Login'}
+        </ButtonPrimary>
       </form>
-    </FormWrap>
+    </>
   );
 };
 

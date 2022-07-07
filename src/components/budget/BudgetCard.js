@@ -1,19 +1,117 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { setBudgetId } from '../../features/budgetSlice';
+import { EllipsisHorizontalIcon } from '../icons';
+import BudgetCardOption from './BudgetCardOption';
 
 const BudgetCard = ({ budget }) => {
+  const dispatch = useDispatch();
+  const { layout } = useSelector((state) => state.action);
+  const [id, setId] = useState('');
+
+  const handleMoreClick = (e, id) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setId(id);
+    dispatch(setBudgetId(id));
+  };
+
+  const handleCloseMore = () => {
+    setId('');
+  };
+
   return (
-    <BudgetCardWrap>
-      <div>{budget.name}</div>
+    <BudgetCardWrap layout={layout}>
+      <CardInfo>
+        <Link to={`/dashboard/budgets/${budget._id}`}>
+          <div className="budget-name">{budget.name}</div>
+        </Link>
+
+        <div className="budget-total">
+          <span className="cur">&#x20A6;</span>
+          {budget.total.toLocaleString()}
+        </div>
+      </CardInfo>
+      <CardLabels>
+        {budget.labels.slice(0, 3).map((label) => (
+          <Link
+            to={`/dashboard/labels/${label._id}`}
+            className="label"
+            key={label._id}
+          >
+            {label.name}
+          </Link>
+        ))}
+        {budget.labels.length > 3 ? (
+          <div className="label num">+{budget.labels.length - 3}</div>
+        ) : (
+          ''
+        )}
+      </CardLabels>
     </BudgetCardWrap>
   );
 };
 
 const BudgetCardWrap = styled.div`
-  background-color: ${(props) => props.theme.colors.card_color1};
+  /* background-color: ${(props) => props.theme.colors.card_color1}; */
   border: 1px solid ${(props) => props.theme.colors.border_color1};
-  padding: 20px;
   border-radius: 5px;
+  margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};
+  padding: 20px;
+`;
+
+const CardInfo = styled.div`
+  margin-bottom: 20px;
+  .budget-name {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .budget-total {
+    font-size: 20px;
+    opacity: 0.5;
+  }
+
+  .cur {
+    font-size: 14px;
+  }
+
+  a {
+    display: inline-flex;
+    text-decoration: none;
+    color: ${(props) => props.theme.colors.text_color2};
+
+    :hover {
+      color: #58a6ff;
+    }
+  }
+`;
+
+const CardLabels = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  overflow: ellipsis;
+  white-space: wrap;
+  width: 100%;
+
+  .label {
+    text-decoration: none;
+    font-size: 10px;
+    color: ${(props) => props.theme.colors.text_color2};
+    margin-right: 3px;
+    border: 1px solid ${(props) => props.theme.colors.border_color1};
+    padding: 3px 8px;
+    border-radius: 20px;
+    background-color: ${(props) => props.theme.colors.secondary};
+  }
+
+  .num {
+    font-weight: 600;
+    cursor: pointer;
+  }
 `;
 
 export default BudgetCard;

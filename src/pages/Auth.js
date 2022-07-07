@@ -4,11 +4,16 @@ import Tabs from '../components/auth/Tabs';
 import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
 import { useSearchParams } from 'react-router-dom';
+import Message from '../components/message/Message';
+import { useSelector } from 'react-redux';
+import { FormWrap } from '../styles/DefaultStyles';
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState('login');
   const [searchParams] = useSearchParams();
   const tab = searchParams.get('tab');
+
+  const { errorMsg, status } = useSelector((state) => state.user);
 
   const tabList = [
     { name: 'Login', alias: 'login' },
@@ -34,10 +39,13 @@ const Auth = () => {
           setActiveTab={setActiveTab}
         />
         <AuthMain>
-          {activeTab === 'login' && <Login />}
-          {activeTab === 'register' && <Register />}
+          <FormWrap>
+            {activeTab === 'login' && <Login status={status} />}
+            {activeTab === 'register' && <Register status={status} />}
+          </FormWrap>
         </AuthMain>
       </AuthInner>
+      <Message msg={errorMsg} />
     </AuthWrap>
   );
 };
@@ -45,7 +53,6 @@ const Auth = () => {
 const AuthWrap = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
   justify-content: center;
   padding: 0 20px;
   z-index: 99998;
@@ -55,12 +62,12 @@ const AuthWrap = styled.div`
 const AuthInner = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin: 100px 0;
 `;
 
 const AuthMain = styled.div`
   padding: 30px;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.auth_bg_color};
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   box-shadow: ${(props) => props.theme.colors.shadow1};

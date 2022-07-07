@@ -3,7 +3,12 @@ import { getFromLS, setToLS } from '../utils/storage';
 
 const initialState = {
   mode: 'light',
-  activeView: 'budgets',
+  moreSide: false,
+  layout: 'grid',
+  addLabelModal: false,
+  delLabelModal: false,
+  delBudgetModal: false,
+  sideNav: false,
 };
 
 const actionSlice = createSlice({
@@ -20,12 +25,35 @@ const actionSlice = createSlice({
       setToLS('mode', action.payload);
       state.mode = action.payload;
     },
-    setDashboardView(state, action) {
-      state.activeView = action.payload;
+    toggleMoreSide(state, action) {
+      state.moreSide = action.payload;
+    },
+    toggleLayout(state) {
+      state.layout = state.layout === 'grid' ? 'list' : 'grid';
+    },
+    toggleAddLabelModal(state, action) {
+      state.addLabelModal = action.payload;
+    },
+    toggleDelLabelModal(state, action) {
+      state.delLabelModal = action.payload;
+    },
+    toggleDelBudgetModal(state, action) {
+      state.delBudgetModal = action.payload;
+    },
+    toggleSideNav(state) {
+      state.sideNav = !state.sideNav;
     },
   },
 });
 
-export const { getThemeMode, setThemeMode, setDashboardView } =
-  actionSlice.actions;
+export const {
+  getThemeMode,
+  setThemeMode,
+  toggleMoreSide,
+  toggleLayout,
+  toggleAddLabelModal,
+  toggleDelLabelModal,
+  toggleDelBudgetModal,
+  toggleSideNav,
+} = actionSlice.actions;
 export default actionSlice.reducer;

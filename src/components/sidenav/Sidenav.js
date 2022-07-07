@@ -1,40 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import Logout from './Logout';
 import NavTab from './NavTab';
-import { useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setDashboardView } from '../../features/actionSlice';
-import { ArchiveIcon, ControlIcon, LabelIcon, TrashIcon } from '../icons';
 
 const Sidenav = () => {
-  const [searchParams] = useSearchParams();
-  const view = searchParams.get('view');
-  const dispatch = useDispatch();
-
-  const viewList = [
-    { name: 'Budgets', alias: 'budgets', element: <ControlIcon /> },
-    { name: 'Labels', alias: 'labels', element: <LabelIcon /> },
-    { name: 'Archive', alias: 'trash', element: <ArchiveIcon /> },
-    { name: 'Trash', alias: 'trash', element: <TrashIcon /> },
-  ];
-
-  useEffect(() => {
-    if (view) {
-      viewList.map((item) => {
-        if (item.alias === view.toLowerCase()) {
-          dispatch(setDashboardView(item.alias));
-          return;
-        }
-      });
-    }
-  }, [view]);
+  const { sideNav } = useSelector((state) => state.action);
 
   return (
-    <SidenavWrap>
+    <SidenavWrap active={sideNav}>
       <SidenavInner>
-        <NavTab views={viewList} />
-        <Logout />
+        <SidenavTop>
+          <NavTab />
+        </SidenavTop>
+        <SidenavBottom></SidenavBottom>
       </SidenavInner>
     </SidenavWrap>
   );
@@ -43,9 +21,11 @@ const Sidenav = () => {
 const SidenavWrap = styled.div`
   display: flex;
   height: 100vh;
-  width: 250px;
+  width: ${(props) => (props.active ? '300px' : '60px')};
   background-color: ${(props) => props.theme.colors.secondary};
   border-right: 1px solid ${(props) => props.theme.colors.border_color1};
+  overflow: hidden;
+  transition: all 300ms;
 `;
 
 const SidenavInner = styled.div`
@@ -54,6 +34,15 @@ const SidenavInner = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 30px 0;
+`;
+
+const SidenavTop = styled.div`
+  flex: 1;
+  width: 100%;
+`;
+
+const SidenavBottom = styled.div`
+  width: 100%;
 `;
 
 export default Sidenav;

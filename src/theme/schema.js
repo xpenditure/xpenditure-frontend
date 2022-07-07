@@ -1,3 +1,7 @@
+import { getFromLS } from '../utils/storage';
+
+const accentColor = getFromLS('accent-color');
+
 export const light = {
   name: 'Light',
   colors: {
@@ -5,6 +9,8 @@ export const light = {
     secondary: '#',
     card_color1: '#f6f8fa',
     text_color_default: '#222',
+    btn_color_primary: '#468737',
+    btn_color_primary_hover: '#2ea043',
     shadow1:
       'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;',
   },
@@ -16,6 +22,7 @@ export const light = {
 export const dark = {
   name: 'Dark',
   colors: {
+    input_color1: '#010409',
     primary: '#0d1117',
     secondary: '#161b22',
     card_color1: '#21262d',
@@ -24,7 +31,9 @@ export const dark = {
     text_color2: '#c9d1d9',
     text_color_default: '#fff',
     hover_color1: '#b1bac41f',
-    btn_color1: '#468737',
+    btn_color_primary: accentColor,
+    btn_color_primary_hover: '#2ea043',
+    btn_primary_border: '#f0f6fc1a',
     shadow1: '0 8px 24px #010409',
   },
   reset: {

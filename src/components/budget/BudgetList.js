@@ -1,34 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { SocketContext } from '../../context/socket';
 import BudgetCard from './BudgetCard';
+import { useSelector } from 'react-redux';
 
-const BudgetList = () => {
-  const socket = useContext(SocketContext);
-  const [budgets, setBudgets] = useState([]);
-
-  useEffect(() => {
-    return () => {
-      socket.emit('fetchBudgets');
-      socket.on('fetchBudgets', (data) => {
-        setBudgets(data);
-      });
-    };
-  }, [socket]);
+const BudgetList = ({ budgets }) => {
+  const { layout } = useSelector((state) => state.action);
 
   return (
-    <BudgetListWrap>
+    <BudgetsWrap layout={layout}>
       {budgets.map((budget) => (
-        <BudgetCard key={budget._id} budget={budget} />
+        <BudgetCard layout={layout} key={budget._id} budget={budget} />
       ))}
-    </BudgetListWrap>
+    </BudgetsWrap>
   );
 };
 
-const BudgetListWrap = styled.div`
-  display: grid;
+const BudgetsWrap = styled.div`
+  display: ${(props) => props.layout};
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 15px;
+  width: ${(props) => (props.layout === 'list' ? '600px' : 'auto')};
+  margin: ${(props) => (props.layout === 'list' ? 'auto' : '0')};
 `;
 
 export default BudgetList;

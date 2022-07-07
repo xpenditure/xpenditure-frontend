@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FormWrap, InputGroup, InputWrap, Title } from './styled';
+import {
+  FormWrap,
+  InputGroup,
+  InputWrap,
+  Title,
+  ButtonPrimary,
+} from '../../styles/DefaultStyles';
 import { registerUserAsync } from '../../features/userSlice';
 
-const Register = () => {
+const Register = ({ status }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,7 +20,12 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    if (firstName != '' && lastName != '' && email != '' && password != '') {
+    if (
+      firstName !== '' &&
+      lastName !== '' &&
+      email !== '' &&
+      password !== ''
+    ) {
       const payload = {
         firstName,
         lastName,
@@ -27,7 +38,7 @@ const Register = () => {
   };
 
   return (
-    <FormWrap>
+    <>
       <Title>
         <h1>Register</h1>
         <p>Create an account for free!</p>
@@ -60,9 +71,11 @@ const Register = () => {
             />
           </InputWrap>
         </InputGroup>
-        <button>Register</button>
+        <ButtonPrimary className={status === 'loading' ? 'btn-disabled' : ''}>
+          {status === 'loading' ? 'Loading...' : 'Register'}
+        </ButtonPrimary>
       </form>
-    </FormWrap>
+    </>
   );
 };
 

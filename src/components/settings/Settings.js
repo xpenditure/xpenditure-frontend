@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AccountIcon, BellIcon, CancelIcon, PaintbrushIcon } from '../icons';
+import Close from '../excerpt/Close';
+import { AccountIcon, BellIcon, PaintbrushIcon } from '../icons';
+import Modal from '../modal/Modal';
+import Account from './Account';
+import Appearance from './Appearance';
+import Notifications from './Notifications';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
   const [title, setTtitle] = useState('Account');
+
+  const navigate = useNavigate();
 
   const tabList = [
     { name: 'Account', alias: 'account', element: <AccountIcon /> },
@@ -17,9 +25,12 @@ const Settings = () => {
     setTtitle(tab.name);
   };
 
+  const handleCloseSettingsModal = () => {
+    navigate(-1);
+  };
+
   return (
-    <SettingsWrap>
-      <Overlay />
+    <Modal visible={true} close={handleCloseSettingsModal}>
       <SettingsInner>
         <SettingsSide>
           <div className="tabList">
@@ -38,50 +49,34 @@ const Settings = () => {
         <SettingsMain>
           <SettingsNav>
             <div className="title">{title}</div>
-            <div className="close">
-              <CancelIcon />
-            </div>
+            <Close close={handleCloseSettingsModal} />
           </SettingsNav>
           <SettingsView>
-            {activeTab === 'account' && 'Account'}
-            {activeTab === 'appearance' && 'Appearance'}
-            {activeTab === 'notifications' && 'Notifications'}
+            {activeTab === 'account' && <Account />}
+            {activeTab === 'appearance' && <Appearance />}
+            {activeTab === 'notifications' && <Notifications />}
           </SettingsView>
         </SettingsMain>
       </SettingsInner>
-    </SettingsWrap>
+    </Modal>
   );
 };
 
-const SettingsWrap = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  z-index: 999998;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 0;
-  top: 0;
-`;
 const SettingsInner = styled.div`
   width: 900px;
-  height: 600px;
   max-width: 100%;
-  max-height: 100%;
-  background-color: ${(props) => props.theme.colors.primary};
-  border: 1px solid ${(props) => props.theme.colors.border_color1};
-  border-radius: ${(props) => props.theme.reset.border_radius};
+  max-height: 600px;
   display: flex;
-  box-shadow: ${(props) => props.theme.colors.shadow1};
-  position: relative;
+  overflow: hidden;
+  max-height: 80vh;
+  height: 600px;
 `;
 const SettingsSide = styled.div`
   width: 200px;
-  height: 100%;
   background-color: ${(props) => props.theme.colors.secondary};
   border-right: 1px solid ${(props) => props.theme.colors.border_color1};
   padding: 10px 0;
+  overflow-y: auto;
 
   .tabList {
     display: flex;
@@ -104,7 +99,7 @@ const SettingsSide = styled.div`
     justify-content: center;
     align-items: center;
     svg {
-      width: 20px;
+      width: 18px;
       fill: ${(props) => props.theme.colors.text_color2};
     }
   }
@@ -117,11 +112,16 @@ const SettingsSide = styled.div`
 `;
 const SettingsMain = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const SettingsView = styled.div`
   padding: 20px;
   overflow-y: auto;
+  position: relative;
+  flex: 1;
+  height: 100%;
 `;
 
 const SettingsNav = styled.div`
@@ -132,23 +132,6 @@ const SettingsNav = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-
-  .close {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    svg {
-      fill: ${(props) => props.theme.colors.text_color_default};
-      width: 20px;
-    }
-  }
-`;
-
-const Overlay = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export default Settings;
