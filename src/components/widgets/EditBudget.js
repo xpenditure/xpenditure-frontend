@@ -37,7 +37,6 @@ const EditBudget = () => {
     const payload = {
       budgetId: budget._id,
       budgetName,
-      budgetTotal,
       budgetSummary,
       budgetLabels,
     };
@@ -67,8 +66,6 @@ const EditBudget = () => {
     }
   };
 
-  const populateFields = () => {};
-
   return (
     <Modal visible={true} close={close}>
       <AddWrap width="600">
@@ -89,9 +86,11 @@ const EditBudget = () => {
               <InputWrap>
                 <label>Budget total</label>
                 <input
+                  className="btn-disabled"
                   value={budgetTotal}
                   onChange={(e) => setBudgetTotal(e.target.value)}
                 />
+                <p>You cannot edit this field.</p>
               </InputWrap>
               <InputWrap>
                 <label>Budget summary</label>

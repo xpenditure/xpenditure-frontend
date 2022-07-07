@@ -6,6 +6,17 @@ import styled from 'styled-components';
 const BudgetCard = ({ budget }) => {
   const { layout } = useSelector((state) => state.action);
 
+  const balanace = () => {
+    let funds = budget?.funds;
+    let expenses = budget?.expenses;
+
+    return (
+      funds.reduce((a, b) => a + b.total, 0) +
+      budget.total -
+      expenses.reduce((a, b) => a + b.total, 0)
+    );
+  };
+
   return (
     <BudgetCardWrap layout={layout}>
       <CardInfo>
@@ -14,8 +25,8 @@ const BudgetCard = ({ budget }) => {
         </Link>
 
         <div className="budget-total">
-          <span className="cur">&#x20A6;</span>
-          {budget.total.toLocaleString()}
+          <span className="cur">$</span>
+          {balanace().toLocaleString()}
         </div>
       </CardInfo>
       <CardLabels>

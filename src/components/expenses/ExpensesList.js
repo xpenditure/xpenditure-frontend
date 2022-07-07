@@ -5,7 +5,9 @@ const ExpensesList = ({ expenses }) => {
     <div>
       {expenses &&
         expenses.map((item) => (
-          <div key={item._id}>{item?.name || 'Default name'}</div>
+          <div key={item._id}>
+            {item.name} - ${item.total.toLocaleString()}
+          </div>
         ))}
     </div>
   );

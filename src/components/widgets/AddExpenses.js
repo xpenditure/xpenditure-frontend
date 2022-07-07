@@ -11,7 +11,7 @@ import Modal from '../modal/Modal';
 import Close from '../excerpt/Close';
 import { SocketContext } from '../../context/socket';
 
-const AddExpenses = ({ close }) => {
+const AddExpenses = ({ close, budgetId }) => {
   const [name, setName] = useState('');
   const [total, setTotal] = useState('');
   const [narration, setNarration] = useState('');
@@ -25,9 +25,13 @@ const AddExpenses = ({ close }) => {
       name,
       total,
       narration,
+      budgetId,
     };
 
-    console.log(payload);
+    if (name != '' && total !== '') {
+      socket.emit('createExpenses', payload);
+    }
+    close();
   };
 
   return (

@@ -110,6 +110,7 @@ const BudgetDataWrap = styled.div`
   width: 700px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 `;
 const BalSect = styled.div`
   display: flex;
