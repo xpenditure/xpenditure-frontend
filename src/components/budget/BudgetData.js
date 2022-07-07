@@ -120,7 +120,7 @@ const SpendSect = styled.div`
   display: flex;
   justify-content: space-between;
   color: ${(props) => props.theme.colors.text_color2};
-  background-color: ${(props) => props.theme.colors.card_color1};
+  background-color: ${(props) => props.theme.colors.secondary};
 
   .spend-info {
     display: flex;
