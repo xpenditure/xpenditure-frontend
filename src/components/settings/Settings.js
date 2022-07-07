@@ -64,17 +64,19 @@ const Settings = () => {
 
 const SettingsInner = styled.div`
   width: 900px;
-  height: 600px;
   max-width: 100%;
   max-height: 600px;
   display: flex;
+  overflow: hidden;
+  max-height: 80vh;
+  height: 600px;
 `;
 const SettingsSide = styled.div`
   width: 200px;
-  height: 100%;
   background-color: ${(props) => props.theme.colors.secondary};
   border-right: 1px solid ${(props) => props.theme.colors.border_color1};
   padding: 10px 0;
+  overflow-y: auto;
 
   .tabList {
     display: flex;
@@ -119,6 +121,7 @@ const SettingsView = styled.div`
   overflow-y: auto;
   position: relative;
   flex: 1;
+  height: 100%;
 `;
 
 const SettingsNav = styled.div`

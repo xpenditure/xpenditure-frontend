@@ -23,7 +23,7 @@ const LabelList = ({ active }) => {
           key={label._id}
         >
           <TabItem>
-            <TabIcon>
+            <TabIcon className="active-icon">
               <TagIcon />
             </TabIcon>
             <TabName>{label.name}</TabName>

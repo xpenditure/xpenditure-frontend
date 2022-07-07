@@ -25,7 +25,7 @@ const NavTab = () => {
         }
       >
         <TabItem>
-          <TabIcon>
+          <TabIcon className="active-icon">
             <ControlIcon />
           </TabIcon>
           <TabName>Budgets</TabName>
@@ -39,7 +39,7 @@ const NavTab = () => {
         }
       >
         <TabItem>
-          <TabIcon>
+          <TabIcon className="active-icon">
             <ArchiveIcon />
           </TabIcon>
           <TabName>Archive</TabName>
@@ -54,34 +54,22 @@ const NavTab = () => {
         }
       >
         <TabItem>
-          <TabIcon>
+          <TabIcon className="active-icon">
             <BellIcon />
           </TabIcon>
           <TabName>Notifications</TabName>
         </TabItem>
       </NavLink>
-      <div className="custom" to="#">
+
+      <div className="custom">
         <TabItem onClick={handleToggleLabel}>
-          <OLS>
-            <div className="tabitem">
-              <TabIcon>
-                <LabelIcon />
-              </TabIcon>
-              <TabName>Labels</TabName>
-              <div className="icon">
-                <CaretDownIcon />
-              </div>
-            </div>
-            <Link
-              to="/dashboard/new/label"
-              state={{ background: location }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ButtonPrimary>New</ButtonPrimary>
-            </Link>
-          </OLS>
+          <TabIcon className="active-icon">
+            <LabelIcon />
+          </TabIcon>
+          <TabName>Labels</TabName>
         </TabItem>
       </div>
+
       <LabelList active={label} />
       <NavLink
         end
@@ -92,7 +80,7 @@ const NavTab = () => {
         state={{ background: location }}
       >
         <TabItem>
-          <TabIcon>
+          <TabIcon className="active-icon">
             <GearIcon />
           </TabIcon>
           <TabName>Settings</TabName>

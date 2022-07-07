@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { EllipsisHorizontalIcon, LogoutIcon } from '../icons';
+import { CaretDownIcon, EllipsisHorizontalIcon, LogoutIcon } from '../icons';
 import { useDispatch, useSelector } from 'react-redux';
 import More from './More';
 import { clearTokenFromStorage } from '../../features/userSlice';
+import { Line } from '../../styles/DefaultStyles';
 
 const UserInfo = () => {
   const { user } = useSelector((state) => state.user);
@@ -24,21 +25,20 @@ const UserInfo = () => {
   };
 
   return (
-    <UserInfoWrap>
-      <div className="user-info">
-        <div className="avatar"></div>
-        <div className="details">
-          <div className="name">
-            {user?.firstName} {user?.lastName}
-          </div>
-          <div className="email">{user?.email}</div>
-        </div>
-      </div>
+    <UserInfoWrap onClick={open}>
+      <div className="avatar"></div>
       <ShowMenu>
-        <div className="icon-more" onClick={open}>
-          <EllipsisHorizontalIcon />
+        <div className="icon-more">
+          <CaretDownIcon />
         </div>
-        <More visible={menu} close={close} pos="top">
+        <More visible={menu} close={close}>
+          <div className="details">
+            <div className="name">
+              {user?.firstName} {user?.lastName}
+            </div>
+            <div className="email">{user?.email}</div>
+          </div>
+          <Line />
           <div className="link">
             <p onClick={handleLogout}>
               <i>
@@ -57,24 +57,15 @@ const UserInfoWrap = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: 20px 20px;
-  width: 100%;
-  justify-content: space-between;
+  margin-right: 20px;
+  cursor: pointer;
 
   .avatar {
-    width: 40px !important;
-    height: 40px;
-    width: 18px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.primary};
-    margin-right: 10px;
+    background-color: ${(props) => props.theme.colors.input_color1};
     display: flex;
-  }
-
-  .user-info {
-    display: flex;
-    align-items: center;
-    flex: 1;
   }
 
   .details {
@@ -84,25 +75,20 @@ const UserInfoWrap = styled.div`
     font-size: 14px;
     color: ${(props) => props.theme.colors.text_color2};
     flex: 1;
+    padding: 20px;
   }
 
   .name,
   .email {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 95%;
+    font-weight: 600;
   }
 
   .name {
-    font-weight: 600;
     margin-bottom: 5px;
   }
 
   .email {
     font-size: 12px;
-    font-weight: 600;
   }
 `;
 
@@ -113,14 +99,7 @@ const ShowMenu = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${(props) => props.theme.colors.hover_color1};
-    }
+    margin-left: 5px;
 
     svg {
       width: 18px;

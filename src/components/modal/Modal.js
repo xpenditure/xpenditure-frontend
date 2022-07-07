@@ -20,6 +20,7 @@ const ModalWrap = styled.div`
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   justify-content: center;
   align-items: flex-start;
+  padding: 0 20px 20px 20px;
 `;
 const ModalInner = styled.div`
   margin-top: 60px;

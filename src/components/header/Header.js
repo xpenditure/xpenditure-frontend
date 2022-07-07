@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
-import { EllipsisHorizontalIcon, GridIcon, ListIcon } from '../icons';
+import { EllipsisHorizontalIcon, GridIcon, ListIcon, MenuIcon } from '../icons';
 import MoreSide from '../widgets/MoreSide';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMoreSide, toggleLayout } from '../../features/actionSlice';
+import {
+  toggleMoreSide,
+  toggleLayout,
+  toggleSideNav,
+} from '../../features/actionSlice';
+import UserInfo from '../widgets/UserInfo';
+import { IconLg } from '../../styles/DefaultStyles';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -18,19 +24,27 @@ const Header = () => {
     dispatch(toggleLayout());
   };
 
+  const handleSideNav = () => {
+    dispatch(toggleSideNav());
+  };
+
   return (
     <HeaderWrap>
       <HeaderLeft>
+        <IconLg className="menu" onClick={handleSideNav}>
+          <MenuIcon />
+        </IconLg>
         <SearchInput />
       </HeaderLeft>
       <HeaderRight>
-        <div className="layout-icon" onClick={handleChangeLayout}>
+        <UserInfo />
+        <IconLg onClick={handleChangeLayout}>
           {layout === 'grid' ? <ListIcon /> : <GridIcon />}
-        </div>
+        </IconLg>
         <MoreItem>
-          <div className="ellipsis" onClick={handleShowMoreSide}>
+          <IconLg onClick={handleShowMoreSide}>
             <EllipsisHorizontalIcon />
-          </div>
+          </IconLg>
           <MoreSide />
         </MoreItem>
       </HeaderRight>
@@ -55,6 +69,10 @@ const HeaderWrap = styled.div`
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
+
+  .menu {
+    margin-right: 20px;
+  }
 `;
 
 const HeaderRight = styled.div`
@@ -67,45 +85,11 @@ const HeaderRight = styled.div`
       display: flex;
     }
   }
-
-  .layout-icon {
-    display: flex;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${(props) => props.theme.colors.hover_color1};
-    }
-
-    svg {
-      width: 25px;
-      fill: ${(props) => props.theme.colors.text_color2};
-    }
-  }
 `;
 
 const MoreItem = styled.div`
   position: relative;
-  margin-left: 20px;
-
-  .ellipsis {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${(props) => props.theme.colors.hover_color1};
-    }
-  }
+  margin-left: 10px;
 `;
 
 export default Header;

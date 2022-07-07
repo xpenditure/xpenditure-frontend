@@ -1,18 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import UserInfo from '../widgets/UserInfo';
 import NavTab from './NavTab';
 
 const Sidenav = () => {
+  const { sideNav } = useSelector((state) => state.action);
+
   return (
-    <SidenavWrap>
+    <SidenavWrap active={sideNav}>
       <SidenavInner>
         <SidenavTop>
           <NavTab />
         </SidenavTop>
-        <SidenavBottom>
-          <UserInfo />
-        </SidenavBottom>
+        <SidenavBottom></SidenavBottom>
       </SidenavInner>
     </SidenavWrap>
   );
@@ -21,9 +21,11 @@ const Sidenav = () => {
 const SidenavWrap = styled.div`
   display: flex;
   height: 100vh;
-  width: 300px;
+  width: ${(props) => (props.active ? '300px' : '60px')};
   background-color: ${(props) => props.theme.colors.secondary};
   border-right: 1px solid ${(props) => props.theme.colors.border_color1};
+  overflow: hidden;
+  transition: all 300ms;
 `;
 
 const SidenavInner = styled.div`
