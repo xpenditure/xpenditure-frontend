@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   ButtonPrimary,
+  InputWrap,
   AddWrap,
   AddNav,
   AddMain,
+  ButtonWrap,
 } from '../../styles/DefaultStyles';
 import Modal from '../modal/Modal';
-import styled from 'styled-components';
 import Close from '../excerpt/Close';
+import { SocketContext } from '../../context/socket';
 
-const AddFund = () => {
+const AddFund = ({ close, budgetId }) => {
   const [fund, setFund] = useState('');
+  const socket = useContext(SocketContext);
+
+  const handleFund = (e) => {
+    e.preventDefault();
+    const payload = {
+      total: fund,
+      budgetId,
+    };
+
+    socket.emit('createFund', payload);
+    close();
+  };
 
   return (
-    <Modal>
+    <Modal visible={true} close={close}>
       <AddWrap>
         <AddNav>
           <div>Add fund</div>
-          <Close />
+          <Close close={close} />
         </AddNav>
         <AddMain>
-          <form>
+          <form onSubmit={handleFund}>
             <InputWrap>
               <label>Fund total</label>
               <input value={fund} onChange={(e) => setFund(e.target.value)} />
+              <p>Add funds to budget</p>
             </InputWrap>
+            <ButtonWrap>
+              <ButtonPrimary>Fund</ButtonPrimary>
+            </ButtonWrap>
           </form>
         </AddMain>
       </AddWrap>

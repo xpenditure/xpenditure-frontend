@@ -33,6 +33,7 @@ function App() {
       socket.emit('fetchBudgets');
       socket.on('fetchBudgets', (data) => {
         dispatch(addBudgets(data));
+        console.log(data);
       });
 
       // labels

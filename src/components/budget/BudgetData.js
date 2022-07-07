@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   ChartDownIcon,
@@ -10,72 +10,99 @@ import {
 import More from '../widgets/More';
 import { ButtonPrimary, IconLg } from '../../styles/DefaultStyles';
 import BudgetCardOption from './BudgetCardOption';
+import AddFund from '../widgets/AddFund';
 
-const BudgetData = ({ budget, budgetId }) => {
+const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
+  const [activeFund, setActiveFund] = useState(false);
 
   const close = () => {
     setActiveMore(false);
   };
 
+  const showAddFund = () => {
+    setActiveFund(true);
+  };
+
+  const closeAddFund = () => {
+    setActiveFund(false);
+  };
+
+  const balance = () => {
+    return parseFloat(totalEarnings()) - parseFloat(totalExpenses());
+  };
+
+  const totalEarnings = () => {
+    return funds?.reduce((a, b) => a + b.total, 0) + budget.total;
+  };
+
+  const totalExpenses = () => {
+    return expenses?.reduce((a, b) => a + b.total, 0) || 0;
+  };
+
   return (
-    <BudgetDataWrap>
-      <BalSect>
-        <div className="bal">
-          <p>Your balance</p>
-          <div className="bal-text">
-            <span>$</span>
-            {budget?.total?.toLocaleString()}
+    <>
+      <BudgetDataWrap>
+        <BalSect>
+          <div className="bal">
+            <p>Your balance</p>
+            <div className="bal-text">
+              <span>$</span>
+              {balance().toLocaleString()}
+            </div>
           </div>
-        </div>
-        <div className="bal-action">
-          <ButtonPrimary>Add funds</ButtonPrimary>
-          <div className="menu">
-            <IconLg className="ellipsis" onClick={() => setActiveMore(true)}>
-              <EllipsisHorizontalIcon />
-            </IconLg>
-            {activeMore && (
-              <BudgetCardOption
-                close={close}
-                labels={budget.labels}
-                budgetId={budgetId}
-                budget={budget}
-              />
-            )}
+          <div className="bal-action">
+            <ButtonPrimary onClick={showAddFund}>Add funds</ButtonPrimary>
+            <div className="menu">
+              <IconLg className="ellipsis" onClick={() => setActiveMore(true)}>
+                <EllipsisHorizontalIcon />
+              </IconLg>
+              {activeMore && (
+                <BudgetCardOption
+                  close={close}
+                  labels={budget.labels}
+                  budgetId={budgetId}
+                  budget={budget}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </BalSect>
-      <SpendSect>
-        <div className="spend-info">
-          <div className="spend-icon">
-            <ChartUpIcon />
+        </BalSect>
+        <SpendSect>
+          <div className="spend-info">
+            <div className="spend-icon">
+              <ChartUpIcon />
+            </div>
+            <div className="spend-text">
+              <p className="spend-name">Total earnings</p>
+              <p>${totalEarnings().toLocaleString()}</p>
+            </div>
           </div>
-          <div className="spend-text">
-            <p className="spend-name">Total earnings</p>
-            <p>$20,894.30</p>
+          <div className="spend-info">
+            <div className="spend-icon">
+              <ChartDownIcon />
+            </div>
+            <div className="spend-text">
+              <p className="spend-name">Total expenses</p>
+              <span>$</span>
+              {totalExpenses() === 0
+                ? '0.00'
+                : totalExpenses().toLocaleString()}
+            </div>
           </div>
-        </div>
-        <div className="spend-info">
-          <div className="spend-icon">
-            <ChartDownIcon />
+          <div className="spend-info">
+            <div className="spend-icon">
+              <ShoppingBagIcon />
+            </div>
+            <div className="spend-text">
+              <p className="spend-name">Budget goal</p>
+              <p>$0.00</p>
+            </div>
           </div>
-          <div className="spend-text">
-            <p className="spend-name">Total spendings</p>
-            <span>$</span>
-            32,000,000
-          </div>
-        </div>
-        <div className="spend-info">
-          <div className="spend-icon">
-            <ShoppingBagIcon />
-          </div>
-          <div className="spend-text">
-            <p className="spend-name">Spending goal</p>
-            <p>$20,894.30</p>
-          </div>
-        </div>
-      </SpendSect>
-    </BudgetDataWrap>
+        </SpendSect>
+      </BudgetDataWrap>
+      {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
+    </>
   );
 };
 

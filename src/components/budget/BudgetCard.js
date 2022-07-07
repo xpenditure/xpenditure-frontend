@@ -1,26 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { setBudgetId } from '../../features/budgetSlice';
-import { EllipsisHorizontalIcon } from '../icons';
-import BudgetCardOption from './BudgetCardOption';
 
 const BudgetCard = ({ budget }) => {
-  const dispatch = useDispatch();
   const { layout } = useSelector((state) => state.action);
-  const [id, setId] = useState('');
-
-  const handleMoreClick = (e, id) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setId(id);
-    dispatch(setBudgetId(id));
-  };
-
-  const handleCloseMore = () => {
-    setId('');
-  };
 
   return (
     <BudgetCardWrap layout={layout}>
@@ -55,7 +39,6 @@ const BudgetCard = ({ budget }) => {
 };
 
 const BudgetCardWrap = styled.div`
-  /* background-color: ${(props) => props.theme.colors.card_color1}; */
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: 5px;
   margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};

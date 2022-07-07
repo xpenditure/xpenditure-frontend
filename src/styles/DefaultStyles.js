@@ -52,7 +52,7 @@ export const InputWrap = styled.div`
   }
 
   textarea {
-    min-height: 100px;
+    min-height: 70px;
     max-height: 200px;
     resize: vertical;
   }
