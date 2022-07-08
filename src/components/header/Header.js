@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../search/SearchInput';
 import { EllipsisHorizontalIcon, GridIcon, ListIcon, MenuIcon } from '../icons';
@@ -11,6 +11,7 @@ import {
 } from '../../features/actionSlice';
 import UserInfo from '../widgets/UserInfo';
 import { IconLg } from '../../styles/DefaultStyles';
+import CreateBtn from './CreateBtn';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const Header = () => {
         <SearchInput />
       </HeaderLeft>
       <HeaderRight>
+        <CreateBtn />
         <UserInfo />
         <IconLg onClick={handleChangeLayout}>
           {layout === 'grid' ? <ListIcon /> : <GridIcon />}
