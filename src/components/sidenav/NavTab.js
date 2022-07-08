@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { NavLink, useLocation, Link } from 'react-router-dom';
-import { TabList, TabIcon, TabItem, TabName, OLS } from './styled';
-import { BellIcon, CaretDownIcon, GearIcon, PlusIcon } from '../icons';
+import { NavLink, useLocation } from 'react-router-dom';
+import { TabList, TabIcon, TabItem, TabName } from './styled';
+import { BellIcon, GearIcon } from '../icons';
 import { ArchiveIcon, ControlIcon, LabelIcon } from '../icons';
 import LabelList from './LabelList';
-import { ButtonPrimary } from '../../styles/DefaultStyles';
 
-const NavTab = () => {
+const NavTab = ({ active }) => {
   const location = useLocation();
 
   const [label, setLabel] = useState(false);
@@ -16,7 +15,7 @@ const NavTab = () => {
   };
 
   return (
-    <TabList>
+    <TabList active={active}>
       <NavLink
         to="/dashboard"
         end

@@ -139,6 +139,12 @@ const userSlice = createSlice({
     setUserData(state, action) {
       state.user = action.payload;
     },
+    setColor(state, action) {
+      state.user.color = action.payload;
+    },
+    setBackground(state, action) {
+      state.user.background = action.payload;
+    },
   },
   extraReducers: {
     [loginUserAsync.pending]: (state) => {
@@ -205,6 +211,11 @@ const userSlice = createSlice({
   },
 });
 
-export const { getTokenFromStorage, clearTokenFromStorage, setUserData } =
-  userSlice.actions;
+export const {
+  getTokenFromStorage,
+  clearTokenFromStorage,
+  setUserData,
+  setColor,
+  setBackground,
+} = userSlice.actions;
 export default userSlice.reducer;

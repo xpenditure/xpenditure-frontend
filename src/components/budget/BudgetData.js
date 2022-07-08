@@ -5,9 +5,7 @@ import {
   ChartUpIcon,
   EllipsisHorizontalIcon,
   ShoppingBagIcon,
-  TrashIcon,
 } from '../icons';
-import More from '../widgets/More';
 import { ButtonPrimary, IconLg } from '../../styles/DefaultStyles';
 import BudgetCardOption from './BudgetCardOption';
 import AddFund from '../widgets/AddFund';
@@ -100,6 +98,27 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
             </div>
           </div>
         </SpendSect>
+        <Summary>
+          <div className="style-box"></div>
+          {budget?.summary && (
+            <div className="summary box">
+              <p className="title">Summary:</p>
+              <p>{budget?.summary}</p>
+            </div>
+          )}
+          {budget?.labels && (
+            <div className="labels box">
+              <p className="title">Labels:</p>
+              <div className="labels">
+                {budget?.labels.map((label) => (
+                  <div key={label._id} className="label">
+                    {label.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </Summary>
       </BudgetDataWrap>
       {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
     </>
@@ -149,6 +168,7 @@ const SpendSect = styled.div`
   justify-content: space-between;
   color: ${(props) => props.theme.colors.text_color2};
   background-color: ${(props) => props.theme.colors.secondary};
+  margin-bottom: 10px;
 
   .spend-info {
     display: flex;
@@ -178,6 +198,61 @@ const SpendSect = styled.div`
     font-size: 14px;
     margin-bottom: 5px;
     color: darkgray;
+  }
+`;
+
+const Summary = styled.div`
+  width: 100%;
+  border: 1px solid ${(props) => props.theme.colors.border_color1};
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  /* z-index: 10; */
+  background-color: ${(props) => props.theme.colors.primary};
+
+  .style-box {
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    border: 1px solid inherit;
+    position: absolute;
+    border-radius: 10px;
+    border-top: none;
+  }
+
+  .summary {
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: darkgray;
+  }
+
+  p {
+    font-size: 14px;
+    color: ${(props) => props.theme.colors.text_color2};
+  }
+
+  .labels {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: ellipsis;
+    white-space: wrap;
+    width: 100%;
+
+    .label {
+      text-decoration: none;
+      font-size: 10px;
+      color: ${(props) => props.theme.colors.text_color2};
+      margin-right: 3px;
+      border: 1px solid ${(props) => props.theme.colors.border_color1};
+      padding: 3px 8px;
+      border-radius: 20px;
+      background-color: ${(props) => props.theme.colors.secondary};
+    }
   }
 `;
 

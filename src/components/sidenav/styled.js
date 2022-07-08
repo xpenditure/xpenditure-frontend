@@ -4,20 +4,23 @@ export const TabList = styled.div`
   display: flex;
   flex-direction: column;
 
-  .activated {
+  a.activated {
     position: relative;
+    background-color: ${(props) =>
+      props.active ? props.theme.colors.hover_color1 : ''};
 
     ::after {
       content: '';
       position: absolute;
       width: 4px;
-      height: 70%;
+      height: 60%;
       background-color: ${(props) => props.theme.colors.btn_color_primary};
       border-radius: 40px;
     }
 
     .active-icon {
-      background-color: ${(props) => props.theme.colors.hover_color1};
+      background-color: ${(props) =>
+        !props.active ? props.theme.colors.hover_color1 : ''};
     }
   }
 

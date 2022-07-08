@@ -10,6 +10,10 @@ import {
 import Modal from '../modal/Modal';
 import Close from '../excerpt/Close';
 import { SocketContext } from '../../context/socket';
+import {
+  numberWithCommas,
+  onlyNumber,
+} from '../../validations/inputValidation';
 
 const AddExpenses = ({ close, budgetId }) => {
   const [name, setName] = useState('');
@@ -49,7 +53,10 @@ const AddExpenses = ({ close, budgetId }) => {
             </InputWrap>
             <InputWrap>
               <label>Total</label>
-              <input value={total} onChange={(e) => setTotal(e.target.value)} />
+              <input
+                value={numberWithCommas(total)}
+                onChange={(e) => setTotal(onlyNumber(e.target.value))}
+              />
             </InputWrap>
             <InputWrap>
               <label>Narration</label>

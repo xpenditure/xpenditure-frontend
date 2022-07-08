@@ -10,7 +10,7 @@ const Sidenav = () => {
     <SidenavWrap active={sideNav}>
       <SidenavInner>
         <SidenavTop>
-          <NavTab />
+          <NavTab active={sideNav} />
         </SidenavTop>
         <SidenavBottom></SidenavBottom>
       </SidenavInner>

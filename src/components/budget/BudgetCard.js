@@ -17,6 +17,10 @@ const BudgetCard = ({ budget }) => {
     );
   };
 
+  const checkLayout = () => {
+    return layout === 'grid' ? budget.labels.slice(0, 3) : budget.labels;
+  };
+
   return (
     <BudgetCardWrap layout={layout}>
       <CardInfo>
@@ -30,7 +34,7 @@ const BudgetCard = ({ budget }) => {
         </div>
       </CardInfo>
       <CardLabels>
-        {budget.labels.slice(0, 3).map((label) => (
+        {checkLayout().map((label) => (
           <Link
             to={`/dashboard/labels/${label._id}`}
             className="label"
@@ -39,7 +43,7 @@ const BudgetCard = ({ budget }) => {
             {label.name}
           </Link>
         ))}
-        {budget.labels.length > 3 ? (
+        {layout === 'grid' && budget.labels.length > 3 ? (
           <div className="label num">+{budget.labels.length - 3}</div>
         ) : (
           ''

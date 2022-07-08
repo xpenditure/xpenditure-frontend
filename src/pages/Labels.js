@@ -7,6 +7,7 @@ import { EditIcon, TrashIcon } from '../components/icons';
 import styled from 'styled-components';
 import { setLabel } from '../features/budgetSlice';
 import { toggleDelLabelModal } from '../features/actionSlice';
+import DeleteLabel from '../components/widgets/DeleteLabel';
 
 const Labels = () => {
   const { labelId } = useParams();
@@ -43,27 +44,30 @@ const Labels = () => {
   };
 
   return (
-    <LabelsWrap>
-      <div className="header">
-        <div className="left">
-          <h2>{label?.name}</h2>
-        </div>
-        <div className="right">
-          <Link
-            to={`/dashboard/edit/labels/${labelId}`}
-            state={{ background: location }}
-          >
-            <IconLg>
-              <EditIcon />
+    <>
+      <LabelsWrap>
+        <div className="header">
+          <div className="left">
+            <h2>{label?.name}</h2>
+          </div>
+          <div className="right">
+            <Link
+              to={`/dashboard/edit/labels/${labelId}`}
+              state={{ background: location }}
+            >
+              <IconLg>
+                <EditIcon />
+              </IconLg>
+            </Link>
+            <IconLg onClick={handleShowDel}>
+              <TrashIcon />
             </IconLg>
-          </Link>
-          <IconLg onClick={handleShowDel}>
-            <TrashIcon />
-          </IconLg>
+          </div>
         </div>
-      </div>
-      <BudgetList budgets={filteredBudgets} />
-    </LabelsWrap>
+        <BudgetList budgets={filteredBudgets} />
+      </LabelsWrap>
+      <DeleteLabel />
+    </>
   );
 };
 

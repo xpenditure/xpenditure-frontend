@@ -10,17 +10,16 @@ import {
 import Close from '../excerpt/Close';
 import Modal from '../modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  toggleDelBudgetModal,
-  toggleDelLabelModal,
-} from '../../features/actionSlice';
+import { toggleDelBudgetModal } from '../../features/actionSlice';
 import { SocketContext } from '../../context/socket';
+import { useNavigate } from 'react-router-dom';
 
 const DeleteBudget = () => {
   const [budgetName, setBudgetName] = useState('');
   const { budget } = useSelector((state) => state.budget);
   const { delBudgetModal } = useSelector((state) => state.action);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const socket = useContext(SocketContext);
 
   const close = () => {
@@ -32,6 +31,7 @@ const DeleteBudget = () => {
     e.preventDefault();
     socket.emit('deleteBudget', budget._id);
     close();
+    navigate('/dashboard');
   };
 
   return (

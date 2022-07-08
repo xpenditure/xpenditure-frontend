@@ -19,10 +19,8 @@ import {
 } from '../../features/budgetSlice';
 import { SocketContext } from '../../context/socket';
 
-const AddLabel = () => {
-  const { labels, budgetLabels, budgetId } = useSelector(
-    (state) => state.budget
-  );
+const AddLabel = ({ budgetId }) => {
+  const { labels, budgetLabels } = useSelector((state) => state.budget);
   const { addLabelModal } = useSelector((state) => state.action);
   const dispatch = useDispatch();
   const socket = useContext(SocketContext);

@@ -7,12 +7,15 @@ import ExpensesHeader from '../components/expenses/ExpensesHeader';
 import ExpensesList from '../components/expenses/ExpensesList';
 import FundList from '../components/expenses/FundList';
 import { EditIcon } from '../components/icons';
-import { IconSm, Line } from '../styles/DefaultStyles';
+import { Line } from '../styles/DefaultStyles';
+import AddLabel from '../components/widgets/AddLabel';
+import DeleteBudget from '../components/widgets/DeleteBudget';
+import Empty from '../components/excerpt/Empty';
 
 const OneBudget = () => {
   const { budgetId } = useParams();
   const { budgets } = useSelector((state) => state.budget);
-  const [budget, setBudget] = useState({});
+  const [budget, setBudget] = useState(null);
   const [funds, setFunds] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [activeTab, setActiveTab] = useState('expenses');
@@ -31,47 +34,58 @@ const OneBudget = () => {
   }, [budgetId, budgets]);
 
   return (
-    <OneBudgetWrap>
-      <BudgetName>{budget.name}</BudgetName>
-      <OneBudgetInner>
-        <BudgetData
-          budget={budget}
-          budgetId={budgetId}
-          funds={funds}
-          expenses={expenses}
-        />
-      </OneBudgetInner>
-      <ExpensesHeader budgetId={budgetId} />
-      <TransactionTabs>
-        <div
-          className={activeTab === 'expenses' ? 'active tab' : 'tab'}
-          onClick={() => setActiveTab('expenses')}
-        >
-          <i>
-            <EditIcon />
-          </i>
-          Expenses
-        </div>
-        <div
-          className={activeTab === 'funds' ? 'active tab' : 'tab'}
-          onClick={() => setActiveTab('funds')}
-        >
-          <i>
-            <EditIcon />
-          </i>
-          Funds
-        </div>
-      </TransactionTabs>
-      <Line />
-      <Transactions>
-        {activeTab === 'expenses' && <ExpensesList expenses={expenses} />}
-        {activeTab === 'funds' && <FundList funds={funds} />}
-      </Transactions>
-    </OneBudgetWrap>
+    <>
+      {budget && (
+        <>
+          <OneBudgetWrap>
+            <BudgetName>{budget.name}</BudgetName>
+            <OneBudgetInner>
+              <BudgetData
+                budget={budget}
+                budgetId={budgetId}
+                funds={funds}
+                expenses={expenses}
+              />
+            </OneBudgetInner>
+            <ExpensesHeader budgetId={budgetId} />
+            <TransactionTabs>
+              <div
+                className={activeTab === 'expenses' ? 'active tab' : 'tab'}
+                onClick={() => setActiveTab('expenses')}
+              >
+                <i>
+                  <EditIcon />
+                </i>
+                Expenses
+              </div>
+              <div
+                className={activeTab === 'funds' ? 'active tab' : 'tab'}
+                onClick={() => setActiveTab('funds')}
+              >
+                <i>
+                  <EditIcon />
+                </i>
+                Funds
+              </div>
+            </TransactionTabs>
+            <Line />
+            <Transactions>
+              {activeTab === 'expenses' && <ExpensesList expenses={expenses} />}
+              {activeTab === 'funds' && <FundList funds={funds} />}
+            </Transactions>
+          </OneBudgetWrap>
+          <AddLabel budgetId={budgetId} />
+          <DeleteBudget budgetId={budgetId} />
+        </>
+      )}
+      {!budget && <Empty />}
+    </>
   );
 };
 
-const OneBudgetWrap = styled.div``;
+const OneBudgetWrap = styled.div`
+  margin-bottom: 100px;
+`;
 const OneBudgetInner = styled.div`
   display: flex;
   flex-direction: column;
@@ -114,6 +128,7 @@ const TransactionTabs = styled.div`
     cursor: pointer;
     position: relative;
     transition: all 300ms;
+    font-size: 14px;
 
     :hover {
       background-color: ${(props) => props.theme.colors.hover_color1};

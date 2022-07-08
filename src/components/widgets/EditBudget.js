@@ -19,6 +19,10 @@ import {
   clearActiveBudgetData,
   setBudgetLabels,
 } from '../../features/budgetSlice';
+import {
+  numberWithCommas,
+  onlyNumber,
+} from '../../validations/inputValidation';
 
 const EditBudget = () => {
   const { labels, budgetLabels, budget } = useSelector((state) => state.budget);
@@ -87,8 +91,8 @@ const EditBudget = () => {
                 <label>Budget total</label>
                 <input
                   className="btn-disabled"
-                  value={budgetTotal}
-                  onChange={(e) => setBudgetTotal(e.target.value)}
+                  value={numberWithCommas(budgetTotal)}
+                  onChange={(e) => setBudgetTotal(onlyNumber(e.target.value))}
                 />
                 <p>You cannot edit this field.</p>
               </InputWrap>

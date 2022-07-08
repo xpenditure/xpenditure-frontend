@@ -122,6 +122,20 @@ export const Button = styled.button`
   width: ${(props) => (props.fill ? '100%' : 'auto')};
   background-color: ${(props) => props.theme.colors.btn_color_default};
   transition: all 300ms;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 20px;
+      fill: ${(props) => props.theme.colors.btn_text_color};
+    }
+  }
 `;
 
 export const ButtonPrimary = styled(Button)`

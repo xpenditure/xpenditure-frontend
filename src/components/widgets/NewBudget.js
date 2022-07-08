@@ -15,6 +15,10 @@ import {
 import Close from '../excerpt/Close';
 import { SocketContext } from '../../context/socket';
 import { useSelector } from 'react-redux';
+import {
+  numberWithCommas,
+  onlyNumber,
+} from '../../validations/inputValidation';
 
 const NewBudget = () => {
   const [budgetName, setBudgetName] = useState('');
@@ -82,8 +86,9 @@ const NewBudget = () => {
               <InputWrap>
                 <label>Budget total</label>
                 <input
-                  value={budgetTotal}
-                  onChange={(e) => setBudgetTotal(e.target.value)}
+                  value={numberWithCommas(budgetTotal)}
+                  onChange={(e) => setBudgetTotal(onlyNumber(e.target.value))}
+                  onInput={(e) => onlyNumber(e.target.value)}
                 />
               </InputWrap>
               <InputWrap>

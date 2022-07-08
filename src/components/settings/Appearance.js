@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CheckedIcon } from '../icons';
 import { SocketContext } from '../../context/socket';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserData } from '../../features/userSlice';
+import { setBackground, setColor, setUserData } from '../../features/userSlice';
 import { setToLS } from '../../utils/storage';
 
 const Appearance = () => {
@@ -40,11 +40,13 @@ const Appearance = () => {
   const handleColor = (color) => {
     socket.emit('userColor', color);
     setToLS('accent-color', color);
+    dispatch(setColor(color));
   };
 
   const handleBackground = (background) => {
     socket.emit('userBackground', background);
     setToLS('accent-bg', background);
+    dispatch(setBackground(background));
   };
 
   return (

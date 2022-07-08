@@ -89,7 +89,9 @@ const Account = () => {
           </form>
         </FormWrap>
       </AccountLeft>
-      <AccountRight></AccountRight>
+      <AccountRight>
+        <div className="profile-img"></div>
+      </AccountRight>
     </AccountWrap>
   );
 };
@@ -101,6 +103,15 @@ const AccountWrap = styled.div`
 const AccountLeft = styled.div`
   width: 60%;
 `;
-const AccountRight = styled.div``;
+const AccountRight = styled.div`
+  margin-left: 50px;
+  .profile-img {
+    margin-top: 50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.colors.input_color1};
+  }
+`;
 
 export default Account;

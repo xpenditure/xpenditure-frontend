@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { ButtonPrimary } from '../../styles/DefaultStyles';
+import { Button, ButtonPrimary } from '../../styles/DefaultStyles';
 import AddExpenses from '../widgets/AddExpenses';
 import styled from 'styled-components';
+import { CaretDownIcon } from '../icons';
 
 const ExpensesHeader = ({ budgetId }) => {
   const [active, setActive] = useState(false);
@@ -17,6 +18,12 @@ const ExpensesHeader = ({ budgetId }) => {
         <Inner>
           <div className="ehleft"></div>
           <div className="ehright">
+            <Button>
+              Sort{' '}
+              <div className="icon">
+                <CaretDownIcon />
+              </div>
+            </Button>
             <ButtonPrimary onClick={() => setActive(true)}>
               New expenses
             </ButtonPrimary>
@@ -38,6 +45,16 @@ const ExpensesHeaderWrap = styled.div`
 const Inner = styled.div`
   display: flex;
   justify-content: space-between;
+
+  .ehleft,
+  .ehright {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 10px;
+    }
+  }
 `;
 
 export default ExpensesHeader;
