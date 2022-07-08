@@ -9,6 +9,7 @@ import {
 import { ButtonPrimary, IconLg } from '../../styles/DefaultStyles';
 import BudgetCardOption from './BudgetCardOption';
 import AddFund from '../widgets/AddFund';
+import { IoAddOutline } from 'react-icons/io5';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
@@ -41,84 +42,94 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   return (
     <>
       <BudgetDataWrap>
-        <BalSect>
-          <div className="bal">
-            <p>Your balance</p>
-            <div className="bal-text">
-              <span>$</span>
-              {balance().toLocaleString()}
-            </div>
-          </div>
-          <div className="bal-action">
-            <ButtonPrimary onClick={showAddFund}>Add funds</ButtonPrimary>
-            <div className="menu">
-              <IconLg className="ellipsis" onClick={() => setActiveMore(true)}>
-                <EllipsisHorizontalIcon />
-              </IconLg>
-              {activeMore && (
-                <BudgetCardOption
-                  close={close}
-                  labels={budget.labels}
-                  budgetId={budgetId}
-                  budget={budget}
-                />
-              )}
-            </div>
-          </div>
-        </BalSect>
-        <SpendSect>
-          <div className="spend-info">
-            <div className="spend-icon">
-              <ChartUpIcon />
-            </div>
-            <div className="spend-text">
-              <p className="spend-name">Total earnings</p>
-              <p>${totalEarnings().toLocaleString()}</p>
-            </div>
-          </div>
-          <div className="spend-info">
-            <div className="spend-icon">
-              <ChartDownIcon />
-            </div>
-            <div className="spend-text">
-              <p className="spend-name">Total expenses</p>
-              <span>$</span>
-              {totalExpenses() === 0
-                ? '0.00'
-                : totalExpenses().toLocaleString()}
-            </div>
-          </div>
-          <div className="spend-info">
-            <div className="spend-icon">
-              <ShoppingBagIcon />
-            </div>
-            <div className="spend-text">
-              <p className="spend-name">Budget goal</p>
-              <p>$0.00</p>
-            </div>
-          </div>
-        </SpendSect>
-        <Summary>
-          <div className="style-box"></div>
-          {budget?.summary && (
-            <div className="summary box">
-              <p className="title">Summary:</p>
-              <p>{budget?.summary}</p>
-            </div>
-          )}
-          {budget?.labels && (
-            <div className="labels box">
-              <p className="title">Labels:</p>
-              <div className="labels">
-                {budget?.labels.map((label) => (
-                  <div key={label._id} className="label">
-                    {label.name}
-                  </div>
-                ))}
+        <div className="left">
+          <BalSect>
+            <div className="bal">
+              <p>Your balance</p>
+              <div className="bal-text">
+                <span>$</span>
+                {balance().toLocaleString()}
               </div>
             </div>
-          )}
-        </Summary>
+            <div className="bal-action">
+              <ButtonPrimary onClick={showAddFund}>Add funds</ButtonPrimary>
+              <div className="menu">
+                <IconLg
+                  className="ellipsis"
+                  onClick={() => setActiveMore(true)}
+                >
+                  <EllipsisHorizontalIcon />
+                </IconLg>
+                {activeMore && (
+                  <BudgetCardOption
+                    close={close}
+                    labels={budget.labels}
+                    budgetId={budgetId}
+                    budget={budget}
+                  />
+                )}
+              </div>
+            </div>
+          </BalSect>
+          <SpendSect>
+            <div className="goal" title="Add Goal">
+              <IoAddOutline />
+            </div>
+            <div className="spend-info">
+              <div className="spend-icon">
+                <ChartUpIcon />
+              </div>
+              <div className="spend-text">
+                <p className="spend-name">Total earnings</p>
+                <p>${totalEarnings().toLocaleString()}</p>
+              </div>
+            </div>
+            <div className="spend-info">
+              <div className="spend-icon">
+                <ChartDownIcon />
+              </div>
+              <div className="spend-text">
+                <p className="spend-name">Total expenses</p>
+                <span>$</span>
+                {totalExpenses() === 0
+                  ? '0.00'
+                  : totalExpenses().toLocaleString()}
+              </div>
+            </div>
+            <div className="spend-info">
+              <div className="spend-icon">
+                <ShoppingBagIcon />
+              </div>
+              <div className="spend-text">
+                <p className="spend-name">Budget goal</p>
+                <p>$0.00</p>
+              </div>
+            </div>
+          </SpendSect>
+        </div>
+        <div className="right">
+          <Summary>
+            <div className="style-box"></div>
+            {budget?.summary && (
+              <div className="summary box">
+                <p className="title">Summary:</p>
+                <p>{budget?.summary}</p>
+              </div>
+            )}
+            {budget?.labels && (
+              <div className="labels box">
+                <p className="title">Labels:</p>
+                <div className="labels">
+                  {budget?.labels.map((label) => (
+                    <div key={label._id} className="label">
+                      {label.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </Summary>
+        </div>
       </BudgetDataWrap>
       {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
     </>
@@ -126,13 +137,22 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
 };
 
 const BudgetDataWrap = styled.div`
-  width: 700px;
   display: flex;
-  flex-direction: column;
   margin-bottom: 50px;
+  width: 100%;
+  justify-content: space-between;
+
+  .left {
+    width: 60%;
+  }
+
+  .right {
+    width: 35%;
+  }
 `;
 const BalSect = styled.div`
   display: flex;
+  flex-direction: row;
   margin-bottom: 10px;
   color: ${(props) => props.theme.colors.text_color2};
   align-items: center;
@@ -162,13 +182,14 @@ const BalSect = styled.div`
 const SpendSect = styled.div`
   display: flex;
   border: 1px solid ${(props) => props.theme.colors.border_color1};
-  padding: 30px;
+  padding: 30px 50px;
   border-radius: 20px;
   display: flex;
   justify-content: space-between;
   color: ${(props) => props.theme.colors.text_color2};
   background-color: ${(props) => props.theme.colors.secondary};
   margin-bottom: 10px;
+  position: relative;
 
   .spend-info {
     display: flex;
@@ -192,12 +213,29 @@ const SpendSect = styled.div`
 
   .spend-text {
     margin-left: 20px;
+    font-size: 25px;
   }
 
   .spend-name {
     font-size: 14px;
     margin-bottom: 5px;
     color: darkgray;
+  }
+
+  .goal {
+    position: absolute;
+    right: 50px;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.colors.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    border: 1px solid ${(props) => props.theme.colors.border_color1};
+    cursor: pointer;
   }
 `;
 

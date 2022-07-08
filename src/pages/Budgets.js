@@ -9,12 +9,13 @@ const Budgets = () => {
 
   return (
     <>
-      {budgets.length > 0 && (
+      {budgets !== undefined || budgets.length !== 0 ? (
         <BudgetsWrap>
           <BudgetList budgets={budgets} />
         </BudgetsWrap>
+      ) : (
+        <Empty name="Budget" />
       )}
-      {budgets == [] && <Empty name="budget" />}
     </>
   );
 };

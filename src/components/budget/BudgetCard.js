@@ -73,10 +73,6 @@ const CardInfo = styled.div`
     opacity: 0.5;
   }
 
-  .cur {
-    font-size: 14px;
-  }
-
   a {
     display: inline-flex;
     text-decoration: none;

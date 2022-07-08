@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import BudgetData from '../components/budget/BudgetData';
 import ExpensesHeader from '../components/expenses/ExpensesHeader';
 import ExpensesList from '../components/expenses/ExpensesList';
 import FundList from '../components/expenses/FundList';
-import { EditIcon } from '../components/icons';
 import { Line } from '../styles/DefaultStyles';
 import AddLabel from '../components/widgets/AddLabel';
 import DeleteBudget from '../components/widgets/DeleteBudget';
-import Empty from '../components/excerpt/Empty';
+import { IoCardOutline, IoCashOutline } from 'react-icons/io5';
 
 const OneBudget = () => {
   const { budgetId } = useParams();
@@ -19,6 +18,9 @@ const OneBudget = () => {
   const [funds, setFunds] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [activeTab, setActiveTab] = useState('expenses');
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFunds(budget?.funds);
@@ -29,9 +31,16 @@ const OneBudget = () => {
     budgets.filter((budget) => {
       if (budget._id === budgetId) {
         setBudget(budget);
+        setLoading(false);
       }
     });
   }, [budgetId, budgets]);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [budgets]);
+
+  if (loading) return;
 
   return (
     <>
@@ -54,7 +63,7 @@ const OneBudget = () => {
                 onClick={() => setActiveTab('expenses')}
               >
                 <i>
-                  <EditIcon />
+                  <IoCashOutline />
                 </i>
                 Expenses
               </div>
@@ -63,7 +72,7 @@ const OneBudget = () => {
                 onClick={() => setActiveTab('funds')}
               >
                 <i>
-                  <EditIcon />
+                  <IoCardOutline />
                 </i>
                 Funds
               </div>
@@ -78,7 +87,6 @@ const OneBudget = () => {
           <DeleteBudget budgetId={budgetId} />
         </>
       )}
-      {!budget && <Empty name="budget" />}
     </>
   );
 };
@@ -102,6 +110,7 @@ const Transactions = styled.div`
 const BudgetName = styled.div`
   font-size: 30px;
   color: ${(props) => props.theme.colors.text_color2};
+  margin-bottom: 30px;
 `;
 
 const TransactionTabs = styled.div`
@@ -139,10 +148,7 @@ const TransactionTabs = styled.div`
       justify-content: center;
       align-items: center;
       margin-right: 8px;
-      svg {
-        fill: ${(props) => props.theme.colors.text_color2};
-        width: 20px;
-      }
+      font-size: 22px;
     }
   }
 `;
