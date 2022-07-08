@@ -78,7 +78,7 @@ const OneBudget = () => {
           <DeleteBudget budgetId={budgetId} />
         </>
       )}
-      {!budget && <Empty />}
+      {!budget && <Empty name="budget" />}
     </>
   );
 };

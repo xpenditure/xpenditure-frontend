@@ -1,24 +1,34 @@
 import React from 'react';
-import { ArchiveIcon, ControlIcon, LabelIcon } from '../icons';
 import styled from 'styled-components';
+import { IoCopyOutline } from 'react-icons/io5';
 
-const Empty = ({ emptyType }) => {
-  const emptyJSON = [
-    { type: 'budget', icon: <ControlIcon /> },
-    { type: 'archive', icon: <ArchiveIcon /> },
-    { type: 'label', icon: <LabelIcon /> },
-  ];
+const Empty = ({ name }) => {
+  const whichIcon = () => {
+    if (name.toLowerCase() === 'budget') return <IoCopyOutline />;
+  };
 
   return (
-    <Template>
-      <div>
-        <ControlIcon />
-      </div>
-      <p>Budget is Empty</p>
-    </Template>
+    <EmptyWrap>
+      <div className="icon-empty">{whichIcon()}</div>
+      <p>{name} is Empty</p>
+    </EmptyWrap>
   );
 };
 
-const Template = styled.div``;
+const EmptyWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #888;
+  margin-top: 100px;
+
+  .icon-empty {
+    display: flex;
+    font-size: 200px;
+    opacity: 0.1;
+  }
+`;
 
 export default Empty;
