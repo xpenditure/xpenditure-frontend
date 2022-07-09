@@ -26,7 +26,9 @@ const UserInfo = () => {
 
   return (
     <UserInfoWrap onClick={open}>
-      <div className="avatar"></div>
+      <div className="avatar">
+        {user?.avatar && <img src={user.avatar} alt="Profile Image" />}
+      </div>
       <ShowMenu>
         <div className="icon-more">
           <CaretDownIcon />
@@ -66,6 +68,14 @@ const UserInfoWrap = styled.div`
     border-radius: 50%;
     background-color: ${(props) => props.theme.colors.input_color1};
     display: flex;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
   }
 
   .details {

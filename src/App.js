@@ -18,6 +18,7 @@ import { SocketContext } from './context/socket';
 import EditBudget from './components/widgets/EditBudget';
 import EditLabel from './components/widgets/EditLabel';
 import Notifications from './pages/Notifications';
+import { setUserData } from './features/userSlice';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -39,6 +40,11 @@ function App() {
       socket.emit('fetchLabels');
       socket.on('fetchLabels', (data) => {
         dispatch(addLabels(data));
+      });
+
+      // user profile
+      socket.on('fetchUserProfile', (data) => {
+        dispatch(setUserData(data));
       });
     };
   }, []);

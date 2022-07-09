@@ -19,15 +19,16 @@ const Account = () => {
   const [email, setEmail] = useState('');
 
   const [loading, setLoading] = useState(true);
+  const [upload, setUpload] = useState(false);
 
   const { user, status } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (user) {
-      setFirstName(user?.firstName);
-      setLastName(user?.lastName);
-      setEmail(user?.email);
+    if (user && user.email) {
+      setFirstName(user?.firstName || '');
+      setLastName(user?.lastName || '');
+      setEmail(user?.email || '');
       setLoading(false);
     }
   }, [user]);
@@ -41,6 +42,10 @@ const Account = () => {
     };
 
     dispatch(updateUserProfileAsync(payload));
+  };
+
+  const close = () => {
+    setUpload(false);
   };
 
   if (loading) {
@@ -95,14 +100,16 @@ const Account = () => {
         </AccountLeft>
         <AccountRight>
           <AvatarWrap>
-            <div className="profile-img"></div>
+            <div className="profile-img">
+              {user?.avatar && <img src={user?.avatar} alt="Profile Image" />}
+            </div>
             <ButtonWrap className="btn-wrap">
-              <Button>Edit</Button>
+              <Button onClick={() => setUpload(true)}>Edit</Button>
             </ButtonWrap>
           </AvatarWrap>
         </AccountRight>
       </AccountWrap>
-      <UploadAvatar />
+      {upload && <UploadAvatar close={close} />}
     </>
   );
 };
@@ -129,6 +136,14 @@ const AvatarWrap = styled.div`
     height: 130px;
     border-radius: 50%;
     background-color: ${(props) => props.theme.colors.input_color1};
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-position: top;
+      object-fit: cover;
+    }
   }
 
   .btn-wrap {
