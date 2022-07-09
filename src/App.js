@@ -39,6 +39,7 @@ function App() {
       // labels
       socket.emit('fetchLabels');
       socket.on('fetchLabels', (data) => {
+        console.log(data);
         dispatch(addLabels(data));
       });
 
