@@ -43,6 +43,7 @@ function App() {
       });
 
       // user profile
+      socket.emit('fetchUserProfile');
       socket.on('fetchUserProfile', (data) => {
         dispatch(setUserData(data));
       });
