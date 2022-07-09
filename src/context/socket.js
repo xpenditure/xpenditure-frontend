@@ -1,8 +1,8 @@
 import io from 'socket.io-client';
 import { createContext } from 'react';
-import { TOKEN } from '../utils/constants';
+import { TOKEN, BASE_URL } from '../utils/constants';
 
-export const socket = io('http://localhost:8000', {
+export const socket = io(BASE_URL, {
   transports: ['websocket', 'polling', 'flashsocket'],
   query: `token=${TOKEN}`,
 });
