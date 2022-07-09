@@ -12,9 +12,11 @@ import {
 import UserInfo from '../widgets/UserInfo';
 import { IconLg } from '../../styles/DefaultStyles';
 import CreateBtn from './CreateBtn';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { layout } = useSelector((state) => state.action);
 
   const handleShowMoreSide = () => {
@@ -38,7 +40,7 @@ const Header = () => {
         <SearchInput />
       </HeaderLeft>
       <HeaderRight>
-        <CreateBtn />
+        {location.pathname === '/dashboard' && <CreateBtn />}
         <UserInfo />
         <IconLg onClick={handleChangeLayout}>
           {layout === 'grid' ? <ListIcon /> : <GridIcon />}

@@ -110,24 +110,26 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
         <div className="right">
           <Summary>
             <div className="style-box"></div>
-            {budget?.summary && (
-              <div className="summary box">
-                <p className="title">Summary:</p>
-                <p>{budget?.summary}</p>
-              </div>
-            )}
-            {budget?.labels && (
-              <div className="labels box">
-                <p className="title">Labels:</p>
-                <div className="labels">
-                  {budget?.labels.map((label) => (
-                    <div key={label._id} className="label">
+
+            <div className="summary box">
+              <p className="title">Summary:</p>
+              <p>{budget?.summary || <i>No summary</i>}</p>
+            </div>
+
+            <div className="labels box">
+              <p className="title">Labels:</p>
+              <p className="labels">
+                {budget?.labels.length > 0 ? (
+                  budget.labels.map((label) => (
+                    <span key={label._id} className="label">
                       {label.name}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                    </span>
+                  ))
+                ) : (
+                  <i>No label</i>
+                )}
+              </p>
+            </div>
           </Summary>
         </div>
       </BudgetDataWrap>
@@ -260,7 +262,7 @@ const Summary = styled.div`
   }
 
   .summary {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .title {

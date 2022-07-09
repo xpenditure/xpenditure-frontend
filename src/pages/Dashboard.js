@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import Sidenav from '../components/sidenav/Sidenav';
@@ -6,9 +6,13 @@ import { Outlet } from 'react-router-dom';
 import Header from '../components/header/Header';
 import { useDispatch } from 'react-redux';
 import { getUserProfileAsync } from '../features/userSlice';
+import Alert from '../components/message/Alert';
+import { SocketContext } from '../context/socket';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     return () => {
@@ -16,11 +20,18 @@ const Dashboard = () => {
     };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      socket.on('message', (data) => {
+        setMessage(data);
+      });
+    };
+  }, []);
+
   return (
     <>
       <DashWrap>
         <Sidenav />
-
         <MainViews>
           <Header />
           <OutletWrap>
@@ -30,6 +41,7 @@ const Dashboard = () => {
           </OutletWrap>
         </MainViews>
       </DashWrap>
+      <Alert data={message} />
     </>
   );
 };
