@@ -19,6 +19,7 @@ import EditBudget from './components/widgets/EditBudget';
 import EditLabel from './components/widgets/EditLabel';
 import Notifications from './pages/Notifications';
 import { setUserData } from './features/userSlice';
+import Search from './components/search/Search';
 
 function App() {
   const { isAuth } = useSelector((state) => state.user);
@@ -92,6 +93,7 @@ function App() {
       </Routes>
       {background && (
         <Routes>
+          <Route path="/dashboard/search" element={<Search />} />
           <Route path="/dashboard/settings" element={<Settings />} />
           <Route path="/dashboard/new/label" element={<NewLabel />} />
           <Route path="/dashboard/new/budget" element={<NewBudget />} />

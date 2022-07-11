@@ -1,35 +1,39 @@
 import React, { useState, createRef } from 'react';
 import styled from 'styled-components';
-import { InputWrap } from '../../styles/DefaultStyles';
-import SearchField from './SearchField';
+import { IoSearchOutline, IoCloseCircle } from 'react-icons/io5';
 
 const SearchInput = () => {
-  const [search, setSearch] = useState('');
-  const [focused, setFocused] = useState(false);
+  const [search, setSearch] = useState('Hi there');
   const inputRef = createRef();
 
+  const clearSearchInput = () => {
+    setSearch('');
+  };
+
   return (
-    <>
-      {focused && <Overlay onClick={() => setFocused(false)} />}
-      <SearchInputWrap>
-        <form>
-          <Input focused={focused}>
-            <input
-              ref={inputRef}
-              onFocus={() => setFocused(true)}
-              // onBlur={() => setFocused(false)}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search budgets or labels"
-              type="text"
-              spellCheck="false"
-              autoComplete="off"
-            />
-          </Input>
-          <SearchField visible={focused} inputRef={inputRef} />
-        </form>
-      </SearchInputWrap>
-    </>
+    <SearchInputWrap>
+      <form>
+        <Input>
+          <i>
+            <IoSearchOutline />
+          </i>
+          <input
+            ref={inputRef}
+            autoFocus={true}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search budgets or labels"
+            type="text"
+            spellCheck="false"
+            autoComplete="off"
+          />
+
+          <i className={search ? 'close' : 'close hidden'}>
+            <IoCloseCircle onClick={clearSearchInput} />
+          </i>
+        </Input>
+      </form>
+    </SearchInputWrap>
   );
 };
 
@@ -39,20 +43,38 @@ const SearchInputWrap = styled.div`
   form {
     position: relative;
   }
-`;
-const Input = styled(InputWrap)`
-  margin-bottom: 0;
-  transition: all 300ms;
-  width: ${(props) => (props.focused ? '500px' : '100%')};
+
+  .hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .close {
+    cursor: pointer;
+  }
 `;
 
-const Overlay = styled.div`
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  position: absolute;
-  background: rgba(0, 0, 0, 0);
+const Input = styled.div`
+  display: flex;
+  background-color: ${(props) => props.theme.colors.primary};
+  input {
+    width: 400px;
+    height: 50px;
+    background-color: ${(props) => props.theme.colors.primary};
+    border: none;
+    outline: none;
+    flex: 1;
+    color: ${(props) => props.theme.colors.text_color2};
+    font-size: 14px;
+  }
+
+  i {
+    font-size: 20px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export default SearchInput;

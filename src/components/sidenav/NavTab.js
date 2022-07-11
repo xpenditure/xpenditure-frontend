@@ -21,14 +21,21 @@ const NavTab = ({ active }) => {
 
   return (
     <TabList active={active}>
-      <div className="custom">
+      <NavLink
+        to="search"
+        end
+        className={({ isActive }) =>
+          'nav-link' + (isActive ? ' activated' : '')
+        }
+        state={{ background: location }}
+      >
         <TabItem onClick={handleToggleSearch}>
           <TabIcon className="active-icon">
             <SearchIcon />
           </TabIcon>
-          <TabName>Labels</TabName>
+          <TabName>Search</TabName>
         </TabItem>
-      </div>
+      </NavLink>
       <NavLink
         to="/dashboard"
         end

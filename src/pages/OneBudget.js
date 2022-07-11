@@ -80,7 +80,9 @@ const OneBudget = () => {
             <Line />
             <Transactions>
               {activeTab === 'expenses' && <ExpensesList expenses={expenses} />}
-              {activeTab === 'funds' && <FundList funds={funds} />}
+              {activeTab === 'funds' && (
+                <FundList funds={funds} budget={budget} />
+              )}
             </Transactions>
           </OneBudgetWrap>
         </>
