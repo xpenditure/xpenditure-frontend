@@ -29,28 +29,26 @@ function App() {
   const background = location.state && location.state.background;
 
   useEffect(() => {
-    return () => {
-      // budgets
-      socket.emit('fetchBudgets');
-      socket.on('fetchBudgets', (data) => {
-        console.log('budgets', data);
-        dispatch(addBudgets(data));
-      });
+    // budgets
+    socket.emit('fetchBudgets');
+    socket.on('fetchBudgets', (data) => {
+      console.log('budgets', data);
+      dispatch(addBudgets(data));
+    });
 
-      // labels
-      socket.emit('fetchLabels');
-      socket.on('fetchLabels', (data) => {
-        console.log('labels', data);
-        dispatch(addLabels(data));
-      });
+    // labels
+    socket.emit('fetchLabels');
+    socket.on('fetchLabels', (data) => {
+      console.log('labels', data);
+      dispatch(addLabels(data));
+    });
 
-      // user profile
-      socket.emit('fetchUserProfile');
-      socket.on('fetchUserProfile', (data) => {
-        console.log('profile', data);
-        dispatch(setUserData(data));
-      });
-    };
+    // user profile
+    socket.emit('fetchUserProfile');
+    socket.on('fetchUserProfile', (data) => {
+      console.log('profile', data);
+      dispatch(setUserData(data));
+    });
   }, []);
 
   useEffect(() => {
