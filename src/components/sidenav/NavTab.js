@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { TabList, TabIcon, TabItem, TabName } from './styled';
-import { BellIcon, GearIcon } from '../icons';
+import { BellIcon, GearIcon, SearchIcon } from '../icons';
 import { ArchiveIcon, ControlIcon, LabelIcon } from '../icons';
 import LabelList from './LabelList';
 
@@ -14,8 +14,20 @@ const NavTab = ({ active }) => {
     setLabel(!label);
   };
 
+  const handleToggleSearch = () => {
+    //
+  };
+
   return (
     <TabList active={active}>
+      <div className="custom">
+        <TabItem onClick={handleToggleSearch}>
+          <TabIcon className="active-icon">
+            <SearchIcon />
+          </TabIcon>
+          <TabName>Labels</TabName>
+        </TabItem>
+      </div>
       <NavLink
         to="/dashboard"
         end

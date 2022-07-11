@@ -26,6 +26,7 @@ import ListIcon from './ListIcon';
 import ChartUpIcon from './ChartUpIcon';
 import ChartDownIcon from './ChatDownIcon';
 import ShoppingBagIcon from './ShoppingBagIcon';
+import SearchIcon from './SearchIcon';
 
 export {
   TrashIcon,
@@ -56,4 +57,5 @@ export {
   ChartUpIcon,
   ChartDownIcon,
   ShoppingBagIcon,
+  SearchIcon,
 };

@@ -30,11 +30,9 @@ const Appearance = () => {
   ];
 
   useEffect(() => {
-    return () => {
-      socket.on('fetchUserProfile', (user) => {
-        dispatch(setUserData(user));
-      });
-    };
+    socket.on('fetchUserProfile', (user) => {
+      dispatch(setUserData(user));
+    });
   }, []);
 
   const handleColor = (color) => {

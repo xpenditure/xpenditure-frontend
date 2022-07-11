@@ -18,7 +18,7 @@ const UploadAvatar = ({ close }) => {
   const maxNumber = 1;
   const socket = useContext(SocketContext);
 
-  const onChange = (imageList, addUpdateIndex) => {
+  const onChange = (imageList) => {
     setImages(imageList);
   };
 

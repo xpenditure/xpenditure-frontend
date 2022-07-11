@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import SearchInput from '../search/SearchInput';
 import { EllipsisHorizontalIcon, GridIcon, ListIcon, MenuIcon } from '../icons';
 import MoreSide from '../widgets/MoreSide';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +36,6 @@ const Header = () => {
         <IconLg className="menu" onClick={handleSideNav}>
           <MenuIcon />
         </IconLg>
-        <SearchInput />
       </HeaderLeft>
       <HeaderRight>
         {location.pathname === '/dashboard' && <CreateBtn />}
