@@ -97,7 +97,7 @@ const UploadAvatar = ({ close }) => {
               )}
             </ImageUploading>
             <ButtonPrimary
-              className={uploading ? 'btn-disabled' : ''}
+              className={uploading || images.length === 0 ? 'btn-disabled' : ''}
               onClick={handleUpload}
             >
               {uploading ? 'Uploading' : 'Upload'}

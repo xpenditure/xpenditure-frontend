@@ -143,6 +143,7 @@ const BudgetDataWrap = styled.div`
   margin-bottom: 50px;
   width: 100%;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   .left {
     width: 60%;
@@ -150,6 +151,16 @@ const BudgetDataWrap = styled.div`
 
   .right {
     width: 35%;
+  }
+
+  @media (max-width: 800px) {
+    .left,
+    .right {
+      width: 100%;
+    }
+    .left {
+      margin-bottom: 30px;
+    }
   }
 `;
 const BalSect = styled.div`
@@ -180,6 +191,16 @@ const BalSect = styled.div`
     position: relative;
     margin-left: 20px;
   }
+
+  @media (max-width: 600px) {
+    padding: 0;
+    .bal {
+      margin-right: 0;
+    }
+    .bal-text {
+      font-size: 20px;
+    }
+  }
 `;
 const SpendSect = styled.div`
   display: flex;
@@ -192,6 +213,7 @@ const SpendSect = styled.div`
   background-color: ${(props) => props.theme.colors.secondary};
   margin-bottom: 10px;
   position: relative;
+  flex-wrap: wrap;
 
   .spend-info {
     display: flex;
@@ -215,7 +237,7 @@ const SpendSect = styled.div`
 
   .spend-text {
     margin-left: 20px;
-    font-size: 25px;
+    font-size: 14px;
   }
 
   .spend-name {
@@ -238,6 +260,17 @@ const SpendSect = styled.div`
     font-size: 22px;
     border: 1px solid ${(props) => props.theme.colors.border_color1};
     cursor: pointer;
+  }
+
+  @media (max-width: 800px) {
+    padding: 20px;
+
+    .spend-info {
+      margin-bottom: 20px;
+    }
+    .spend-info:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 

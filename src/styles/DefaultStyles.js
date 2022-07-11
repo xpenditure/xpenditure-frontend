@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const FormWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+
   form {
+    width: 100%;
     display: flex;
     flex-direction: column;
   }
@@ -26,6 +30,7 @@ export const InputWrap = styled.div`
   input,
   select,
   textarea {
+    width: 100%;
     border: 1px solid ${(props) => props.theme.colors.border_color1};
     border-radius: ${(props) => props.theme.reset.border_radius};
     outline: none;
@@ -84,6 +89,7 @@ export const Line = styled.div`
 
 export const AddWrap = styled.div`
   width: ${(props) => (props.width ? +props.width + 'px' : '500px')};
+  max-width: 100%;
   background-color: ${(props) => props.theme.colors.primary};
 `;
 

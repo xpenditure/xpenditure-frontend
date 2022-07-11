@@ -26,6 +26,10 @@ const SidenavWrap = styled.div`
   border-right: 1px solid ${(props) => props.theme.colors.border_color1};
   overflow: hidden;
   transition: all 300ms;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const SidenavInner = styled.div`

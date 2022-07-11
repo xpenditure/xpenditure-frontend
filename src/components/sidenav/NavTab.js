@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { TabList, TabIcon, TabItem, TabName } from './styled';
 import { BellIcon, GearIcon } from '../icons';
-import { ArchiveIcon, ControlIcon, LabelIcon } from '../icons';
+import { ArchiveIcon, ControlIcon, LabelIcon, CaretDownIcon } from '../icons';
 import LabelList from './LabelList';
+import { IconLg } from '../../styles/DefaultStyles';
 
 const NavTab = ({ active }) => {
   const location = useLocation();
@@ -65,7 +66,12 @@ const NavTab = ({ active }) => {
           <TabIcon className="active-icon">
             <LabelIcon />
           </TabIcon>
-          <TabName>Labels</TabName>
+          <TabName>
+            Labels
+            <IconLg>
+              <CaretDownIcon />
+            </IconLg>
+          </TabName>
         </TabItem>
       </div>
 

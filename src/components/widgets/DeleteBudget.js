@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleDelBudgetModal } from '../../features/actionSlice';
 import { SocketContext } from '../../context/socket';
 import { useNavigate } from 'react-router-dom';
+import { setBudget } from '../../features/budgetSlice';
 
 const DeleteBudget = () => {
   const [budgetName, setBudgetName] = useState('');
@@ -24,6 +25,7 @@ const DeleteBudget = () => {
 
   const close = () => {
     setBudgetName('');
+    dispatch(setBudget({}));
     dispatch(toggleDelBudgetModal(false));
   };
 

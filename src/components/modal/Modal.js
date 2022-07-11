@@ -29,6 +29,7 @@ const ModalInner = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   box-shadow: ${(props) => props.theme.colors.shadow1};
+  max-width: 100%;
 `;
 const Overlay = styled.div`
   width: 100%;

@@ -61,12 +61,17 @@ const Register = ({ status }) => {
           </InputWrap>
           <InputWrap>
             <label>Email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              value={email}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </InputWrap>
           <InputWrap>
             <label>Password</label>
             <input
               value={password}
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputWrap>

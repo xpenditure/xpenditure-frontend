@@ -19,8 +19,8 @@ import {
 } from '../../features/budgetSlice';
 import { SocketContext } from '../../context/socket';
 
-const AddLabel = ({ budgetId }) => {
-  const { labels, budgetLabels } = useSelector((state) => state.budget);
+const AddLabel = () => {
+  const { labels, budgetLabels, budget } = useSelector((state) => state.budget);
   const { addLabelModal } = useSelector((state) => state.action);
   const dispatch = useDispatch();
   const socket = useContext(SocketContext);
@@ -45,9 +45,11 @@ const AddLabel = ({ budgetId }) => {
 
   const handleAddLabel = () => {
     const data = {
-      budgetId,
+      budgetId: budget._id,
       labels: budgetLabels,
     };
+
+    console.log(data);
 
     socket.emit('updateBudgetLabel', data);
     close();

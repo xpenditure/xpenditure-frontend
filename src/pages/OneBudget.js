@@ -83,8 +83,6 @@ const OneBudget = () => {
               {activeTab === 'funds' && <FundList funds={funds} />}
             </Transactions>
           </OneBudgetWrap>
-          <AddLabel budgetId={budgetId} />
-          <DeleteBudget budgetId={budgetId} />
         </>
       )}
     </>
@@ -111,6 +109,10 @@ const BudgetName = styled.div`
   font-size: 30px;
   color: ${(props) => props.theme.colors.text_color2};
   margin-bottom: 30px;
+
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
 `;
 
 const TransactionTabs = styled.div`

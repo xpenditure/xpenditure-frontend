@@ -67,4 +67,8 @@ export const TabIcon = styled.div`
 export const TabName = styled.div`
   font-size: 14px;
   font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
 `;

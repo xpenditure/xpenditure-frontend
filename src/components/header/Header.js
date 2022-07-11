@@ -37,7 +37,7 @@ const Header = () => {
         <IconLg className="menu" onClick={handleSideNav}>
           <MenuIcon />
         </IconLg>
-        <SearchInput />
+        {/* <SearchInput /> */}
       </HeaderLeft>
       <HeaderRight>
         {location.pathname === '/dashboard' && <CreateBtn />}

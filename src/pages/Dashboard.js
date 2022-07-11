@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { getUserProfileAsync } from '../features/userSlice';
 import Alert from '../components/message/Alert';
 import { SocketContext } from '../context/socket';
+import DeleteBudget from '../components/widgets/DeleteBudget';
+import AddLabel from '../components/widgets/AddLabel';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -42,6 +44,8 @@ const Dashboard = () => {
         </MainViews>
       </DashWrap>
       <Alert data={message} />
+      <DeleteBudget />
+      <AddLabel />
     </>
   );
 };
