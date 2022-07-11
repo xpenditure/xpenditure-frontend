@@ -63,6 +63,8 @@ const AuthInner = styled.div`
   display: flex;
   flex-direction: column;
   margin: 100px 0;
+  width: 100%;
+  align-items: center;
 `;
 
 const AuthMain = styled.div`
@@ -71,6 +73,7 @@ const AuthMain = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   box-shadow: ${(props) => props.theme.colors.shadow1};
+  max-width: 100%;
   width: 400px;
 `;
 

@@ -17,6 +17,10 @@ body {
   color: ${(props) => props.theme.colors.text_color_default};
 }
 
+a {
+  text-decoration: none;
+}
+
 ::-webkit-scrollbar {
   height: 16px;
   overflow: visible;

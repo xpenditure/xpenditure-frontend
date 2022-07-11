@@ -10,18 +10,18 @@ import { setBudget, setBudgetLabels } from '../../features/budgetSlice';
 import { ArchiveIcon, EditIcon, LabelIcon, TrashIcon } from '../icons';
 import { Link, useLocation } from 'react-router-dom';
 
-const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
+const BudgetCardOption = ({ close, budget }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
   const handleLabelAction = () => {
     dispatch(toggleAddLabelModal(true));
-    dispatch(setBudgetLabels(labels));
+    dispatch(setBudgetLabels(budget.labels));
     close();
   };
 
   const handleEditAction = () => {
-    dispatch(setBudgetLabels(labels));
+    dispatch(setBudgetLabels(budget.labels));
     dispatch(setBudget(budget));
     close();
   };
@@ -46,7 +46,7 @@ const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
             <i>
               <LabelIcon />
             </i>
-            {labels.length > 0 ? 'Change labels' : 'Add label'}
+            {budget?.labels.length > 0 ? 'Change labels' : 'Add label'}
           </p>
           <p>
             <i>
@@ -55,7 +55,7 @@ const BudgetCardOption = ({ close, labels, budgetId, budget }) => {
             Archive
           </p>
           <Link
-            to={`/dashboard/edit/budgets/${budgetId}`}
+            to={`/dashboard/edit/budgets/${budget._id}`}
             state={{ background: location }}
             onClick={() => handleEditAction()}
           >

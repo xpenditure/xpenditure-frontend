@@ -6,7 +6,6 @@ const initialState = {
   label: {},
   budgetLabels: [],
   budget: {},
-  budgetId: '',
 };
 
 const budgetSlice = createSlice({
@@ -18,9 +17,6 @@ const budgetSlice = createSlice({
     },
     addLabels(state, action) {
       state.labels = action.payload;
-    },
-    setBudgetId(state, action) {
-      state.budgetId = action.payload;
     },
     setBudgetLabels(state, action) {
       state.budgetLabels = action.payload;
@@ -43,7 +39,6 @@ export const {
   addBudgets,
   addLabels,
   setBudgetLabels,
-  setBudgetId,
   setBudget,
   setLabel,
   clearActiveBudgetData,

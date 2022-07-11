@@ -1,10 +1,15 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import BudgetCardOption from './BudgetCardOption';
+import { EllipsisHorizontalIcon } from '../icons';
+import { setBudget } from '../../features/budgetSlice';
 
 const BudgetCard = ({ budget }) => {
   const { layout } = useSelector((state) => state.action);
+  const [id, setId] = useState('');
+  const dispatch = useDispatch();
 
   const balanace = () => {
     let funds = budget?.funds;
@@ -23,6 +28,25 @@ const BudgetCard = ({ budget }) => {
 
   return (
     <BudgetCardWrap layout={layout}>
+      <CardHead>
+        <div
+          className="icon"
+          onClick={() => {
+            dispatch(setBudget(budget));
+            setId(budget._id);
+          }}
+        >
+          <EllipsisHorizontalIcon />
+        </div>
+        {id === budget._id && (
+          <BudgetCardOption
+            close={() => {
+              setId('');
+            }}
+            budget={budget}
+          />
+        )}
+      </CardHead>
       <CardInfo>
         <Link to={`/dashboard/budgets/${budget._id}`}>
           <div className="budget-name">{budget.name}</div>
@@ -57,11 +81,13 @@ const BudgetCardWrap = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: 5px;
   margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};
-  padding: 20px;
 `;
 
 const CardInfo = styled.div`
   margin-bottom: 20px;
+  padding: 20px;
+  padding-top: 0;
+
   .budget-name {
     font-size: 20px;
     font-weight: 400;
@@ -84,12 +110,39 @@ const CardInfo = styled.div`
   }
 `;
 
+const CardHead = styled.div`
+  display: flex;
+  padding: 10px 10px;
+  justify-content: flex-end;
+  position: relative;
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
+    }
+
+    svg {
+      width: 18px;
+      fill: ${(props) => props.theme.colors.text_color2};
+    }
+  }
+`;
+
 const CardLabels = styled.div`
   display: flex;
   flex-wrap: wrap;
   overflow: ellipsis;
   white-space: wrap;
   width: 100%;
+  padding: 10px 20px;
 
   .label {
     text-decoration: none;

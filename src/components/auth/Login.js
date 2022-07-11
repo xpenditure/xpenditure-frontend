@@ -38,12 +38,19 @@ const Login = ({ status }) => {
         <InputGroup>
           <InputWrap>
             <label>Email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input
+              value={email}
+              name="email"
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </InputWrap>
           <InputWrap>
             <label>Password</label>
             <input
               value={password}
+              name="password"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </InputWrap>

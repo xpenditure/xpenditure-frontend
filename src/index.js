@@ -7,12 +7,13 @@ import WithTheme from './theme/WithTheme';
 import GlobalStyles from './styles/GlobalStyles';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import { getTokenFromStorage } from './features/userSlice';
+import { getTokenFromStorage, getUserProfileAsync } from './features/userSlice';
 import { getThemeMode } from './features/actionSlice';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 store.dispatch(getTokenFromStorage());
 store.dispatch(getThemeMode());
+store.dispatch(getUserProfileAsync());
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
