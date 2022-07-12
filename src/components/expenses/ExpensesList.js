@@ -3,6 +3,7 @@ import Table from '../table/Table';
 import Time from '../excerpt/Time';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 import More from '../widgets/More';
+import NoTransaction from '../transaction/NoTransaction';
 
 const ExpensesList = ({ expenses }) => {
   const [id, setId] = useState('');
@@ -47,7 +48,12 @@ const ExpensesList = ({ expenses }) => {
     },
   ]);
 
-  return <div>{expenses && <Table columns={columns} data={expenses} />}</div>;
+  return (
+    <div>
+      {expenses?.length > 0 && <Table columns={columns} data={expenses} />}
+      {!expenses?.length && <NoTransaction />}
+    </div>
+  );
 };
 
 export default ExpensesList;

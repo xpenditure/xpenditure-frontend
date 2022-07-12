@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import Table from '../table/Table';
 import Time from '../excerpt/Time';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
+import NoTransaction from '../transaction/NoTransaction';
 
 const FundList = ({ funds, budget }) => {
   const columns = useMemo(() => [
@@ -37,11 +38,8 @@ const FundList = ({ funds, budget }) => {
   ]);
   return (
     <div>
-      {funds && (
-        <div>
-          <Table columns={columns} data={funds} />
-        </div>
-      )}
+      {funds?.length > 0 && <Table columns={columns} data={funds} />}
+      {!funds?.length && <NoTransaction />}
     </div>
   );
 };

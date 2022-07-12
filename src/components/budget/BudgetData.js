@@ -13,11 +13,13 @@ import { Button, ButtonPrimary, ButtonWrap } from '../../styles/DefaultStyles';
 import BudgetCardOption from './BudgetCardOption';
 import AddFund from '../widgets/AddFund';
 import AddBudgetGoal from '../widgets/AddBudgetGoal';
+import More from '../widgets/More';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
   const [activeFund, setActiveFund] = useState(false);
   const [activeGoal, setActiveGoal] = useState(false);
+  const [goalMore, setGoalMore] = useState(false);
 
   const calcBalance = () => {
     return parseFloat(calcIncome()) - parseFloat(calcSpendings());
@@ -53,8 +55,10 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <IoWalletOutline />
               </div>
               <div className="card-details">
-                <p>Balance</p>
-                <h3>${calcBalance().toLocaleString()}</h3>
+                <div className="card-name">Balance</div>
+                <div className="card-total">
+                  ${calcBalance().toLocaleString()}
+                </div>
               </div>
             </div>
             <div className="data-card">
@@ -62,8 +66,10 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <IoCardOutline />
               </div>
               <div className="card-details">
-                <p>Income</p>
-                <h3>${calcIncome().toLocaleString()}</h3>
+                <div className="card-name">Income</div>
+                <div className="card-total">
+                  ${calcIncome().toLocaleString()}
+                </div>
               </div>
             </div>
             <div className="data-card">
@@ -71,8 +77,10 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <IoReceiptOutline />
               </div>
               <div className="card-details">
-                <p>Spending</p>
-                <h3>${calcSpendings().toLocaleString()}</h3>
+                <div className="card-name">Spending</div>
+                <div className="card-total">
+                  ${calcSpendings().toLocaleString()}
+                </div>
               </div>
             </div>
             <div className="data-card">
@@ -80,8 +88,19 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <IoBagCheckOutline />
               </div>
               <div className="card-details">
-                <p>Goal</p>
-                <h3>$0.00</h3>
+                <div class="icon goal-icon" onClick={() => setGoalMore(true)}>
+                  <IoEllipsisHorizontalSharp />
+                  <More visible={goalMore} close={() => setGoalMore(false)}>
+                    <div className="link">
+                      <p>Edit goal</p>
+                      <p>Remove goal</p>
+                    </div>
+                  </More>
+                </div>
+                <div className="card-name">Goal</div>
+                <div className="card-total">
+                  ${budget.goal > 0 ? budget.goal.toLocaleString() : '0.00'}
+                </div>
               </div>
             </div>
           </DataCards>
@@ -117,9 +136,13 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <h3>${calcBalance().toLocaleString()}</h3>
               </div>
               <div className="sum-btn">
-                <ButtonWrap>
-                  <Button onClick={() => setActiveGoal(true)}>Add goal</Button>
-                </ButtonWrap>
+                {budget.goal <= 0 && (
+                  <ButtonWrap>
+                    <Button onClick={() => setActiveGoal(true)}>
+                      Add goal
+                    </Button>
+                  </ButtonWrap>
+                )}
                 <ButtonWrap>
                   <ButtonPrimary onClick={() => setActiveFund(true)}>
                     Top up
@@ -158,6 +181,12 @@ const BudgetDataWrap = styled.div`
       background-color: ${(props) => props.theme.colors.hover_color1};
     }
   }
+
+  .goal-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 `;
 const DataCards = styled.div`
   display: grid;
@@ -174,6 +203,7 @@ const DataCards = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     border: 1px solid ${(props) => props.theme.colors.border_color1};
+    position: relative;
 
     :hover {
       box-shadow: ${(props) => props.theme.colors.shadow1};
@@ -196,13 +226,14 @@ const DataCards = styled.div`
   .card-details {
     display: flex;
     flex-direction: column;
-    p {
+
+    .card-name {
       color: ${(props) => props.theme.colors.text_color2};
-      font-size: 12px;
+      font-size: 14px;
       margin-bottom: 8px;
     }
 
-    h3 {
+    .card-total {
       font-size: 18px;
       color: ${(props) => props.theme.colors.text_color1};
     }
@@ -217,6 +248,7 @@ const DataSummary = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   padding: 20px;
+  height: 170px;
 
   .ellipsis {
     position: relative;
@@ -258,6 +290,7 @@ const DataTop = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  align-items: flex-start;
 `;
 const DataBottom = styled.div`
   display: flex;
