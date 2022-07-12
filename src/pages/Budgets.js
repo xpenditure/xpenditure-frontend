@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BudgetList from '../components/budget/BudgetList';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -6,12 +6,18 @@ import Empty from '../components/excerpt/Empty';
 
 const Budgets = () => {
   const { budgets } = useSelector((state) => state.budget);
+  const [filteredBudgets, setFilteredBudgets] = useState([]);
+
+  useEffect(() => {
+    let newBudgets = budgets.filter((budget) => budget.archived !== true);
+    setFilteredBudgets(newBudgets);
+  }, [budgets]);
 
   return (
     <>
-      {budgets !== undefined || budgets.length !== 0 ? (
+      {filteredBudgets.length !== 0 ? (
         <BudgetsWrap>
-          <BudgetList budgets={budgets} />
+          <BudgetList budgets={filteredBudgets} />
         </BudgetsWrap>
       ) : (
         <Empty name="Budget" />
@@ -21,7 +27,6 @@ const Budgets = () => {
 };
 
 const BudgetsWrap = styled.div`
-  margin-top: 100px;
   .header {
     margin-bottom: 30px;
     display: flex;

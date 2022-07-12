@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import More from '../widgets/More';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
@@ -9,10 +9,12 @@ import {
 import { setBudget, setBudgetLabels } from '../../features/budgetSlice';
 import { ArchiveIcon, EditIcon, LabelIcon, TrashIcon } from '../icons';
 import { Link, useLocation } from 'react-router-dom';
+import { SocketContext } from '../../context/socket';
 
 const BudgetCardOption = ({ close, budget }) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const socket = useContext(SocketContext);
 
   const handleLabelAction = () => {
     dispatch(toggleAddLabelModal(true));
@@ -32,6 +34,15 @@ const BudgetCardOption = ({ close, budget }) => {
     close();
   };
 
+  const handleArchiveBudget = () => {
+    const payload = {
+      value: !budget.archived,
+      budgetId: budget._id,
+    };
+    socket.emit('archiveBudget', payload);
+    close();
+  };
+
   return (
     <More visible={true} close={close}>
       <Wrap onClick={(e) => e.preventDefault()}>
@@ -48,11 +59,11 @@ const BudgetCardOption = ({ close, budget }) => {
             </i>
             {budget?.labels.length > 0 ? 'Change labels' : 'Add label'}
           </p>
-          <p>
+          <p onClick={handleArchiveBudget}>
             <i>
               <ArchiveIcon />
             </i>
-            Archive
+            {budget.archived ? 'Unarchive' : 'Archive'}
           </p>
           <Link
             to={`/dashboard/edit/budgets/${budget._id}`}

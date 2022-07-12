@@ -70,7 +70,7 @@ const Container = styled.div`
 `;
 
 const OutletWrap = styled.div`
-  margin: 10px 0;
+  margin: 100px 0;
 `;
 
 export default Dashboard;

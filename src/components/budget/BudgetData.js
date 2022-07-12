@@ -1,332 +1,148 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
-  ChartDownIcon,
-  ChartUpIcon,
-  EllipsisHorizontalIcon,
-  ShoppingBagIcon,
-} from '../icons';
-import { ButtonPrimary, IconLg } from '../../styles/DefaultStyles';
-import BudgetCardOption from './BudgetCardOption';
-import AddFund from '../widgets/AddFund';
-import { IoAddOutline } from 'react-icons/io5';
+  IoWalletOutline,
+  IoBagCheckOutline,
+  IoReceiptOutline,
+  IoCardOutline,
+} from 'react-icons/io5';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
   const [activeFund, setActiveFund] = useState(false);
-
-  const close = () => {
-    setActiveMore(false);
-  };
-
-  const showAddFund = () => {
-    setActiveFund(true);
-  };
-
-  const closeAddFund = () => {
-    setActiveFund(false);
-  };
-
-  const balance = () => {
-    return parseFloat(totalEarnings()) - parseFloat(totalExpenses());
-  };
-
-  const totalEarnings = () => {
-    return funds?.reduce((a, b) => a + b.total, 0) + budget.total;
-  };
-
-  const totalExpenses = () => {
-    return expenses?.reduce((a, b) => a + b.total, 0) || 0;
-  };
+  const [activeGoal, setActiveGoal] = useState(false);
 
   return (
     <>
       <BudgetDataWrap>
-        <div className="left">
-          <BalSect>
-            <div className="bal">
-              <p>Your balance</p>
-              <div className="bal-text">
-                <span>$</span>
-                {balance().toLocaleString()}
+        <DataTop>
+          <DataCards>
+            <div className="data-card">
+              <div className="card-icon">
+                <IoWalletOutline />
+              </div>
+              <div className="card-details">
+                <p>Balance</p>
+                <h3>$209,900.00</h3>
               </div>
             </div>
-            <div className="bal-action">
-              <ButtonPrimary onClick={showAddFund}>Add funds</ButtonPrimary>
-              <div className="menu">
-                <IconLg
-                  className="ellipsis"
-                  onClick={() => setActiveMore(true)}
-                >
-                  <EllipsisHorizontalIcon />
-                </IconLg>
-                {activeMore && (
-                  <BudgetCardOption
-                    close={close}
-                    labels={budget.labels}
-                    budgetId={budgetId}
-                    budget={budget}
-                  />
-                )}
+            <div className="data-card">
+              <div className="card-icon">
+                <IoCardOutline />
+              </div>
+              <div className="card-details">
+                <p>Income</p>
+                <h3>$409,900.00</h3>
               </div>
             </div>
-          </BalSect>
-          <SpendSect>
-            <div className="goal" title="Add Goal">
-              <IoAddOutline />
-            </div>
-            <div className="spend-info">
-              <div className="spend-icon">
-                <ChartUpIcon />
+            <div className="data-card">
+              <div className="card-icon">
+                <IoReceiptOutline />
               </div>
-              <div className="spend-text">
-                <p className="spend-name">Total earnings</p>
-                <p>${totalEarnings().toLocaleString()}</p>
+              <div className="card-details">
+                <p>Spending</p>
+                <h3>$200,000.00</h3>
               </div>
             </div>
-            <div className="spend-info">
-              <div className="spend-icon">
-                <ChartDownIcon />
+            <div className="data-card">
+              <div className="card-icon">
+                <IoBagCheckOutline />
               </div>
-              <div className="spend-text">
-                <p className="spend-name">Total expenses</p>
-                <span>$</span>
-                {totalExpenses() === 0
-                  ? '0.00'
-                  : totalExpenses().toLocaleString()}
+              <div className="card-details">
+                <p>Goal</p>
+                <h3>$980,900.00</h3>
               </div>
             </div>
-            <div className="spend-info">
-              <div className="spend-icon">
-                <ShoppingBagIcon />
-              </div>
-              <div className="spend-text">
-                <p className="spend-name">Budget goal</p>
-                <p>$0.00</p>
-              </div>
-            </div>
-          </SpendSect>
-        </div>
-        <div className="right">
-          <Summary>
-            <div className="style-box"></div>
-
-            <div className="summary box">
-              <p className="title">Summary:</p>
-              <p>{budget?.summary || <i>No summary</i>}</p>
-            </div>
-
-            <div className="labels box">
-              <p className="title">Labels:</p>
-              <p className="labels">
-                {budget?.labels.length > 0 ? (
-                  budget.labels.map((label) => (
-                    <span key={label._id} className="label">
-                      {label.name}
-                    </span>
-                  ))
-                ) : (
-                  <i>No label</i>
-                )}
-              </p>
-            </div>
-          </Summary>
-        </div>
+          </DataCards>
+          <DataSummary>
+            <div className="sum-top"></div>
+            <div className="sum-bottom"></div>
+          </DataSummary>
+        </DataTop>
+        <DataBottom>
+          <DataGraph></DataGraph>
+          <DataChart></DataChart>
+        </DataBottom>
       </BudgetDataWrap>
-      {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
     </>
   );
 };
 
 const BudgetDataWrap = styled.div`
-  display: flex;
-  margin-bottom: 50px;
   width: 100%;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  .left {
-    width: 60%;
-  }
-
-  .right {
-    width: 35%;
-  }
-
-  @media (max-width: 800px) {
-    .left,
-    .right {
-      width: 100%;
-    }
-    .left {
-      margin-bottom: 30px;
-    }
-  }
+  margin-bottom: 50px;
 `;
-const BalSect = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-  color: ${(props) => props.theme.colors.text_color2};
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px;
+const DataCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  width: 63%;
 
-  .bal {
-    margin-right: 50px;
-  }
-
-  .bal-action {
+  .data-card {
+    height: 170px;
+    background-color: ${(props) => props.theme.colors.card_color1};
+    border-radius: ${(props) => props.theme.reset.border_radius};
+    padding: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    flex-direction: column;
+    justify-content: flex-end;
 
-  .bal-text {
-    font-size: 30px;
-  }
-
-  .menu {
-    display: flex;
-    position: relative;
-    margin-left: 20px;
-  }
-
-  @media (max-width: 600px) {
-    padding: 0;
-    .bal {
-      margin-right: 0;
-    }
-    .bal-text {
-      font-size: 20px;
-    }
-  }
-`;
-const SpendSect = styled.div`
-  display: flex;
-  border: 1px solid ${(props) => props.theme.colors.border_color1};
-  padding: 30px 50px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  color: ${(props) => props.theme.colors.text_color2};
-  background-color: ${(props) => props.theme.colors.secondary};
-  margin-bottom: 10px;
-  position: relative;
-  flex-wrap: wrap;
-
-  .spend-info {
-    display: flex;
-    align-items: center;
-  }
-
-  .spend-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 20px;
-    background-color: ${(props) => props.theme.colors.input_color1};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    svg {
-      width: 20px;
-      fill: ${(props) => props.theme.colors.text_color2};
+    :hover {
+      box-shadow: ${(props) => props.theme.colors.shadow1};
     }
   }
 
-  .spend-text {
-    margin-left: 20px;
-    font-size: 14px;
-  }
-
-  .spend-name {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: darkgray;
-  }
-
-  .goal {
-    position: absolute;
-    right: 50px;
-    bottom: -25px;
+  .card-icon {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.hover_color1};
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
-    border: 1px solid ${(props) => props.theme.colors.border_color1};
-    cursor: pointer;
+    font-size: 25px;
+    color: ${(props) => props.theme.colors.text_color2};
   }
 
-  @media (max-width: 800px) {
-    padding: 20px;
-
-    .spend-info {
-      margin-bottom: 20px;
+  .card-details {
+    display: flex;
+    flex-direction: column;
+    p {
+      color: ${(props) => props.theme.colors.text_color2};
+      font-size: 12px;
+      margin-bottom: 8px;
     }
-    .spend-info:last-child {
-      margin-bottom: 0;
+
+    h3 {
+      font-size: 18px;
+      color: ${(props) => props.theme.colors.text_color1};
     }
   }
 `;
 
-const Summary = styled.div`
-  width: 100%;
-  border: 1px solid ${(props) => props.theme.colors.border_color1};
-  border-radius: 20px;
-  padding: 20px;
-  position: relative;
-  /* z-index: 10; */
-  background-color: ${(props) => props.theme.colors.primary};
+const DataSummary = styled.div`
+  width: 35%;
+  border: 1px solid blue;
+`;
 
-  .style-box {
-    bottom: -20px;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    border: 1px solid inherit;
-    position: absolute;
-    border-radius: 10px;
-    border-top: none;
-  }
-
-  .summary {
-    margin-bottom: 20px;
-  }
-
-  .title {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: darkgray;
-  }
-
-  p {
-    font-size: 14px;
-    color: ${(props) => props.theme.colors.text_color2};
-  }
-
-  .labels {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: ellipsis;
-    white-space: wrap;
-    width: 100%;
-
-    .label {
-      text-decoration: none;
-      font-size: 10px;
-      color: ${(props) => props.theme.colors.text_color2};
-      margin-right: 3px;
-      border: 1px solid ${(props) => props.theme.colors.border_color1};
-      padding: 3px 8px;
-      border-radius: 20px;
-      background-color: ${(props) => props.theme.colors.secondary};
-    }
-  }
+const DataTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+const DataBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const DataChart = styled.div`
+  width: 30%;
+  border: 1px solid blue;
+`;
+const DataGraph = styled.div`
+  width: 68%;
+  border: 1px solid yellow;
+  height: 350px;
 `;
 
 export default BudgetData;

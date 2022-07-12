@@ -4,12 +4,17 @@ import styled from 'styled-components';
 const Message = ({ msg }) => {
   const [visible, setVisible] = useState(false);
 
+  const timer = () => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 5000);
+  };
+
   useEffect(() => {
     if (msg) {
+      clearTimeout(timer);
       setVisible(true);
-      setTimeout(() => {
-        setVisible(false);
-      }, 5000);
+      timer();
     }
   }, [msg]);
 

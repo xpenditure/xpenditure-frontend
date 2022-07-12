@@ -33,21 +33,18 @@ function App() {
     // budgets
     socket.emit('fetchBudgets');
     socket.on('fetchBudgets', (data) => {
-      console.log('budgets', data);
       dispatch(addBudgets(data));
     });
 
     // labels
     socket.emit('fetchLabels');
     socket.on('fetchLabels', (data) => {
-      console.log('labels', data);
       dispatch(addLabels(data));
     });
 
     // user profile
     socket.emit('fetchUserProfile');
     socket.on('fetchUserProfile', (data) => {
-      console.log('profile', data);
       dispatch(setUserData(data));
     });
   }, []);

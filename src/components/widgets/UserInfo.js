@@ -69,6 +69,7 @@ const UserInfoWrap = styled.div`
     background-color: ${(props) => props.theme.colors.input_color1};
     display: flex;
     overflow: hidden;
+    border: 2px solid #999;
 
     img {
       width: 100%;
