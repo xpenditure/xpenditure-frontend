@@ -44,7 +44,7 @@ const WithTheme = ({ children }) => {
       secondary: '#161b22',
       card_color1: '#21262d',
       border_color1: '#30363d',
-      text_color1: '#f0f6fc',
+      text_color1: 'lightgrey',
       text_color2: '#c9d1d9',
       text_color_default: '#fff',
       hover_color1: '#b1bac41f',

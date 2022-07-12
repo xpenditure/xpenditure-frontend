@@ -45,7 +45,7 @@ const BudgetCardOption = ({ close, budget }) => {
 
   return (
     <More visible={true} close={close}>
-      <Wrap onClick={(e) => e.preventDefault()}>
+      <Wrap>
         <div className="link">
           <p onClick={handleDeleteBudget}>
             <i>
@@ -53,7 +53,7 @@ const BudgetCardOption = ({ close, budget }) => {
             </i>
             Delete budget
           </p>
-          <p onClick={() => handleLabelAction()}>
+          <p onClick={handleLabelAction}>
             <i>
               <LabelIcon />
             </i>
@@ -68,7 +68,7 @@ const BudgetCardOption = ({ close, budget }) => {
           <Link
             to={`/dashboard/edit/budgets/${budget._id}`}
             state={{ background: location }}
-            onClick={() => handleEditAction()}
+            onClick={handleEditAction}
           >
             <i>
               <EditIcon />
