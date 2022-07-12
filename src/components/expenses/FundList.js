@@ -1,17 +1,47 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import Table from '../table/Table';
+import Time from '../excerpt/Time';
+import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
 
 const FundList = ({ funds, budget }) => {
+  const columns = useMemo(() => [
+    {
+      Header: 'Narration',
+      accessor: 'narration',
+    },
+    {
+      Header: 'Date',
+      accessor: 'createdAt',
+      Cell: ({ cell: { value } }) => {
+        return <Time value={value} />;
+      },
+    },
+    {
+      Header: 'Amount',
+      accessor: 'total',
+      Cell: ({ cell: { value } }) => {
+        return <span>${value.toLocaleString()}</span>;
+      },
+    },
+    {
+      Header: '',
+      accessor: '_id',
+      Cell: ({ cell: { value } }) => {
+        return (
+          <span>
+            <IoEllipsisHorizontalSharp />
+          </span>
+        );
+      },
+    },
+  ]);
   return (
     <div>
-      <div>
-        {'Initial fund' || budget?.name} - ${budget?.total.toLocaleString()}
-      </div>
-      {funds &&
-        funds.map((item) => (
-          <div key={item._id}>
-            {item?.narration} - ${item?.total.toLocaleString()}
-          </div>
-        ))}
+      {funds && (
+        <div>
+          <Table columns={columns} data={funds} />
+        </div>
+      )}
     </div>
   );
 };

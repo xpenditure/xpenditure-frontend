@@ -84,7 +84,7 @@ const TableWrap = styled.div`
     width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
-    background-color: ${(props) => props.theme.secondary};
+    color: ${(props) => props.theme.colors.text_color2};
 
     tr {
       :last-child {
@@ -93,7 +93,7 @@ const TableWrap = styled.div`
         }
       }
       :nth-child(even) {
-        background-color: ${(props) => props.theme.primary};
+        background-color: ${(props) => props.theme.colors.secondary};
       }
     }
 
@@ -107,6 +107,14 @@ const TableWrap = styled.div`
         border-right: 0;
         text-align: right;
       }
+    }
+
+    thead {
+      font-size: 14px;
+    }
+
+    tbody {
+      font-size: 14px;
     }
   }
 `;
