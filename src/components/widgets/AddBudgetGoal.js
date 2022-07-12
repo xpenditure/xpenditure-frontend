@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   ButtonPrimary,
   InputWrap,
@@ -13,9 +13,24 @@ import {
 } from '../../validations/inputValidation';
 import Close from '../excerpt/Close';
 import Modal from '../modal/Modal';
+import { SocketContext } from '../../context/socket';
 
 const AddBudgetGoal = ({ close, budget }) => {
   const [goal, setGoal] = useState('');
+  const socket = useContext(SocketContext);
+
+  const handleBudgetGoal = (e) => {
+    e.preventDefault();
+
+    const payload = {
+      budgetId: budget._id,
+      goal,
+    };
+
+    socket.emit('budgetGoal', payload);
+    close();
+  };
+
   return (
     <Modal visible={true} close={close}>
       <AddWrap>
@@ -26,7 +41,7 @@ const AddBudgetGoal = ({ close, budget }) => {
           <Close close={close} />
         </AddNav>
         <AddMain>
-          <form>
+          <form onSubmit={handleBudgetGoal}>
             <InputWrap>
               <label>Goal total</label>
               <input

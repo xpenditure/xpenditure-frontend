@@ -117,6 +117,22 @@ const TableWrap = styled.div`
       font-size: 14px;
     }
   }
+
+  .icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: ${(props) => props.theme.colors.text_color2};
+    cursor: pointer;
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
+    }
+  }
 `;
 
 export default Table;

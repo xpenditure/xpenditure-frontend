@@ -19,7 +19,7 @@ const ExpensesHeader = ({ budgetId }) => {
           <div className="ehleft"></div>
           <div className="ehright">
             <Button>
-              Sort{' '}
+              Sort
               <div className="icon">
                 <CaretDownIcon />
               </div>

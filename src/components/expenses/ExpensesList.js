@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Table from '../table/Table';
-import moment from 'moment';
 import Time from '../excerpt/Time';
 import { IoEllipsisHorizontalSharp } from 'react-icons/io5';
+import More from '../widgets/More';
 
 const ExpensesList = ({ expenses }) => {
+  const [id, setId] = useState('');
+
   const columns = useMemo(() => [
     {
       Header: 'Name',
@@ -29,9 +31,17 @@ const ExpensesList = ({ expenses }) => {
       accessor: '_id',
       Cell: ({ cell: { value } }) => {
         return (
-          <span>
+          <div className="icon" onClick={() => setId(value)}>
             <IoEllipsisHorizontalSharp />
-          </span>
+            {id === value && (
+              <More close={() => setId('')} visible={true}>
+                <div className="link">
+                  <p>View expenses</p>
+                  <p>Delete</p>
+                </div>
+              </More>
+            )}
+          </div>
         );
       },
     },

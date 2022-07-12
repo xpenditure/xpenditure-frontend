@@ -7,10 +7,12 @@ import {
   IoCardOutline,
   IoChatboxOutline,
   IoBookmarksOutline,
-  IoEllipsisHorizontalOutline,
+  IoEllipsisHorizontalSharp,
 } from 'react-icons/io5';
-import { ButtonPrimary, ButtonWrap } from '../../styles/DefaultStyles';
+import { Button, ButtonPrimary, ButtonWrap } from '../../styles/DefaultStyles';
 import BudgetCardOption from './BudgetCardOption';
+import AddFund from '../widgets/AddFund';
+import AddBudgetGoal from '../widgets/AddBudgetGoal';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
@@ -31,6 +33,14 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
 
   const closeOption = () => {
     setActiveMore(false);
+  };
+
+  const closeAddFund = () => {
+    setActiveFund(false);
+  };
+
+  const closeAddGoal = () => {
+    setActiveGoal(false);
   };
 
   return (
@@ -90,7 +100,7 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                   className="icon ellipsis"
                   onClick={() => setActiveMore(true)}
                 >
-                  <IoEllipsisHorizontalOutline />
+                  <IoEllipsisHorizontalSharp />
                   {activeMore && (
                     <BudgetCardOption
                       close={closeOption}
@@ -106,9 +116,16 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <p>Your balance</p>
                 <h3>${calcBalance().toLocaleString()}</h3>
               </div>
-              <ButtonWrap>
-                <ButtonPrimary>Top up</ButtonPrimary>
-              </ButtonWrap>
+              <div className="sum-btn">
+                <ButtonWrap>
+                  <Button onClick={() => setActiveGoal(true)}>Add goal</Button>
+                </ButtonWrap>
+                <ButtonWrap>
+                  <ButtonPrimary onClick={() => setActiveFund(true)}>
+                    Top up
+                  </ButtonPrimary>
+                </ButtonWrap>
+              </div>
             </div>
           </DataSummary>
         </DataTop>
@@ -117,6 +134,8 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
           <DataChart></DataChart>
         </DataBottom>
       </BudgetDataWrap>
+      {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
+      {activeGoal && <AddBudgetGoal close={closeAddGoal} budget={budget} />}
     </>
   );
 };
@@ -212,6 +231,13 @@ const DataSummary = styled.div`
 
   .sum-top-left {
     display: flex;
+  }
+  .sum-btn {
+    display: flex;
+
+    div:last-child {
+      margin-left: 20px;
+    }
   }
   .sum-bal {
     display: flex;

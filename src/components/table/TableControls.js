@@ -67,6 +67,7 @@ const ControlWrap = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 20px 40px;
+  color: ${(props) => props.theme.colors.text_color2};
 
   .pagination {
     display: flex;
@@ -76,6 +77,11 @@ const ControlWrap = styled.div`
   .pagination-btn {
     display: flex;
     margin-right: 20px;
+
+    .disabled {
+      color: #666;
+      cursor: default;
+    }
 
     button {
       padding: 5px 10px;
@@ -87,6 +93,9 @@ const ControlWrap = styled.div`
       outline: none;
       margin: 0 5px;
       border-radius: ${(props) => props.theme.reset.border_radius};
+      background: transparent;
+      color: ${(props) => props.theme.colors.text_color2};
+      font-size: 16px;
     }
   }
 `;
