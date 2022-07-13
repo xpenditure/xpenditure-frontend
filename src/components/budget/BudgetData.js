@@ -14,6 +14,8 @@ import BudgetCardOption from './BudgetCardOption';
 import AddFund from '../widgets/AddFund';
 import AddBudgetGoal from '../widgets/AddBudgetGoal';
 import More from '../widgets/More';
+import LineChart from '../charts/LineChart';
+import PieChart from '../charts/PieChart';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
@@ -153,8 +155,18 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
           </DataSummary>
         </DataTop>
         <DataBottom>
-          <DataGraph></DataGraph>
-          <DataChart></DataChart>
+          <DataGraph>
+            {expenses?.length > 0 && (
+              <LineChart funds={funds} expenses={expenses} />
+            )}
+          </DataGraph>
+          <DataChart>
+            <PieChart
+              income={calcIncome()}
+              spendings={calcSpendings()}
+              balance={calcBalance()}
+            />
+          </DataChart>
         </DataBottom>
       </BudgetDataWrap>
       {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
@@ -300,12 +312,14 @@ const DataChart = styled.div`
   width: 30%;
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const DataGraph = styled.div`
   width: 68%;
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
-  height: 350px;
 `;
 
 export default BudgetData;
