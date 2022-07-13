@@ -5,17 +5,16 @@ import {
   IoBagCheckOutline,
   IoReceiptOutline,
   IoCardOutline,
-  IoChatboxOutline,
-  IoBookmarksOutline,
   IoEllipsisHorizontalSharp,
 } from 'react-icons/io5';
-import { Button, ButtonPrimary, ButtonWrap } from '../../styles/DefaultStyles';
-import BudgetCardOption from './BudgetCardOption';
+
 import AddFund from '../widgets/AddFund';
 import AddBudgetGoal from '../widgets/AddBudgetGoal';
 import More from '../widgets/More';
 import LineChart from '../charts/LineChart';
 import PieChart from '../charts/PieChart';
+import NoTransaction from '../transaction/NoTransaction';
+import BudgetCardOption from './BudgetCardOption';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
@@ -53,6 +52,15 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
         <DataTop>
           <DataCards>
             <div className="data-card balance">
+              <div
+                class="icon card-more-icon"
+                onClick={() => setActiveMore(true)}
+              >
+                <IoEllipsisHorizontalSharp />
+                {activeMore && (
+                  <BudgetCardOption budget={budget} close={closeOption} />
+                )}
+              </div>
               <div className="card-icon">
                 <IoWalletOutline />
               </div>
@@ -90,7 +98,10 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 <IoBagCheckOutline />
               </div>
               <div className="card-details">
-                <div class="icon goal-icon" onClick={() => setGoalMore(true)}>
+                <div
+                  class="icon card-more-icon"
+                  onClick={() => setGoalMore(true)}
+                >
                   <IoEllipsisHorizontalSharp />
                   <More visible={goalMore} close={() => setGoalMore(false)}>
                     <div className="link">
@@ -106,66 +117,25 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
               </div>
             </div>
           </DataCards>
-          <DataSummary>
-            <div className="sum-top">
-              <div className="sum-top-left">
-                <div className="icon">
-                  <IoChatboxOutline />
-                </div>
-                <div className="icon">
-                  <IoBookmarksOutline />
-                </div>
-              </div>
-              <div className="sum-top-right">
-                <div
-                  className="icon ellipsis"
-                  onClick={() => setActiveMore(true)}
-                >
-                  <IoEllipsisHorizontalSharp />
-                  {activeMore && (
-                    <BudgetCardOption
-                      close={closeOption}
-                      labels={budget.labels}
-                      budget={budget}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="sum-bottom">
-              <div className="sum-bal">
-                <p>Your balance</p>
-                <h3>${calcBalance().toLocaleString()}</h3>
-              </div>
-              <div className="sum-btn">
-                {budget.goal <= 0 && (
-                  <ButtonWrap>
-                    <Button onClick={() => setActiveGoal(true)}>
-                      Add goal
-                    </Button>
-                  </ButtonWrap>
-                )}
-                <ButtonWrap>
-                  <ButtonPrimary onClick={() => setActiveFund(true)}>
-                    Top up
-                  </ButtonPrimary>
-                </ButtonWrap>
-              </div>
-            </div>
-          </DataSummary>
         </DataTop>
         <DataBottom>
           <DataGraph>
-            {expenses?.length > 0 && (
+            {expenses?.length > 0 ? (
               <LineChart funds={funds} expenses={expenses} />
+            ) : (
+              <NoTransaction />
             )}
           </DataGraph>
           <DataChart>
-            <PieChart
-              income={calcIncome()}
-              spendings={calcSpendings()}
-              balance={calcBalance()}
-            />
+            {expenses?.length > 0 ? (
+              <PieChart
+                income={calcIncome()}
+                spendings={calcSpendings()}
+                balance={calcBalance()}
+              />
+            ) : (
+              <NoTransaction />
+            )}
           </DataChart>
         </DataBottom>
       </BudgetDataWrap>
@@ -194,7 +164,7 @@ const BudgetDataWrap = styled.div`
     }
   }
 
-  .goal-icon {
+  .card-more-icon {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -202,9 +172,9 @@ const BudgetDataWrap = styled.div`
 `;
 const DataCards = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 20px;
-  width: 63%;
+  width: 100%;
 
   .data-card {
     height: 170px;
@@ -248,52 +218,6 @@ const DataCards = styled.div`
     .card-total {
       font-size: 18px;
       color: ${(props) => props.theme.colors.text_color1};
-    }
-  }
-`;
-
-const DataSummary = styled.div`
-  width: 35%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid ${(props) => props.theme.colors.border_color1};
-  border-radius: ${(props) => props.theme.reset.border_radius};
-  padding: 20px;
-  height: 170px;
-
-  .ellipsis {
-    position: relative;
-  }
-
-  .sum-top,
-  .sum-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .sum-top-left {
-    display: flex;
-  }
-  .sum-btn {
-    display: flex;
-
-    div:last-child {
-      margin-left: 20px;
-    }
-  }
-  .sum-bal {
-    display: flex;
-    flex-direction: column;
-    p {
-      color: ${(props) => props.theme.colors.text_color2};
-      margin-bottom: 10px;
-    }
-
-    h3 {
-      color: ${(props) => props.theme.colors.text_color1};
-      font-size: 25px;
     }
   }
 `;
