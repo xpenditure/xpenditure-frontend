@@ -6,7 +6,7 @@ import { numberWithCommas } from '../../validations/inputValidation';
 const LineChart = ({ expenses, funds }) => {
   const options = {
     chart: {
-      type: 'area',
+      type: 'line',
       stacked: false,
       height: 350,
       zoom: {
@@ -18,6 +18,7 @@ const LineChart = ({ expenses, funds }) => {
         autoSelected: 'zoom',
       },
     },
+    colors: ['#1d504b', '#1e3a57', '#442f19'],
     dataLabels: {
       enabled: false,
     },
@@ -27,16 +28,6 @@ const LineChart = ({ expenses, funds }) => {
     title: {
       text: 'Expenses & Funds Movement',
       align: 'left',
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 1,
-        inverseColors: false,
-        opacityFrom: 0.5,
-        opacityTo: 0,
-        stops: [0, 90, 100],
-      },
     },
     yaxis: {
       categories: expenses.map(({ total }) => total),
@@ -63,6 +54,10 @@ const LineChart = ({ expenses, funds }) => {
         },
       },
     },
+    legend: {
+      horizontalAlign: 'left',
+      offsetX: 40,
+    },
   };
 
   const series = [
@@ -81,7 +76,7 @@ const LineChart = ({ expenses, funds }) => {
       {expenses && (
         <Chart
           options={options}
-          type="area"
+          type="line"
           width="100%"
           height="350"
           series={series}
