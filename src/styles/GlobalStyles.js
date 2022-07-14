@@ -65,4 +65,11 @@ a {
   color: #ff9191 !important;
 }
 
+/* apex charts */
+.apexcharts-menu {
+  background-color: ${(props) => props.theme.colors.primary} !important;
+  border: 1px solid ${(props) => props.theme.colors.border_color1} !important;
+  color: ${(props) => props.theme.colors.text_color2}
+}
+
 `;

@@ -38,12 +38,21 @@ const Inner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 const TransactionMain = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
   width: 65%;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    order: 2;
+  }
 `;
 
 export default Transactions;

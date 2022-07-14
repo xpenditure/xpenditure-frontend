@@ -11,6 +11,12 @@ const BudgetCard = ({ budget }) => {
   const [id, setId] = useState('');
   const dispatch = useDispatch();
 
+  const reduceWord = () => {
+    return budget.name.length > 30
+      ? budget.name.slice(0, 30) + '...'
+      : budget.name;
+  };
+
   const balanace = () => {
     let funds = budget?.funds;
     let expenses = budget?.expenses;
@@ -49,7 +55,7 @@ const BudgetCard = ({ budget }) => {
       </CardHead>
       <CardInfo>
         <Link to={`/dashboard/budgets/${budget._id}`}>
-          <div className="budget-name">{budget.name}</div>
+          <div className="budget-name">{reduceWord()}</div>
         </Link>
 
         <div className="budget-total">
@@ -81,12 +87,15 @@ const BudgetCardWrap = styled.div`
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: 5px;
   margin-bottom: ${(props) => (props.layout === 'list' ? '20px' : '0')};
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardInfo = styled.div`
   margin-bottom: 20px;
   padding: 20px;
   padding-top: 0;
+  height: 100px;
 
   .budget-name {
     font-size: 20px;

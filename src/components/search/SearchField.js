@@ -22,7 +22,10 @@ const SearchField = ({ data }) => {
   );
 };
 
-const SearchFieldWrap = styled.div``;
+const SearchFieldWrap = styled.div`
+  max-height: 300px;
+  overflow-y: auto;
+`;
 
 const SearchList = styled.div`
   display: flex;
@@ -35,6 +38,10 @@ const SearchList = styled.div`
 
     &:last-child {
       border: none;
+    }
+
+    :hover {
+      background-color: ${(props) => props.theme.colors.hover_color1};
     }
   }
 `;

@@ -37,6 +37,12 @@ const DataSummary = styled.div`
   padding: 20px;
   flex-direction: column;
 
+  @media (max-width: 800px) {
+    width: 100%;
+    order: 1;
+    margin-bottom: 20px;
+  }
+
   .summary {
     margin-bottom: 20px;
   }

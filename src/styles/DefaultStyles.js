@@ -100,6 +100,7 @@ export const AddNav = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  color: ${(props) => props.theme.colors.text_color2};
 `;
 
 export const AddMain = styled.div`

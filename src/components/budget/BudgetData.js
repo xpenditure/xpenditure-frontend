@@ -6,6 +6,7 @@ import {
   IoReceiptOutline,
   IoCardOutline,
   IoEllipsisHorizontalSharp,
+  IoAddSharp,
 } from 'react-icons/io5';
 
 import AddFund from '../widgets/AddFund';
@@ -15,6 +16,7 @@ import LineChart from '../charts/LineChart';
 import PieChart from '../charts/PieChart';
 import NoTransaction from '../transaction/NoTransaction';
 import BudgetCardOption from './BudgetCardOption';
+import { ButtonPrimary } from '../../styles/DefaultStyles';
 
 const BudgetData = ({ budget, budgetId, funds, expenses }) => {
   const [activeMore, setActiveMore] = useState(false);
@@ -34,31 +36,31 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
     return expenses?.reduce((a, b) => a + b.total, 0) || '0.00';
   };
 
-  const closeOption = () => {
-    setActiveMore(false);
-  };
-
-  const closeAddFund = () => {
-    setActiveFund(false);
-  };
-
-  const closeAddGoal = () => {
-    setActiveGoal(false);
-  };
-
   return (
     <>
       <BudgetDataWrap>
         <DataTop>
           <DataCards>
             <div className="data-card balance">
+              <ButtonPrimary
+                onClick={() => setActiveFund(true)}
+                className="top-up"
+              >
+                <span>Top up</span>
+                <i>
+                  <IoAddSharp />
+                </i>
+              </ButtonPrimary>
               <div
                 class="icon card-more-icon"
                 onClick={() => setActiveMore(true)}
               >
                 <IoEllipsisHorizontalSharp />
                 {activeMore && (
-                  <BudgetCardOption budget={budget} close={closeOption} />
+                  <BudgetCardOption
+                    budget={budget}
+                    close={() => setActiveMore(false)}
+                  />
                 )}
               </div>
               <div className="card-icon">
@@ -94,6 +96,14 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
               </div>
             </div>
             <div className="data-card">
+              {budget.goal === 0 && (
+                <button
+                  className="add-goal"
+                  onClick={() => setActiveGoal(true)}
+                >
+                  <IoAddSharp />
+                </button>
+              )}
               <div className="card-icon">
                 <IoBagCheckOutline />
               </div>
@@ -139,8 +149,12 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
           </DataChart>
         </DataBottom>
       </BudgetDataWrap>
-      {activeFund && <AddFund close={closeAddFund} budgetId={budgetId} />}
-      {activeGoal && <AddBudgetGoal close={closeAddGoal} budget={budget} />}
+      {activeFund && (
+        <AddFund close={() => setActiveFund(false)} budgetId={budgetId} />
+      )}
+      {activeGoal && (
+        <AddBudgetGoal close={() => setActiveGoal(false)} budget={budget} />
+      )}
     </>
   );
 };
@@ -148,6 +162,20 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
 const BudgetDataWrap = styled.div`
   width: 100%;
   margin-bottom: 50px;
+
+  .top-up {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+
+    i {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      margin-left: 5px;
+    }
+  }
 
   .icon {
     width: 35px;
@@ -169,12 +197,35 @@ const BudgetDataWrap = styled.div`
     top: 10px;
     right: 10px;
   }
+
+  .add-goal {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: ${(props) => props.theme.colors.btn_color_primary};
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    color: ${(props) => props.theme.colors.text_color2};
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 `;
 const DataCards = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 20px;
   width: 100%;
+  margin-bottom: 20px;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
 
   .data-card {
     height: 170px;
@@ -231,6 +282,10 @@ const DataTop = styled.div`
 const DataBottom = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 `;
 const DataChart = styled.div`
   width: 30%;
@@ -239,11 +294,20 @@ const DataChart = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 `;
 const DataGraph = styled.div`
   width: 68%;
   border: 1px solid ${(props) => props.theme.colors.border_color1};
   border-radius: ${(props) => props.theme.reset.border_radius};
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 `;
 
 export default BudgetData;

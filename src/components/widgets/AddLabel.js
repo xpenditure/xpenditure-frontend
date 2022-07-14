@@ -59,7 +59,9 @@ const AddLabel = () => {
     <Modal visible={addLabelModal} close={close}>
       <AddWrap>
         <AddNav>
-          <div>Add label</div>
+          <div>
+            Add label to <b>{budget?.name}</b>
+          </div>
           <Close close={close} />
         </AddNav>
         <AddMain>

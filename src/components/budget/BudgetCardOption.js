@@ -17,9 +17,9 @@ const BudgetCardOption = ({ close, budget }) => {
   const socket = useContext(SocketContext);
 
   const handleLabelAction = () => {
+    close();
     dispatch(toggleAddLabelModal(true));
     dispatch(setBudgetLabels(budget.labels));
-    close();
   };
 
   const handleEditAction = () => {

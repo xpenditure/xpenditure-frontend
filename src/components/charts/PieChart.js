@@ -6,7 +6,13 @@ const PieChart = ({ income, spendings, balance }) => {
   const series = [income, spendings, balance];
   return (
     <div>
-      <Chart options={options} series={series} type="pie" width="100%" />
+      <Chart
+        options={options}
+        series={series}
+        type="pie"
+        width="100%"
+        height="100%"
+      />
     </div>
   );
 };
