@@ -1,19 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const SearchField = () => {
+const SearchField = ({ data }) => {
   return (
     <SearchFieldWrap>
-      <div>search results will show here</div>
+      {data?.length === 0 ? (
+        <NoResult>
+          <p>Search result shows here</p>
+        </NoResult>
+      ) : (
+        <SearchList>
+          {data.map((budget) => (
+            <Link to={`/dashboard/budgets/${budget._id}`} key={budget._id}>
+              {budget.name}
+            </Link>
+          ))}
+        </SearchList>
+      )}
     </SearchFieldWrap>
   );
 };
 
-const SearchFieldWrap = styled.div`
-  padding: 20px;
+const SearchFieldWrap = styled.div``;
+
+const SearchList = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  a {
+    border-bottom: 1px solid ${(props) => props.theme.colors.border_color1};
+    padding: 10px;
+    color: ${(props) => props.theme.colors.text_color2};
+
+    &:last-child {
+      border: none;
+    }
+  }
+`;
+
+const NoResult = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
+  color: ${(props) => props.theme.colors.text_color2};
 `;
 
 export default SearchField;

@@ -1,15 +1,8 @@
-import React, { useState, createRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { IoSearchOutline, IoCloseCircle } from 'react-icons/io5';
 
-const SearchInput = () => {
-  const [search, setSearch] = useState('Hi there');
-  const inputRef = createRef();
-
-  const clearSearchInput = () => {
-    setSearch('');
-  };
-
+const SearchInput = ({ search, setSearch }) => {
   return (
     <SearchInputWrap>
       <form>
@@ -18,7 +11,6 @@ const SearchInput = () => {
             <IoSearchOutline />
           </i>
           <input
-            ref={inputRef}
             autoFocus={true}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -29,7 +21,7 @@ const SearchInput = () => {
           />
 
           <i className={search ? 'close' : 'close hidden'}>
-            <IoCloseCircle onClick={clearSearchInput} />
+            <IoCloseCircle onClick={() => setSearch('')} />
           </i>
         </Input>
       </form>
