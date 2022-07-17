@@ -40,8 +40,8 @@ const actionSlice = createSlice({
     toggleDelBudgetModal(state, action) {
       state.delBudgetModal = action.payload;
     },
-    toggleSideNav(state) {
-      state.sideNav = !state.sideNav;
+    toggleSideNav(state, action) {
+      state.sideNav = action.payload;
     },
   },
 });

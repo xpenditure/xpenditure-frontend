@@ -17,7 +17,7 @@ import CreateBtnMob from './CreateBtnMob';
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { layout } = useSelector((state) => state.action);
+  const { layout, sideNav } = useSelector((state) => state.action);
 
   const handleShowMoreSide = () => {
     dispatch(toggleMoreSide(true));
@@ -28,7 +28,9 @@ const Header = () => {
   };
 
   const handleSideNav = () => {
-    dispatch(toggleSideNav());
+    sideNav === true
+      ? dispatch(toggleSideNav(false))
+      : dispatch(toggleSideNav(true));
   };
 
   return (

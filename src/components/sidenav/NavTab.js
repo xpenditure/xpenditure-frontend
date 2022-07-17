@@ -16,7 +16,6 @@ const NavTab = ({ active }) => {
 
   const handleToggleLabel = () => {
     setLabel(!label);
-    closeSideNav();
   };
 
   const closeSideNav = () => {
