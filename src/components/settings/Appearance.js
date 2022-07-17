@@ -5,23 +5,14 @@ import { SocketContext } from '../../context/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBackground, setColor, setUserData } from '../../features/userSlice';
 import { setToLS } from '../../utils/storage';
+import { IoRadioButtonOff, IoRadioButtonOn } from 'react-icons/io5';
 
 const Appearance = () => {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  const colors = [
-    '#5c2b29',
-    '#614919',
-    '#5b2245',
-    '#1e3a57',
-    '#442f19',
-    '#1d504b',
-    '#2d555e',
-    '#256141',
-    '#468737',
-  ];
+  const colors = ['#5c2b29', '#1d504b', '#2d555e', '#256141', '#468737'];
 
   const backgrounds = [
     { mode: 'light', name: 'Default', color: '#fff' },
@@ -73,7 +64,16 @@ const Appearance = () => {
               color={background.color}
               onClick={() => handleBackground(background.mode)}
             >
-              <div className="name">{background.name}</div>
+              <div className="name">
+                {background.name}
+                <span>
+                  {user.background === background.mode ? (
+                    <IoRadioButtonOn />
+                  ) : (
+                    <IoRadioButtonOff />
+                  )}
+                </span>
+              </div>
             </Background>
           ))}
         </BackgroundWrap>
@@ -133,6 +133,18 @@ const Background = styled.div`
   color: ${(props) => (props.color === '#fff' ? '#444' : '#c9d1d9')};
   font-weight: 600;
   cursor: pointer;
+
+  .name {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 export default Appearance;

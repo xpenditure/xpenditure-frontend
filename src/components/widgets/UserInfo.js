@@ -101,6 +101,10 @@ const UserInfoWrap = styled.div`
   .email {
     font-size: 12px;
   }
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 const ShowMenu = styled.div`

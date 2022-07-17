@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Close from '../excerpt/Close';
-import { AccountIcon, BellIcon, PaintbrushIcon } from '../icons';
+import { AccountIcon, PaintbrushIcon } from '../icons';
 import Modal from '../modal/Modal';
 import Account from './Account';
 import Appearance from './Appearance';
-import Notifications from './Notifications';
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState('account');
@@ -17,7 +16,6 @@ const Settings = () => {
   const tabList = [
     { name: 'Account', alias: 'account', element: <AccountIcon /> },
     { name: 'Appearance', alias: 'appearance', element: <PaintbrushIcon /> },
-    { name: 'Notifications', alias: 'notifications', element: <BellIcon /> },
   ];
 
   const handleItem = (tab) => {
@@ -54,7 +52,6 @@ const Settings = () => {
           <SettingsView>
             {activeTab === 'account' && <Account />}
             {activeTab === 'appearance' && <Appearance />}
-            {activeTab === 'notifications' && <Notifications />}
           </SettingsView>
         </SettingsMain>
       </SettingsInner>

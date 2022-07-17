@@ -17,7 +17,6 @@ import { addBudgets, addLabels } from './features/budgetSlice';
 import { SocketContext } from './context/socket';
 import EditBudget from './components/widgets/EditBudget';
 import EditLabel from './components/widgets/EditLabel';
-import Notifications from './pages/Notifications';
 import { setUserData } from './features/userSlice';
 import Search from './components/search/Search';
 
@@ -81,7 +80,6 @@ function App() {
           }
         >
           <Route index element={<Budgets />} />
-          <Route path="notifications" element={<Notifications />} />
           <Route path="archive" element={<Archive />} />
           <Route path="labels/:labelId" element={<Labels />} />
           <Route path="budgets/:budgetId" element={<OneBudget />} />

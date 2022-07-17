@@ -1,20 +1,31 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { toggleSideNav } from '../../features/actionSlice';
 import NavTab from './NavTab';
+import UserInfoMob from '../widgets/UserInfoMob';
 
 const Sidenav = () => {
   const { sideNav } = useSelector((state) => state.action);
+  const dispatch = useDispatch();
 
   return (
-    <SidenavWrap active={sideNav}>
-      <SidenavInner>
-        <SidenavTop>
-          <NavTab active={sideNav} />
-        </SidenavTop>
-        <SidenavBottom></SidenavBottom>
-      </SidenavInner>
-    </SidenavWrap>
+    <>
+      <Overlay
+        active={sideNav}
+        onClick={() => dispatch(toggleSideNav(false))}
+      />
+      <SidenavWrap active={sideNav}>
+        <SidenavInner>
+          <SidenavTop>
+            <NavTab active={sideNav} />
+          </SidenavTop>
+          <SidenavBottom>
+            <UserInfoMob />
+          </SidenavBottom>
+        </SidenavInner>
+      </SidenavWrap>
+    </>
   );
 };
 
@@ -28,7 +39,12 @@ const SidenavWrap = styled.div`
   transition: all 300ms;
 
   @media (max-width: 800px) {
-    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 300px;
+    z-index: 999999;
+    margin-left: ${(props) => (props.active ? '0px' : '-300px')};
   }
 `;
 
@@ -47,6 +63,19 @@ const SidenavTop = styled.div`
 
 const SidenavBottom = styled.div`
   width: 100%;
+`;
+
+const Overlay = styled.div`
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0);
+  z-index: 999999;
+
+  @media (max-width: 800px) {
+    display: ${(props) => (props.active ? 'block' : 'none')};
+  }
 `;
 
 export default Sidenav;

@@ -18,12 +18,6 @@ const ExpensesHeader = ({ budgetId }) => {
         <Inner>
           <div className="ehleft"></div>
           <div className="ehright">
-            <Button>
-              Sort
-              <div className="icon">
-                <CaretDownIcon />
-              </div>
-            </Button>
             <ButtonPrimary onClick={() => setActive(true)}>
               New expenses
             </ButtonPrimary>

@@ -52,6 +52,10 @@ const CreateWrap = styled.div`
   .create-new {
     position: relative;
   }
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export default CreateBtn;

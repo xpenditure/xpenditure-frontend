@@ -22,7 +22,7 @@ const ModalWrap = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 999998;
+  z-index: 999999998;
   display: ${(props) => (props.visible ? 'flex' : 'none')};
   justify-content: center;
   align-items: flex-start;

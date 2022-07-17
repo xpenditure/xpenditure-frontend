@@ -18,7 +18,6 @@ const LineChart = ({ expenses, funds }) => {
         autoSelected: 'zoom',
       },
     },
-    colors: ['#1d504b', '#1e3a57', '#442f19'],
     dataLabels: {
       enabled: false,
     },

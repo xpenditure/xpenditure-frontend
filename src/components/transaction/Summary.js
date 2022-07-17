@@ -39,8 +39,7 @@ const DataSummary = styled.div`
 
   @media (max-width: 800px) {
     width: 100%;
-    order: 1;
-    margin-bottom: 20px;
+    order: 2;
   }
 
   .summary {

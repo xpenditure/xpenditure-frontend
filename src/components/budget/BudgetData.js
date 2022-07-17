@@ -51,11 +51,10 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                   <IoAddSharp />
                 </i>
               </ButtonPrimary>
-              <div
-                class="icon card-more-icon"
-                onClick={() => setActiveMore(true)}
-              >
-                <IoEllipsisHorizontalSharp />
+              <div class="icon card-more-icon">
+                <IoEllipsisHorizontalSharp
+                  onClick={() => setActiveMore(true)}
+                />
                 {activeMore && (
                   <BudgetCardOption
                     budget={budget}
@@ -73,7 +72,7 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 </div>
               </div>
             </div>
-            <div className="data-card">
+            <div className="data-card income">
               <div className="card-icon">
                 <IoCardOutline />
               </div>
@@ -84,7 +83,7 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 </div>
               </div>
             </div>
-            <div className="data-card">
+            <div className="data-card spending">
               <div className="card-icon">
                 <IoReceiptOutline />
               </div>
@@ -95,7 +94,7 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                 </div>
               </div>
             </div>
-            <div className="data-card">
+            <div className="data-card goal">
               {budget.goal === 0 && (
                 <button
                   className="add-goal"
@@ -224,7 +223,20 @@ const DataCards = styled.div`
   margin-bottom: 20px;
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.5fr 1fr;
+  }
+
+  @media (max-width: 500px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .balance,
+    .goal,
+    .income,
+    .spending {
+      width: 100%;
+    }
   }
 
   .data-card {
@@ -305,6 +317,7 @@ const DataGraph = styled.div`
   border-radius: ${(props) => props.theme.reset.border_radius};
 
   @media (max-width: 1000px) {
+    display: none;
     width: 100%;
     margin-bottom: 30px;
   }

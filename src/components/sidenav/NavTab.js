@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { TabList, TabIcon, TabItem, TabName } from './styled';
-import { BellIcon, GearIcon, SearchIcon } from '../icons';
+import { GearIcon, SearchIcon } from '../icons';
 import { ArchiveIcon, ControlIcon, LabelIcon, CaretDownIcon } from '../icons';
 import LabelList from './LabelList';
 import { IconLg } from '../../styles/DefaultStyles';
+import { useDispatch } from 'react-redux';
+import { toggleSideNav } from '../../features/actionSlice';
 
 const NavTab = ({ active }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const [label, setLabel] = useState(false);
 
   const handleToggleLabel = () => {
     setLabel(!label);
+    closeSideNav();
   };
 
-  const handleToggleSearch = () => {
-    //
+  const closeSideNav = () => {
+    dispatch(toggleSideNav(false));
   };
 
   return (
@@ -29,7 +33,7 @@ const NavTab = ({ active }) => {
         }
         state={{ background: location }}
       >
-        <TabItem onClick={handleToggleSearch}>
+        <TabItem onClick={closeSideNav}>
           <TabIcon className="active-icon">
             <SearchIcon />
           </TabIcon>
@@ -42,6 +46,7 @@ const NavTab = ({ active }) => {
         className={({ isActive }) =>
           'nav-link' + (isActive ? ' activated' : '')
         }
+        onClick={closeSideNav}
       >
         <TabItem>
           <TabIcon className="active-icon">
@@ -56,6 +61,7 @@ const NavTab = ({ active }) => {
         className={({ isActive }) =>
           'nav-link' + (isActive ? ' activated' : '')
         }
+        onClick={closeSideNav}
       >
         <TabItem>
           <TabIcon className="active-icon">
@@ -64,22 +70,6 @@ const NavTab = ({ active }) => {
           <TabName>Archive</TabName>
         </TabItem>
       </NavLink>
-
-      <NavLink
-        to="notifications"
-        end
-        className={({ isActive }) =>
-          'nav-link' + (isActive ? ' activated' : '')
-        }
-      >
-        <TabItem>
-          <TabIcon className="active-icon">
-            <BellIcon />
-          </TabIcon>
-          <TabName>Notifications</TabName>
-        </TabItem>
-      </NavLink>
-
       <div className="custom">
         <TabItem onClick={handleToggleLabel}>
           <TabIcon className="active-icon">
@@ -102,6 +92,7 @@ const NavTab = ({ active }) => {
         }
         to="/dashboard/settings"
         state={{ background: location }}
+        onClick={closeSideNav}
       >
         <TabItem>
           <TabIcon className="active-icon">
