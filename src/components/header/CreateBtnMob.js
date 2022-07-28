@@ -40,6 +40,7 @@ const Wrap = styled.div`
   bottom: 40px;
   right: 40px;
   z-index: 999999;
+  display: none;
 
   .create-new {
     background-color: ${(props) => props.theme.colors.btn_color_primary};
@@ -50,6 +51,10 @@ const Wrap = styled.div`
     align-items: center;
     border-radius: 50%;
     font-size: 30px;
+  }
+
+  @media (max-width: 800px) {
+    display: block;
   }
 `;
 

@@ -35,7 +35,7 @@ const Header = () => {
 
   return (
     <HeaderWrap>
-      <CreateBtnMob />
+      {location.pathname === '/dashboard' && <CreateBtnMob />}
       <HeaderLeft>
         <IconLg className="menu" onClick={handleSideNav}>
           <MenuIcon />
