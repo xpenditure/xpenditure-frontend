@@ -28,8 +28,8 @@ const actionSlice = createSlice({
     toggleMoreSide(state, action) {
       state.moreSide = action.payload;
     },
-    toggleLayout(state) {
-      state.layout = state.layout === 'grid' ? 'list' : 'grid';
+    toggleLayout(state, action) {
+      state.layout = action.payload;
     },
     toggleAddLabelModal(state, action) {
       state.addLabelModal = action.payload;

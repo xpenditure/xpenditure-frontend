@@ -24,7 +24,8 @@ const Header = () => {
   };
 
   const handleChangeLayout = () => {
-    dispatch(toggleLayout());
+    let val = layout === 'grid' ? 'list' : 'grid';
+    dispatch(toggleLayout(val));
   };
 
   const handleSideNav = () => {
@@ -44,7 +45,7 @@ const Header = () => {
       <HeaderRight>
         {location.pathname === '/dashboard' && <CreateBtn />}
         <UserInfo />
-        <IconLg onClick={handleChangeLayout}>
+        <IconLg onClick={handleChangeLayout} className="icon-layout">
           {layout === 'grid' ? <ListIcon /> : <GridIcon />}
         </IconLg>
         <MoreItem>
@@ -84,6 +85,12 @@ const HeaderLeft = styled.div`
 const HeaderRight = styled.div`
   display: flex;
   align-items: center;
+
+  .icon-layout {
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
 
   .noti {
     margin-left: 20px;

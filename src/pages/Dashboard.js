@@ -10,6 +10,7 @@ import Alert from '../components/message/Alert';
 import { SocketContext } from '../context/socket';
 import DeleteBudget from '../components/widgets/DeleteBudget';
 import AddLabel from '../components/widgets/AddLabel';
+import { toggleLayout } from '../features/actionSlice';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,16 @@ const Dashboard = () => {
       });
     };
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth === 600) {
+        dispatch(toggleLayout('list'));
+      } else {
+        dispatch(toggleLayout('grid'));
+      }
+    });
+  });
 
   return (
     <>

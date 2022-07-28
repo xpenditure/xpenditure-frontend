@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import More from '../widgets/More';
-import { IoAdd } from 'react-icons/io5';
+import { IoAdd, IoAddSharp } from 'react-icons/io5';
 import { Link, useLocation } from 'react-router-dom';
 
 const CreateBtnMob = () => {
@@ -11,7 +11,7 @@ const CreateBtnMob = () => {
   return (
     <Wrap>
       <div class="create-new" onClick={() => setVisible(true)}>
-        <IoAdd />
+        <IoAddSharp />
       </div>
       <More visible={visible} close={() => setVisible(false)} pos="top">
         <div className="link">
@@ -37,18 +37,19 @@ const CreateBtnMob = () => {
 
 const Wrap = styled.div`
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: 30px;
+  right: 30px;
   z-index: 999999;
   display: none;
 
   .create-new {
     background-color: ${(props) => props.theme.colors.btn_color_primary};
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     border-radius: 50%;
     font-size: 30px;
   }
