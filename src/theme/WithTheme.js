@@ -28,6 +28,8 @@ const WithTheme = ({ children }) => {
       btn_color_primary_hover: accentColor + 'cla',
       hover_color1: '#4444441f',
       auth_bg_color: '#fff',
+      danger_color1: '#da3633',
+      danger_border_color: '#f85949',
       shadow1:
         'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;',
     },
