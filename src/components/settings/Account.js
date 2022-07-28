@@ -116,13 +116,27 @@ const Account = () => {
 
 const AccountWrap = styled.div`
   display: flex;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const AccountLeft = styled.div`
   width: 60%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 2;
+  }
 `;
 const AccountRight = styled.div`
   margin-left: 50px;
+
+  @media (max-width: 768px) {
+    order: 1;
+    margin-left: 50px;
+    margin-bottom: 50px;
+  }
 `;
 
 const AvatarWrap = styled.div`
@@ -149,6 +163,13 @@ const AvatarWrap = styled.div`
   .btn-wrap {
     position: absolute;
     bottom: 5px;
+  }
+
+  @media (max-width: 900px) {
+    .profile-img {
+      width: 100px;
+      height: 100px;
+    }
   }
 `;
 
