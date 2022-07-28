@@ -52,6 +52,7 @@ const Wrap = styled.div`
     cursor: pointer;
     border-radius: 50%;
     font-size: 30px;
+    color: #fff;
   }
 
   @media (max-width: 800px) {

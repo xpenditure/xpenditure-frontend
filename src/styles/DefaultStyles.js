@@ -113,7 +113,7 @@ export const ButtonWrap = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 5px 16px;
+  padding: 8px 16px;
   border-radius: 6px;
   font-weight: 400;
   cursor: pointer;
@@ -173,6 +173,7 @@ export const LabelList = styled.div`
   .active {
     border-color: ${(props) => props.theme.colors.btn_color_primary};
     background-color: ${(props) => props.theme.colors.btn_color_primary};
+    color: #fff;
   }
 `;
 export const Label = styled.div`
@@ -188,6 +189,10 @@ export const Label = styled.div`
 
   :hover {
     border-color: ${(props) => props.theme.colors.btn_color_primary};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 10px;
   }
 `;
 
