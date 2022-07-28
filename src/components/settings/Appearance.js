@@ -98,6 +98,7 @@ const Item = styled.div`
 
 const ColorsWrap = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 const Color = styled.div`
@@ -115,10 +116,20 @@ const Color = styled.div`
     width: 14px;
     fill: #fff;
   }
+
+  @media (max-width: 600px) {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 const BackgroundWrap = styled.div`
   display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
 const Background = styled.div`
   width: 150px;
@@ -144,6 +155,10 @@ const Background = styled.div`
       justify-content: center;
       align-items: center;
     }
+  }
+
+  @media (max-width: 600px) {
+    margin-bottom: 10px;
   }
 `;
 

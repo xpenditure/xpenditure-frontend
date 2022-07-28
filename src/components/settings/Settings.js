@@ -106,6 +106,24 @@ const SettingsSide = styled.div`
     font-size: 14px;
     color: ${(props) => props.theme.colors.text_color2};
   }
+
+  @media (max-width: 600px) {
+    min-width: 50px;
+    width: 50px;
+    overflow: hidden;
+
+    .tabItem {
+      padding: 0;
+    }
+    .tabName {
+      display: none;
+    }
+
+    .tabIcon {
+      width: 50px;
+      height: 50px;
+    }
+  }
 `;
 const SettingsMain = styled.div`
   flex: 1;
