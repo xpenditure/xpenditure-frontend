@@ -13,6 +13,7 @@ import { IconLg } from '../../styles/DefaultStyles';
 import CreateBtn from './CreateBtn';
 import { useLocation } from 'react-router-dom';
 import CreateBtnMob from './CreateBtnMob';
+import AppName from './AppName';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const Header = () => {
         <IconLg className="menu" onClick={handleSideNav}>
           <MenuIcon />
         </IconLg>
+        <AppName />
       </HeaderLeft>
       <HeaderRight>
         {location.pathname === '/dashboard' && <CreateBtn />}
