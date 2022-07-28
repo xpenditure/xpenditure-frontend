@@ -17,10 +17,10 @@ const WithTheme = ({ children }) => {
     colors: {
       input_color1: '#eee',
       primary: '#fff',
-      secondary: '#e5e5e5',
-      card_color1: '#f6f8fa',
+      secondary: '#fff',
+      card_color1: '#fff',
       text_color1: '#444',
-      text_color2: '#444',
+      text_color2: '#666',
       border_color1: '#ddd',
       text_color_default: '#222',
       btn_text_color: '#fff',

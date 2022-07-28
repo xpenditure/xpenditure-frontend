@@ -45,7 +45,7 @@ const MoreInner = styled.div`
     p {
       padding: 5px 10px;
       text-decoration: none;
-      color: ${(props) => props.theme.colors.text_color2};
+      color: ${(props) => props.theme.colors.text_color1};
       font-size: 14px;
       cursor: pointer;
       display: flex;

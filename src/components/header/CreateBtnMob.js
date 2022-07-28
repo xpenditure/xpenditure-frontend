@@ -10,7 +10,7 @@ const CreateBtnMob = () => {
 
   return (
     <Wrap>
-      <div class="create-new" onClick={() => setVisible(true)}>
+      <div className="create-new" onClick={() => setVisible(true)}>
         <IoAddSharp />
       </div>
       <More visible={visible} close={() => setVisible(false)} pos="top">

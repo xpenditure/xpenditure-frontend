@@ -18,7 +18,7 @@ const Summary = ({ budget }) => {
         {budget?.labels.length > 0 ? (
           <LabelList>
             {budget?.labels.map((label) => (
-              <Label>{label.name}</Label>
+              <Label key={label._id}>{label.name}</Label>
             ))}
           </LabelList>
         ) : (

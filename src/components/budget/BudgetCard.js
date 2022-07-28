@@ -101,11 +101,13 @@ const CardInfo = styled.div`
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 10px;
+    color: ${(props) => props.theme.colors.text_color1};
   }
 
   .budget-total {
     font-size: 20px;
-    opacity: 0.5;
+    /* opacity: 0.6; */
+    color: ${(props) => props.theme.colors.text_color2};
   }
 
   a {

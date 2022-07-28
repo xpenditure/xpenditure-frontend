@@ -29,39 +29,39 @@ const MoreSide = () => {
   return (
     <More visible={moreSide} close={close}>
       <div className="link">
-        <Link onClick={close} to="#">
+        <a href="mailto:jerrynwosu007@gmail.com" onClick={close} to="#">
           <i>
             <BugIcon />
           </i>
           Report a bug
-        </Link>
-        <Link onClick={close} to="#">
-          <i>
-            <SupportIcon />
-          </i>
-          Support
-        </Link>
-        <Link onClick={close} to="#">
+        </a>
+        <a href="https://github.com/xpenditure" onClick={close} to="#">
           <i>
             <HelpIcon />
           </i>
-          FAQs
-        </Link>
+          Support
+        </a>
+        <a href="https://twitter.com/codeofjay" onClick={close} to="#">
+          <i>
+            <SupportIcon />
+          </i>
+          Say Hi
+        </a>
       </div>
       <Line />
       <div className="link">
-        <Link onClick={close} to="#">
+        <a href="https://github.com/xpenditure" onClick={close} to="#">
           <i>
             <GithubIcon />
           </i>
           Github
-        </Link>
-        <Link onClick={close} to="#">
+        </a>
+        <a href="https://github.com/xpenditure" onClick={close} to="#">
           <i>
             <ShareIcon />
           </i>
           Contribute
-        </Link>
+        </a>
       </div>
     </More>
   );

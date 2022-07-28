@@ -51,7 +51,7 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
                   <IoAddSharp />
                 </i>
               </ButtonPrimary>
-              <div class="icon card-more-icon">
+              <div className="icon card-more-icon">
                 <IoEllipsisHorizontalSharp
                   onClick={() => setActiveMore(true)}
                 />
@@ -108,7 +108,7 @@ const BudgetData = ({ budget, budgetId, funds, expenses }) => {
               </div>
               <div className="card-details">
                 <div
-                  class="icon card-more-icon"
+                  className="icon card-more-icon"
                   onClick={() => setGoalMore(true)}
                 >
                   <IoEllipsisHorizontalSharp />
