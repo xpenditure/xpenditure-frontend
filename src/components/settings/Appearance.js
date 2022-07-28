@@ -159,6 +159,7 @@ const Background = styled.div`
 
   @media (max-width: 600px) {
     margin-bottom: 10px;
+    width: 100%;
   }
 `;
 
